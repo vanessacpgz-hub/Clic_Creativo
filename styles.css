@@ -642,19 +642,28 @@ form {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 640px) {
+  /* NAV */
+  .nav-inner { gap: 1.2rem; }
+  .nav-inner a { font-size: 0.78rem; }
+
+  /* HERO: stack vertical, texto arriba, imágenes abajo lado a lado */
   .hero {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
     padding: 1.5rem 1rem 0;
     gap: 0;
+    min-height: unset;
   }
   .hero-text {
     grid-column: 1 / 3;
     grid-row: 1;
-    padding-bottom: 0;
-    margin-bottom: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1.2rem;
+    max-width: 100%;
   }
   .hero-text h1 { font-size: 1.4rem; }
+  .hero-text p { font-size: 0.82rem; }
+
   .hero-img-left {
     grid-column: 1;
     grid-row: 2;
@@ -668,7 +677,26 @@ form {
     padding-bottom: 100px;
   }
   .hero-img-left img,
-  .hero-img-right img { width: 130px; }
+  .hero-img-right img { width: 120px; }
+
+  /* SERVICIOS */
+  .servicios-inner { gap: 1rem; }
+  .service-card { width: 140px; padding: 1rem 0.8rem; }
+  .card-icon-wrap { width: 70px; height: 70px; }
+  .card-icon-wrap img { width: 70px; height: 70px; }
+  .btn-magenta-pill { font-size: 0.72rem; padding: 0.5rem 1rem; }
+  .btn-verde-pill { font-size: 0.78rem; padding: 0.55rem 1.2rem; }
+
+  /* SOBRE MÍ */
+  .sobre-inner { flex-direction: column-reverse; text-align: center; }
+  .sobre-foto { width: 160px; }
+  .sobre-foto img { width: 160px; height: 160px; }
+
+  /* MODALS */
+  .form-row-split { grid-template-columns: 1fr; }
+  .modal { border-radius: 16px; }
+  form { padding: 1rem 1.2rem 1.5rem; }
+}
 
   .servicios-inner { gap: 1.2rem; }
   .service-card { width: 160px; padding: 1.2rem 1rem; }
@@ -681,4 +709,12 @@ form {
   .form-row-split { grid-template-columns: 1fr; }
   .modal { border-radius: 16px; }
   form { padding: 1rem 1.2rem 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  .header-logo-bar { padding: 0.5rem 1rem; }
+  .header-logo { height: 90px; }
+  .gingham-nav { padding: 0.4rem 0; }
+  .nav-inner { gap: 0.9rem; flex-wrap: nowrap; overflow-x: auto; padding: 0 0.5rem; }
+  .nav-inner a { font-size: 0.75rem; white-space: nowrap; }
 }
