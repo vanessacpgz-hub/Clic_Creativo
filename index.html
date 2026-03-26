@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clic Creativo</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="site-header">
+    <div class="header-logo-bar">
+      <img src="Imagenes/Logo.png" alt="Clic Creativo" class="header-logo" />
+    </div>
+    <nav class="gingham-nav">
+      <div class="nav-inner">
+        <a href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#sobre-mi">Sobre Mí</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </nav>
+    <div class="header-scallop"></div>
+  </header>
+
+  <!-- ========== HERO (Verde Menta) ========== -->
+  <section class="hero" id="inicio">
+    <div class="hero-img-left">
+      <img src="Imagenes/Imagenblanca.jpg" alt="Mockup web" />
+    </div>
+    <div class="hero-text">
+      <h1>Diseños que<br/>impulsan tu negocio</h1>
+      <p>Páginas WEB responsivas y soluciones creativas.</p>
+    </div>
+    <div class="hero-img-right">
+      <img src="Imagenes/Imagenroja.jpg" alt="Mockup invitación" />
+    </div>
+    <div class="hero-grass">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,60 C30,20 60,80 90,50 C120,20 150,70 180,45 C210,20 240,65 270,40 C300,15 330,60 360,35 C390,10 420,55 450,30 C480,5 510,50 540,25 C570,0 600,45 630,20 C660,-5 690,40 720,15 C750,-10 780,35 810,10 C840,-15 870,30 900,5 C930,-20 960,25 990,0 C1020,-25 1050,20 1080,-5 C1110,-30 1140,15 1170,-10 L1200,0 L1200,120 L0,120 Z" fill="#5a8a3c" opacity="0.9"/>
+        <path d="M0,80 C40,50 80,90 120,65 C160,40 200,85 240,60 C280,35 320,80 360,55 C400,30 440,75 480,50 C520,25 560,70 600,45 C640,20 680,65 720,40 C760,15 800,60 840,35 C880,10 920,55 960,30 C1000,5 1040,50 1080,25 C1120,0 1160,45 1200,20 L1200,120 L0,120 Z" fill="#4a7a2c" opacity="0.7"/>
+        <!-- Flores decorativas -->
+        <circle cx="100" cy="72" r="8" fill="#E60073" opacity="0.8"/>
+        <circle cx="100" cy="72" r="4" fill="#fff"/>
+        <circle cx="300" cy="68" r="6" fill="#ffb3d9" opacity="0.9"/>
+        <circle cx="300" cy="68" r="3" fill="#fff"/>
+        <circle cx="500" cy="74" r="7" fill="#E60073" opacity="0.7"/>
+        <circle cx="500" cy="74" r="3.5" fill="#fff"/>
+        <circle cx="700" cy="70" r="5" fill="#ffb3d9"/>
+        <circle cx="700" cy="70" r="2.5" fill="#fff"/>
+        <circle cx="900" cy="73" r="8" fill="#E60073" opacity="0.8"/>
+        <circle cx="900" cy="73" r="4" fill="#fff"/>
+        <circle cx="1100" cy="69" r="6" fill="#ffb3d9"/>
+        <circle cx="1100" cy="69" r="3" fill="#fff"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ========== SERVICIOS (Rosa claro) ========== -->
+  <section class="servicios" id="servicios">
+    <div class="servicios-inner">
+
+      <!-- Tarjeta Web -->
+      <div class="service-card">
+        <div class="card-icon-wrap">
+          <img src="Imagenes/Cotizapaginaweb.png" alt="Página Web" />
+        </div>
+        <button class="btn-magenta-pill" onclick="openModal('web')">Cotiza tu página WEB</button>
+      </div>
+
+      <!-- Flor central decorativa SVG -->
+      <div class="flor-center">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="120" height="120">
+          <!-- 5 pétalos grandes redondeados tipo daisy -->
+          <ellipse cx="50" cy="18" rx="12" ry="20" fill="#E60073" transform="rotate(0 50 50)"/>
+          <ellipse cx="50" cy="18" rx="12" ry="20" fill="#E60073" transform="rotate(72 50 50)"/>
+          <ellipse cx="50" cy="18" rx="12" ry="20" fill="#E60073" transform="rotate(144 50 50)"/>
+          <ellipse cx="50" cy="18" rx="12" ry="20" fill="#E60073" transform="rotate(216 50 50)"/>
+          <ellipse cx="50" cy="18" rx="12" ry="20" fill="#E60073" transform="rotate(288 50 50)"/>
+          <!-- centro amarillo cremoso -->
+          <circle cx="50" cy="50" r="16" fill="#fff0a0"/>
+          <circle cx="50" cy="50" r="11" fill="#ffd700"/>
+          <circle cx="45" cy="45" r="3.5" fill="white" opacity="0.5"/>
+        </svg>
+      </div>
+
+      <!-- Tarjeta Invitación -->
+      <div class="service-card">
+        <div class="card-icon-wrap">
+          <img src="Imagenes/CotizaInvitacion.png" alt="Invitación Interactiva" />
+        </div>
+        <button class="btn-magenta-pill" onclick="openModal('invitacion')">Cotiza tu invitación</button>
+      </div>
+
+    </div>
+
+    <!-- Botón Catálogo -->
+    <div class="catalogo-wrap" id="catalogo">
+      <button class="btn-verde-pill">Catálogo de páginas web e invitaciones</button>
+    </div>
+
+    <div class="servicios-scallop"></div>
+  </section>
+
+  <!-- ========== SOBRE MÍ ========== -->
+  <section class="sobre-mi" id="sobre-mi">
+    <div class="sobre-inner">
+      <div class="sobre-text">
+        <p>Mi misión es transformar ideas en experiencias digitales que funcionen. Me apasiona el diseño que conecta. Desde una página web que impulsa tu negocio hasta una invitación interactiva que hará que tu evento sea inolvidable, estoy aquí para que dar el clic sea la parte más fácil de tu proyecto. ¡Hagamos algo increíble juntos!</p>
+        <p class="sobre-firma">Mayra Capetillo</p>
+      </div>
+      <div class="sobre-foto">
+        <img src="Imagenes/ImagenPerfil.jpeg" alt="Mayra Capetillo" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACTO ========== -->
+  <section class="contacto" id="contacto">
+    <a href="https://wa.me/524494556465?text=¡Hola%20Clic_Creativo!%20Me%20gustaría%20saber%20más%20sobre%20sus%20servicios."
+       target="_blank" class="btn-magenta-pill btn-wa">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.882l6.186-1.448A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.371l-.36-.214-3.724.871.936-3.619-.235-.372A9.818 9.818 0 1112 21.818z"/>
+      </svg>
+      Escríbeme en WhatsApp
+    </a>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <img src="Imagenes/Logo.png" alt="Clic Creativo" class="footer-logo" />
+    <p>© 2025 Clic Creativo · Diseño digital con amor 🌸</p>
+  </footer>
+
+  <!-- ========== MODAL WEB ========== -->
+  <div class="modal-overlay" id="modalWeb">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('web')">✕</button>
+      <div class="modal-header-bar">
+        <img src="Imagenes/Logo.png" alt="Clic Creativo" class="modal-logo" />
+        <nav class="modal-nav-gingham">
+          <span>Inicio</span><span>Servicios</span>
+        </nav>
+      </div>
+      <h2 class="modal-title">Cotiza tu página<br/>WEB</h2>
+      <form id="formWeb" onsubmit="sendWhatsApp('web', event)">
+        <div class="form-row">
+          <label>Tipo de negocio</label>
+          <input type="text" id="wb-nombre" placeholder="Escribe aquí..." required />
+        </div>
+        <div class="form-row">
+          <label>Objetivo de tu negocio</label>
+          <select id="wb-objetivo">
+            <option value="">Selecciona...</option>
+            <option value="Vender en línea">Vender en línea</option>
+            <option value="Informar sobre mis servicios">Informar sobre mis servicios</option>
+            <option value="Marca Personal">Marca Personal</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Presupuesto estimado</label>
+          <select id="wb-presupuesto">
+            <option value="">Selecciona...</option>
+            <option value="Menos de $2,000 MXN">Menos de $2,000 MXN</option>
+            <option value="$2,000 - $5,000 MXN">$2,000 - $5,000 MXN</option>
+            <option value="$5,000 - $10,000 MXN">$5,000 - $10,000 MXN</option>
+            <option value="Más de $10,000 MXN">Más de $10,000 MXN</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>¿Tiene logo tu negocio?</label>
+          <div class="radio-inline">
+            <label><input type="radio" name="wb-logo" value="Sí" /> Sí</label>
+            <label><input type="radio" name="wb-logo" value="No" /> No</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Fecha de entrega deseada</label>
+          <input type="date" id="wb-fecha" />
+        </div>
+        <div class="form-row">
+          <label>Secciones deseadas</label>
+          <div class="check-grid">
+            <label><input type="checkbox" name="wb-sec" value="Inicio" /> Inicio</label>
+            <label><input type="checkbox" name="wb-sec" value="Sobre mí" /> Sobre mí</label>
+            <label><input type="checkbox" name="wb-sec" value="Servicios" /> Servicios</label>
+            <label><input type="checkbox" name="wb-sec" value="Contacto" /> Contacto</label>
+            <label><input type="checkbox" name="wb-sec" value="Galería" /> Galería</label>
+          </div>
+        </div>
+        <button type="submit" class="btn-send">
+          <span>Enviar</span>
+          <svg class="cursor-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+            <path d="M4 0l16 12-7 2-4 8z"/>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========== MODAL INVITACIÓN ========== -->
+  <div class="modal-overlay" id="modalInvitacion">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('invitacion')">✕</button>
+      <div class="modal-header-bar">
+        <img src="Imagenes/Logo.png" alt="Clic Creativo" class="modal-logo" />
+        <nav class="modal-nav-gingham">
+          <span>Inicio</span><span>Servicios</span>
+        </nav>
+      </div>
+      <h2 class="modal-title">Cotiza tu Invitación</h2>
+      <form id="formInvitacion" onsubmit="sendWhatsApp('invitacion', event)">
+        <div class="form-row">
+          <label>Tipo de invitación</label>
+          <select id="inv-tipo">
+            <option value="">Selecciona...</option>
+            <option value="Boda">💍 Boda</option>
+            <option value="XV Años">🌸 XV Años</option>
+            <option value="Cumpleaños">🎂 Cumpleaños</option>
+            <option value="Bautizo">🕊️ Bautizo</option>
+          </select>
+        </div>
+        <div class="form-row label-magenta">
+          <label>Datos que deseas incluir</label>
+        </div>
+        <div class="form-row indent">
+          <label>Nombre completo</label>
+          <input type="text" id="inv-nombre" placeholder="Escribe aquí..." />
+        </div>
+        <div class="form-row indent">
+          <label>Padrinos</label>
+          <input type="text" id="inv-padrinos" placeholder="Escribe aquí..." />
+        </div>
+        <div class="form-row indent">
+          <label>Frase</label>
+          <input type="text" id="inv-frase" placeholder="Escribe aquí..." />
+        </div>
+        <div class="form-row indent">
+          <label>Ubicación</label>
+          <input type="text" id="inv-ubicacion" placeholder="Escribe aquí..." />
+        </div>
+        <div class="form-row-split">
+          <div class="form-row">
+            <label>Fecha de entrega deseada</label>
+            <input type="date" id="inv-fecha" />
+          </div>
+          <div class="form-row">
+            <label>Confirmarse con anfitriona y ubicación</label>
+            <div class="radio-inline">
+              <label><input type="radio" name="inv-confirma" value="Sí" /> Sí</label>
+              <label><input type="radio" name="inv-confirma" value="No" /> No</label>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn-send">
+          <span>Enviar</span>
+          <svg class="cursor-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+            <path d="M4 0l16 12-7 2-4 8z"/>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
