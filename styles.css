@@ -47,7 +47,7 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
 
 /* ===== HERO ===== */
 .hero {
-  background: linear-gradient(135deg, #f695ec 0%, #b457aa 0%, #6b0f6b 70%, #E60073 100%);
+  background: linear-gradient(135deg, #f695ec 0%, #b457aa 0%, #ff48d4 70%, #E60073 100%);
   min-height: 88vh;
   display: flex;
   align-items: center;
@@ -177,7 +177,7 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
 
 /* ===== SOBRE MÍ ===== */
 .sobre {
-  background: linear-gradient(135deg, #ff93db 0%, #e3047f 100%);
+  background: linear-gradient(135deg, #e6b1d5 0%, #e3047f 100%);
   padding: 5rem 2rem;
 }
 .sobre-inner {
@@ -219,6 +219,67 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
 .contacto h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: white; }
 .contacto p { color: rgba(255,255,255,0.85); font-size: 1rem; }
 
+/* NUEVO: Cuadrícula Uniforme para Botones de Redes Sociales */
+.social-buttons-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 320px;
+  margin: 1.5rem auto 2rem auto;
+}
+
+/* NUEVO: Estilo base idéntico para todos los botones sociales */
+.btn-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+.btn-social:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+/* NUEVO: Colores de fondo específicos de redes sociales */
+.btn-wa { background-color: #25D366; color: white; }
+.btn-ig { background-color: #E1306C; }
+.btn-fb { background-color: #1877F2; }
+
+/* NUEVO: Botón de dudas estilo Clic Creativo (con bordes punteados estilizados) */
+.btn-dudas {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--rosa-pale);
+  color: var(--magenta);
+  border: 2px dashed var(--magenta);
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+.btn-dudas:hover {
+  background-color: var(--blanco);
+  border-style: solid;
+  transform: scale(1.03);
+  box-shadow: 0 8px 24px rgba(255,255,255,0.2);
+}
+
 /* ===== FOOTER ===== */
 .footer {
   background: #1a1a1a; color: #aaa;
@@ -251,17 +312,6 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
 }
 .btn-outline:hover { background: var(--magenta); color: white; transform: translateY(-2px); }
 
-.btn-wa {
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  background: white; color: var(--magenta);
-  border: none; border-radius: 50px;
-  padding: 1rem 2.5rem;
-  font-family: 'Quicksand', sans-serif; font-size: 1rem; font-weight: 700;
-  cursor: pointer; text-decoration: none;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.btn-wa:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-
 /* ===== MODALS ===== */
 .modal-overlay {
   position: fixed; inset: 0;
@@ -270,6 +320,9 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
   padding: 1rem; opacity: 0; pointer-events: none; transition: opacity 0.3s;
 }
 .modal-overlay.active { opacity: 1; pointer-events: all; }
+
+/* Soporte para despliegue por JS flexible de dudas */
+.modal-overlay[style*="display: flex"] { opacity: 1; pointer-events: all; }
 
 .modal {
   background: var(--rosa-pale);
@@ -313,14 +366,20 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
 
 .form-row input[type="text"],
 .form-row input[type="date"],
-.form-row select {
+.form-row input[type="email"],
+.form-row select,
+.form-row textarea {
   border: 1.5px solid var(--rosa);
   border-radius: 10px; padding: 0.6rem 0.9rem;
   font-size: 0.88rem; font-family: 'Quicksand', sans-serif;
   color: var(--gris); background: white; outline: none;
   transition: border-color 0.2s;
 }
-.form-row input:focus, .form-row select:focus { border-color: var(--magenta); }
+.form-row input:focus, 
+.form-row select:focus,
+.form-row textarea:focus { border-color: var(--magenta); }
+
+.form-row textarea { resize: none; }
 
 .radio-row { display: flex; gap: 1.5rem; }
 .radio-row label { display: flex; align-items: center; gap: 0.4rem; font-size: 0.88rem; font-weight: 500; cursor: pointer; }
@@ -339,6 +398,21 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
   margin-top: 0.5rem;
 }
 .btn-send:hover { background: var(--magenta-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(230,0,115,0.3); }
+
+/* NUEVO: Contenedor y animación de Mensaje de Éxito en Formulario */
+.mensaje-exito {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  animation: modalFadeIn 0.4s ease forwards;
+}
+.exito-icono { font-size: 3.5rem; margin-bottom: 0.8rem; }
+.mensaje-exito h4 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #25D366; margin-bottom: 0.5rem; }
+.mensaje-exito p { font-size: 0.95rem; color: var(--gris-soft); line-height: 1.6; }
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
@@ -365,4 +439,5 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
   .card { width: 100%; max-width: 300px; }
   form { padding: 1rem 1.2rem 1.5rem; }
   .check-grid { grid-template-columns: 1fr; }
+  .social-buttons-grid { max-width: 100%; }
 }
