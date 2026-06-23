@@ -47,7 +47,7 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
 
 /* ===== HERO ===== */
 .hero {
-  background: linear-gradient(135deg, #1e1e2e 0%, #3d1a5e 40%, #6b0f6b 70%, #E60073 100%);
+  background: linear-gradient(135deg, #f695ec 0%, #b457aa 0%, #6b0f6b 70%, #E60073 100%);
   min-height: 88vh;
   display: flex;
   align-items: center;
@@ -177,7 +177,7 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
 
 /* ===== SOBRE MÍ ===== */
 .sobre {
-  background: linear-gradient(135deg, #1e1e2e 0%, #3d1a5e 100%);
+  background: linear-gradient(135deg, #ff93db 0%, #e3047f 100%);
   padding: 5rem 2rem;
 }
 .sobre-inner {
