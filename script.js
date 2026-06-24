@@ -77,19 +77,50 @@ function handleContactoSubmit(event) {
 // ===== SISTEMA DE NAVEGACIÓN DINÁMICA DE PRODUCTOS =====
 
 const productosDB = {
-  'web-pro': {
-    nombre: 'Plantilla Web Pro',
-    precio: '$1,899 MXN',
-    categoria: 'Páginas WEB',
-    foto: 'Imagenes/Cotizapaginaweb.png',
-    descripcion: 'Una página web completa, elegante y totalmente responsiva. Ideal para negocios locales o marcas personales que buscan destacar de inmediato en el mundo digital. Incluye secciones optimizadas para conversión.'
+  // --- INVITACIONES ---
+  'inv-sencilla': {
+    nombre: 'Invitación Esencial (Sencilla)',
+    precio: '$250 MXN',
+    categoria: 'Invitaciones',
+    foto: 'Imagenes/CotizaInvitacion.png',
+    descripcion: 'Diseño digital elegante y minimalista en formato estático de una sola página. Ideal para eventos íntimos o notificaciones rápidas. Incluye tipografía estilizada, paleta de colores personalizada y entrega en alta resolución listo para enviarse por WhatsApp.'
   },
-  'inv-glamour': {
-    nombre: 'Invitación Glamour',
+  'inv-ubicacion': {
+    nombre: 'Invitación Interactiva (Con Ubicación)',
     precio: '$450 MXN',
     categoria: 'Invitaciones',
     foto: 'Imagenes/CotizaInvitacion.png',
-    descripcion: 'Diseño exclusivo con animaciones delicadas, confirmación de asistencia directa, contador regresivo personalizado y enlace directo a Google Maps para que tus invitados no se pierdan ningún detalle.'
+    descripcion: 'Nuestra opción más popular. Una invitación interactiva que incluye botones dinámicos con enlace directo a Google Maps o Waze para la ubicación del evento, botón de confirmación de asistencia RSVP directo a tu WhatsApp y un contador de cuenta regresiva estilizado.'
+  },
+  'inv-premium': {
+    nombre: 'Invitación Premium (Completa/Compleja)',
+    precio: '$650 MXN',
+    categoria: 'Invitaciones',
+    foto: 'Imagenes/CotizaInvitacion.png',
+    descripcion: 'Experiencia digital de lujo para tus invitados. Incluye todas las funciones interactivas (Ubicación, RSVP vía WhatsApp), además de pase digital con código de accesos, sección para sugerencia de música, mesa de regalos con enlaces directos y galería de fotos de los festejados con animaciones delicadas.'
+  },
+
+  // --- PÁGINAS WEB ---
+  'web-sencilla': {
+    nombre: 'Landing Page Express (Sencilla)',
+    precio: '$1,200 MXN',
+    categoria: 'Páginas WEB',
+    foto: 'Imagenes/Cotizapaginaweb.png',
+    descripcion: 'Una página de aterrizaje (One Page) directa y optimizada. Cuenta con sección de bienvenida, descripción clara de tu producto o servicio principal, galería básica de imágenes y un formulario de contacto directo o enlace a tus redes. Ideal para arrancar tu presencia digital con estilo.'
+  },
+  'web-intermedia': {
+    nombre: 'Web Comercial (Con Ubicación e Integraciones)',
+    precio: '$2,400 MXN',
+    categoria: 'Páginas WEB',
+    foto: 'Imagenes/Cotizapaginaweb.png',
+    descripcion: 'Sitio web multipágina o sección extendida perfecta para negocios establecidos, locales o profesionistas. Incluye mapa interactivo de Google Maps incrustado, catálogo o listado de servicios detallado, integración con botones de cotización por WhatsApp y optimización SEO local básica.'
+  },
+  'web-premium': {
+    nombre: 'Web Premium Pro (Compleja / Administrable)',
+    precio: '$4,500 MXN',
+    categoria: 'Páginas WEB',
+    foto: 'Imagenes/Cotizapaginaweb.png',
+    descripcion: 'La solución definitiva para marcas exigentes. Estructura robusta y completamente personalizada basada en componentes dinámicos. Incluye secciones para blog o portafolio avanzado, integración de sistemas de reserva, animaciones interactivas premium y una arquitectura limpia lista para escalar a e-commerce.'
   }
 };
 

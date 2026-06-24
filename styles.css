@@ -2,9 +2,9 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --magenta: #f576c2;
+  --magenta: #E60073;
   --magenta-dark: #b8005c;
-  --rosa: #f9b7e3;
+  --rosa: #f2d4e8;
   --rosa-light: #faf0f6;
   --rosa-pale: #fdf7fb;
   --verde: #e8f4e0;
@@ -47,7 +47,7 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
 
 /* ===== HERO ===== */
 .hero {
-  background: linear-gradient(135deg, #f695bf 0%, #f576c2 0%, #ee59ad 70%, #ef2b8d 100%);
+  background: linear-gradient(135deg, #f695ec 0%, #b457aa 0%, #ff48d4 70%, #E60073 100%);
   min-height: 88vh;
   display: flex;
   align-items: center;
@@ -78,6 +78,7 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
   font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em;
   padding: 0.35rem 1rem; border-radius: 20px;
   backdrop-filter: blur(8px);
+  margin-bottom: 0.5rem;
 }
 
 .hero-content h1 {
@@ -203,7 +204,7 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
 .contacto h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: white; }
 .contacto p { color: rgba(255,255,255,0.85); font-size: 1rem; }
 
-/* Cuadrícula para Botones de Redes Sociales */
+/* Redes Sociales */
 .social-buttons-grid {
   display: flex; flex-direction: column; gap: 15px;
   width: 100%; max-width: 320px; margin: 1.5rem auto 2rem auto;
@@ -223,7 +224,6 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
 .btn-ig { background-color: #E1306C; }
 .btn-fb { background-color: #1877F2; }
 
-/* Botón de dudas estilo Clic Creativo */
 .btn-dudas {
   display: inline-flex; align-items: center; gap: 8px;
   background-color: var(--rosa-pale); color: var(--magenta);
@@ -318,7 +318,6 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
 }
 .btn-send:hover { background: var(--magenta-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(230,0,115,0.3); }
 
-/* Mensaje de Éxito */
 .mensaje-exito { text-align: center; padding: 2.5rem 1.5rem; animation: modalFadeIn 0.4s ease forwards; }
 .exito-icono { font-size: 3.5rem; margin-bottom: 0.8rem; }
 .mensaje-exito h4 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #25D366; margin-bottom: 0.5rem; }
