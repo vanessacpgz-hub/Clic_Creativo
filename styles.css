@@ -47,7 +47,7 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
 
 /* ===== HERO ===== */
 .hero {
-  background: linear-gradient(135deg, #f695ec 0%, #b457aa 0%, #ff48d4 70%, #E60073 100%);
+  background: linear-gradient(135deg, #d75f9b 0%, #d47ca8 0%, #dc96b9 70%, #ad0458 100%);
   min-height: 88vh;
   display: flex;
   align-items: center;
