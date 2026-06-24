@@ -2,9 +2,9 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --magenta: #0fe600;
-  --magenta-dark: #b800;
-  --rosa: #e40575;
+  --magenta: #ff49a4;
+  --magenta-dark: #b8005c;
+  --rosa: #dc96b9;
   --rosa-light: #faf0f6;
   --rosa-pale: #fdf7fb;
   --verde: #e8f4e0;
@@ -174,7 +174,7 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
 
 /* ===== SOBRE MÍ ===== */
 .sobre {
-  background: linear-gradient(135deg, #e6b1d5 0%, #e3047f 100%);
+  background: linear-gradient(135deg, #dc96b9 0%, #d75f9b 100%);
   padding: 5rem 2rem;
 }
 .sobre-inner {
