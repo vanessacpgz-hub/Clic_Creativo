@@ -2,7 +2,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --magenta: #E60073;
+  --magenta: #0fe600;
   --magenta-dark: #b800;
   --rosa: #e40575;
   --rosa-light: #faf0f6;
