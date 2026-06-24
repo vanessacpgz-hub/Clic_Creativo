@@ -2,9 +2,9 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --magenta: #ed64a8;
+  --magenta: #f576c2;
   --magenta-dark: #b8005c;
-  --rosa: #fa87d3;
+  --rosa: #f9b7e3;
   --rosa-light: #faf0f6;
   --rosa-pale: #fdf7fb;
   --verde: #e8f4e0;
