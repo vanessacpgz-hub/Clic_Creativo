@@ -2,9 +2,9 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --magenta: #E60073;
+  --magenta: #ed64a8;
   --magenta-dark: #b8005c;
-  --rosa: #f2d4e8;
+  --rosa: #fa87d3;
   --rosa-light: #faf0f6;
   --rosa-pale: #fdf7fb;
   --verde: #e8f4e0;
@@ -47,7 +47,7 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
 
 /* ===== HERO ===== */
 .hero {
-  background: linear-gradient(135deg, #f695ec 0%, #b457aa 0%, #ff48d4 70%, #E60073 100%);
+  background: linear-gradient(135deg, #f695bf 0%, #f576c2 0%, #ee59ad 70%, #ef2b8d 100%);
   min-height: 88vh;
   display: flex;
   align-items: center;
@@ -111,7 +111,7 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
 }
 .hero-wave svg { width: 100%; height: 100%; }
 
-/* ===== SERVICIOS ===== */
+/* ===== SERVICIOS / CATÁLOGO ===== */
 .servicios {
   background: var(--blanco);
   padding: 5rem 2rem 4rem;
@@ -162,10 +162,6 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
 .card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gris); }
 .card p { font-size: 0.85rem; color: var(--gris-soft); line-height: 1.6; text-align: center; }
 
-.card-center-deco {
-  display: flex; align-items: center; justify-content: center;
-}
-
 .btn-catalogo {
   background: #c8f0a8; color: #2d6b10;
   border: none; border-radius: 50px;
@@ -184,20 +180,12 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
   max-width: 960px; margin: 0 auto;
   display: flex; align-items: center; gap: 4rem; flex-wrap: wrap;
 }
-.sobre-foto-wrap {
-  position: relative; flex-shrink: 0;
-}
+.sobre-foto-wrap { position: relative; flex-shrink: 0; }
 .sobre-foto-wrap > img:first-child {
   width: 260px; height: 320px; object-fit: cover;
   border-radius: 40% 60% 60% 40% / 50% 50% 50% 50%;
   box-shadow: 0 20px 50px rgba(230,0,115,0.2);
   border: 4px solid white;
-}
-.flor-sobre {
-  position: absolute; bottom: -20px; right: -20px;
-  width: 70px !important; height: 70px !important;
-  border-radius: 0 !important; box-shadow: none !important;
-  object-fit: contain !important;
 }
 .sobre-texto {
   flex: 1; min-width: 260px;
@@ -210,80 +198,47 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
 .sobre .section-label { background: rgba(255,255,255,0.12); color: #ffd6f0; }
 
 /* ===== CONTACTO ===== */
-.contacto {
-  background: var(--magenta);
-  padding: 5rem 2rem;
-  text-align: center;
-}
+.contacto { background: var(--magenta); padding: 5rem 2rem; text-align: center; }
 .contacto-inner { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
 .contacto h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: white; }
 .contacto p { color: rgba(255,255,255,0.85); font-size: 1rem; }
 
-/* NUEVO: Cuadrícula Uniforme para Botones de Redes Sociales */
+/* Cuadrícula para Botones de Redes Sociales */
 .social-buttons-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 100%;
-  max-width: 320px;
-  margin: 1.5rem auto 2rem auto;
+  display: flex; flex-direction: column; gap: 15px;
+  width: 100%; max-width: 320px; margin: 1.5rem auto 2rem auto;
 }
 
-/* NUEVO: Estilo base idéntico para todos los botones sociales */
 .btn-social {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: 1rem 2.5rem;
-  border-radius: 50px;
-  font-family: 'Quicksand', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  text-decoration: none;
-  color: white;
+  display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+  padding: 1rem 2.5rem; border-radius: 50px;
+  font-family: 'Quicksand', sans-serif; font-size: 1rem; font-weight: 700;
+  cursor: pointer; text-decoration: none; color: white;
   transition: transform 0.2s, box-shadow 0.2s;
   box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
-.btn-social:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-}
+.btn-social:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
 
-/* NUEVO: Colores de fondo específicos de redes sociales */
 .btn-wa { background-color: #25D366; color: white; }
 .btn-ig { background-color: #E1306C; }
 .btn-fb { background-color: #1877F2; }
 
-/* NUEVO: Botón de dudas estilo Clic Creativo (con bordes punteados estilizados) */
+/* Botón de dudas estilo Clic Creativo */
 .btn-dudas {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background-color: var(--rosa-pale);
-  color: var(--magenta);
-  border: 2px dashed var(--magenta);
-  padding: 0.8rem 2rem;
-  border-radius: 50px;
-  font-family: 'Quicksand', sans-serif;
-  font-weight: 700;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 0.5rem;
+  display: inline-flex; align-items: center; gap: 8px;
+  background-color: var(--rosa-pale); color: var(--magenta);
+  border: 2px dashed var(--magenta); padding: 0.8rem 2rem; border-radius: 50px;
+  font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 0.95rem;
+  cursor: pointer; transition: all 0.3s ease; margin-top: 0.5rem;
 }
 .btn-dudas:hover {
-  background-color: var(--blanco);
-  border-style: solid;
-  transform: scale(1.03);
-  box-shadow: 0 8px 24px rgba(255,255,255,0.2);
+  background-color: var(--blanco); border-style: solid;
+  transform: scale(1.03); box-shadow: 0 8px 24px rgba(255,255,255,0.2);
 }
 
 /* ===== FOOTER ===== */
 .footer {
-  background: #1a1a1a; color: #aaa;
-  text-align: center; padding: 2rem;
+  background: #1a1a1a; color: #aaa; text-align: center; padding: 2rem;
   display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
 }
 .footer-logo { height: 50px; filter: brightness(0) invert(1); opacity: 0.7; }
@@ -292,75 +247,48 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
 /* ===== BUTTONS ===== */
 .btn-primary {
   display: inline-flex; align-items: center; gap: 0.4rem;
-  background: var(--magenta); color: white;
-  border: none; border-radius: 50px;
-  padding: 0.75rem 1.8rem;
-  font-family: 'Quicksand', sans-serif; font-size: 0.9rem; font-weight: 700;
-  cursor: pointer; text-decoration: none;
-  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  background: var(--magenta); color: white; border: none; border-radius: 50px;
+  padding: 0.75rem 1.8rem; font-family: 'Quicksand', sans-serif; font-size: 0.9rem; font-weight: 700;
+  cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 .btn-primary:hover { background: var(--magenta-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(230,0,115,0.35); }
 
 .btn-outline {
-  display: inline-flex; align-items: center;
-  background: transparent; color: var(--magenta);
-  border: 2px solid var(--magenta); border-radius: 50px;
-  padding: 0.73rem 1.8rem;
-  font-family: 'Quicksand', sans-serif; font-size: 0.9rem; font-weight: 700;
-  cursor: pointer;
+  display: inline-flex; align-items: center; background: transparent; color: var(--magenta);
+  border: 2px solid var(--magenta); border-radius: 50px; padding: 0.73rem 1.8rem;
+  font-family: 'Quicksand', sans-serif; font-size: 0.9rem; font-weight: 700; cursor: pointer;
   transition: background 0.2s, color 0.2s, transform 0.2s;
 }
 .btn-outline:hover { background: var(--magenta); color: white; transform: translateY(-2px); }
 
 /* ===== MODALS ===== */
 .modal-overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.5); backdrop-filter: blur(6px);
+  position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(6px);
   z-index: 200; display: flex; align-items: center; justify-content: center;
   padding: 1rem; opacity: 0; pointer-events: none; transition: opacity 0.3s;
 }
 .modal-overlay.active { opacity: 1; pointer-events: all; }
-
-/* Soporte para despliegue por JS flexible de dudas */
 .modal-overlay[style*="display: flex"] { opacity: 1; pointer-events: all; }
 
 .modal {
-  background: var(--rosa-pale);
-  border-radius: 24px; width: 100%; max-width: 480px;
-  max-height: 92vh; overflow-y: auto;
-  position: relative;
-  transform: translateY(30px) scale(0.96);
-  transition: transform 0.35s cubic-bezier(0.34,1.4,0.64,1);
+  background: var(--rosa-pale); border-radius: 24px; width: 100%; max-width: 480px;
+  max-height: 92vh; overflow-y: auto; position: relative;
+  transform: translateY(30px) scale(0.96); transition: transform 0.35s cubic-bezier(0.34,1.4,0.64,1);
   box-shadow: 0 30px 80px rgba(0,0,0,0.2);
 }
 .modal-overlay.active .modal { transform: translateY(0) scale(1); }
 
-.modal-top {
-  background: var(--rosa);
-  padding: 1rem 1.5rem;
-  border-radius: 24px 24px 0 0;
-  display: flex; justify-content: center;
-}
+.modal-top { background: var(--rosa); padding: 1rem 1.5rem; border-radius: 24px 24px 0 0; display: flex; justify-content: center; }
 .modal-logo { height: 60px; object-fit: contain; mix-blend-mode: multiply; }
-
-.modal-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5rem; color: var(--magenta);
-  text-align: center; padding: 1.2rem 1.5rem 0.2rem;
-}
-
+.modal-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--magenta); text-align: center; padding: 1.2rem 1.5rem 0.2rem; }
 .modal-close {
-  position: absolute; top: 0.8rem; right: 1rem;
-  background: white; border: none; border-radius: 50%;
-  width: 30px; height: 30px; font-size: 0.85rem;
-  cursor: pointer; color: var(--gris-soft);
-  transition: color 0.2s; z-index: 10;
+  position: absolute; top: 0.8rem; right: 1rem; background: white; border: none; border-radius: 50%;
+  width: 30px; height: 30px; font-size: 0.85rem; cursor: pointer; color: var(--gris-soft); transition: color 0.2s; z-index: 10;
 }
 .modal-close:hover { color: var(--magenta); }
 
 /* ===== FORMS ===== */
 form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1rem; }
-
 .form-row { display: flex; flex-direction: column; gap: 0.35rem; }
 .form-row label { font-size: 0.82rem; font-weight: 700; color: var(--gris); }
 
@@ -369,16 +297,10 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
 .form-row input[type="email"],
 .form-row select,
 .form-row textarea {
-  border: 1.5px solid var(--rosa);
-  border-radius: 10px; padding: 0.6rem 0.9rem;
-  font-size: 0.88rem; font-family: 'Quicksand', sans-serif;
-  color: var(--gris); background: white; outline: none;
-  transition: border-color 0.2s;
+  border: 1.5px solid var(--rosa); border-radius: 10px; padding: 0.6rem 0.9rem;
+  font-size: 0.88rem; font-family: 'Quicksand', sans-serif; color: var(--gris); background: white; outline: none; transition: border-color 0.2s;
 }
-.form-row input:focus, 
-.form-row select:focus,
-.form-row textarea:focus { border-color: var(--magenta); }
-
+.form-row input:focus, .form-row select:focus, .form-row textarea:focus { border-color: var(--magenta); }
 .form-row textarea { resize: none; }
 
 .radio-row { display: flex; gap: 1.5rem; }
@@ -390,21 +312,14 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
 .check-grid input { accent-color: var(--magenta); }
 
 .btn-send {
-  background: var(--magenta); color: white;
-  border: none; border-radius: 50px;
-  padding: 0.8rem 2rem; font-family: 'Quicksand', sans-serif;
-  font-size: 0.95rem; font-weight: 700; cursor: pointer;
-  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-  margin-top: 0.5rem;
+  background: var(--magenta); color: white; border: none; border-radius: 50px;
+  padding: 0.8rem 2rem; font-family: 'Quicksand', sans-serif; font-size: 0.95rem; font-weight: 700;
+  cursor: pointer; transition: background 0.2s, transform 0.2s, box-shadow 0.2s; margin-top: 0.5rem;
 }
 .btn-send:hover { background: var(--magenta-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(230,0,115,0.3); }
 
-/* NUEVO: Contenedor y animación de Mensaje de Éxito en Formulario */
-.mensaje-exito {
-  text-align: center;
-  padding: 2.5rem 1.5rem;
-  animation: modalFadeIn 0.4s ease forwards;
-}
+/* Mensaje de Éxito */
+.mensaje-exito { text-align: center; padding: 2.5rem 1.5rem; animation: modalFadeIn 0.4s ease forwards; }
 .exito-icono { font-size: 3.5rem; margin-bottom: 0.8rem; }
 .mensaje-exito h4 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #25D366; margin-bottom: 0.5rem; }
 .mensaje-exito p { font-size: 0.95rem; color: var(--gris-soft); line-height: 1.6; }
@@ -418,15 +333,12 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
 @media (max-width: 768px) {
   .nav { display: none; }
   .hamburger { display: flex; }
-
   .hero { padding: 3rem 1.5rem 5rem; gap: 2rem; min-height: unset; }
   .hero-content { max-width: 100%; }
   .phone img { width: 120px; }
-
   .sobre-inner { flex-direction: column; text-align: center; }
   .sobre-foto-wrap > img:first-child { width: 200px; height: 240px; }
   .sobre-texto { align-items: center; }
-
   .cards { gap: 1.5rem; }
   .card { width: 240px; padding: 2rem 1.5rem; }
 }

@@ -4,14 +4,13 @@ const mobileNav = document.getElementById('mobileNav');
 ham.addEventListener('click', () => mobileNav.classList.toggle('open'));
 mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
 
-// Modals (Actualizado para dar soporte al formulario de dudas)
+// Modals
 function openModal(type) {
   if (type === 'web') {
     document.getElementById('modalWeb').classList.add('active');
   } else if (type === 'invitacion') {
     document.getElementById('modalInvitacion').classList.add('active');
   } else if (type === 'contactoFlotante') {
-    // Restauramos el formulario visible y ocultamos el mensaje de éxito por si vuelven a abrirlo
     document.getElementById('formContactoFlotante').style.display = 'flex';
     document.getElementById('mensajeExito').style.display = 'none';
     document.getElementById('modalContactoFlotante').classList.add('active');
@@ -30,7 +29,6 @@ function closeModal(type) {
   document.body.style.overflow = '';
 }
 
-// Cierre de ventanas al hacer clic fuera del recuadro blanco
 document.querySelectorAll('.modal-overlay').forEach(o => {
   o.addEventListener('click', e => { 
     if (e.target === o) { 
@@ -40,7 +38,7 @@ document.querySelectorAll('.modal-overlay').forEach(o => {
   });
 });
 
-// WhatsApp (Tus cotizaciones de Páginas Web e Invitaciones)
+// WhatsApp Cotizaciones
 function sendWhatsApp(type, e) {
   e.preventDefault();
   const phone = '524494556465';
@@ -64,24 +62,63 @@ function sendWhatsApp(type, e) {
   window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
-// NUEVO: Manejo del envío del formulario flotante "Contáctame si tienes dudas"
+// Manejo del formulario flotante
 function handleContactoSubmit(event) {
-  event.preventDefault(); // Detiene la recarga automática de la página
-
-  // Captura de datos (por si deseas guardarlos o procesarlos en el futuro)
-  const nombre = document.getElementById('cnt-nombre').value.trim();
-  const correo = document.getElementById('cnt-correo').value.trim();
-  const mensaje = document.getElementById('cnt-mensaje').value.trim();
-
-  // Escondemos el formulario y mostramos el mensaje de "Mensaje enviado"
+  event.preventDefault();
   document.getElementById('formContactoFlotante').style.display = 'none';
   document.getElementById('mensajeExito').style.display = 'block';
-
-  // Reseteamos los campos de texto para que estén limpios en un uso posterior
   document.getElementById('formContactoFlotante').reset();
 
-  // Espera 3.5 segundos para que alcancen a leer el mensaje de éxito y cierra el modal
   setTimeout(() => {
     closeModal('contactoFlotante');
   }, 3500);
+}
+
+// ===== SISTEMA DE NAVEGACIÓN DINÁMICA DE PRODUCTOS =====
+
+const productosDB = {
+  'web-pro': {
+    nombre: 'Plantilla Web Pro',
+    precio: '$1,899 MXN',
+    categoria: 'Páginas WEB',
+    foto: 'Imagenes/Cotizapaginaweb.png',
+    descripcion: 'Una página web completa, elegante y totalmente responsiva. Ideal para negocios locales o marcas personales que buscan destacar de inmediato en el mundo digital. Incluye secciones optimizadas para conversión.'
+  },
+  'inv-glamour': {
+    nombre: 'Invitación Glamour',
+    precio: '$450 MXN',
+    categoria: 'Invitaciones',
+    foto: 'Imagenes/CotizaInvitacion.png',
+    descripcion: 'Diseño exclusivo con animaciones delicadas, confirmación de asistencia directa, contador regresivo personalizado y enlace directo a Google Maps para que tus invitados no se pierdan ningún detalle.'
+  }
+};
+
+function mostrarCatalogo() {
+  document.getElementById('landing-sections').style.display = 'none';
+  document.getElementById('detalle-producto').style.display = 'none';
+  document.getElementById('catalogo-productos').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+function verDetalleProducto(idProducto) {
+  const info = productosDB[idProducto];
+  if (!info) return;
+
+  document.getElementById('det-foto').src = info.foto;
+  document.getElementById('det-foto').alt = info.nombre;
+  document.getElementById('det-categoria').innerText = info.categoria;
+  document.getElementById('det-nombre').innerText = info.nombre;
+  document.getElementById('det-precio').innerText = info.precio;
+  document.getElementById('det-descripcion').innerText = info.descripcion;
+
+  document.getElementById('catalogo-productos').style.display = 'none';
+  document.getElementById('detalle-producto').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+function regresarAlInicio() {
+  document.getElementById('catalogo-productos').style.display = 'none';
+  document.getElementById('detalle-producto').style.display = 'none';
+  document.getElementById('landing-sections').style.display = 'block';
+  window.scrollTo(0, 0);
 }

@@ -13,132 +13,177 @@
     <div class="header-inner">
       <img src="Imagenes/Logo.png" alt="Clic Creativo" class="logo" />
       <nav class="nav">
-        <a href="#inicio">Inicio</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#sobre-mi">Sobre Mí</a>
-        <a href="#contacto">Contáctanos</a>
+        <a href="#inicio" onclick="regresarAlInicio()">Inicio</a>
+        <a href="#servicios" onclick="regresarAlInicio()">Servicios</a>
+        <a href="#sobre-mi" onclick="regresarAlInicio()">Sobre Mí</a>
+        <a href="#contacto" onclick="regresarAlInicio()">Contáctanos</a>
       </nav>
       <button class="hamburger" id="ham" aria-label="Menú">
         <span></span><span></span><span></span>
       </button>
     </div>
     <div class="mobile-nav" id="mobileNav">
-      <a href="#inicio">Inicio</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#sobre-mi">Sobre Mí</a>
-      <a href="#contacto">Contáctanos</a>
+      <a href="#inicio" onclick="regresarAlInicio()">Inicio</a>
+      <a href="#servicios" onclick="regresarAlInicio()">Servicios</a>
+      <a href="#sobre-mi" onclick="regresarAlInicio()">Sobre Mí</a>
+      <a href="#contacto" onclick="regresarAlInicio()">Contáctanos</a>
     </div>
   </header>
 
-  <section class="hero" id="inicio">
-    <div class="hero-bg-circles">
-      <span class="circle c1"></span>
-      <span class="circle c2"></span>
-      <span class="circle c3"></span>
-    </div>
-    <div class="hero-content">
-      <div class="hero-badge">Diseño Digital</div>
-      <h1>Diseños que<br/><em>enamoran</em> y<br/>transforman</h1>
-      <p>Páginas WEB e Invitaciones Interactivas hechas con amor para tu negocio o evento especial.</p>
-      <div class="hero-btns">
-        <button class="btn-primary" onclick="openModal('web')">Cotiza tu Web</button>
-        <button class="btn-outline" onclick="openModal('invitacion')">Cotiza Invitación</button>
+  <div id="landing-sections">
+    <section class="hero" id="inicio">
+      <div class="hero-bg-circles">
+        <span class="circle c1"></span>
+        <span class="circle c2"></span>
+        <span class="circle c3"></span>
       </div>
-    </div>
-    <div class="hero-phones">
-      <div class="phone phone-left">
-        <img src="Imagenes/Imagenblanca.jpg" alt="Diseño web" />
+      <div class="hero-content">
+        <div class="hero-badge">Diseño Digital</div>
+        <h1>Diseños que<br/><em>enamoran</em> y<br/>transforman</h1>
+        <p>Páginas WEB e Invitaciones Interactivas hechas con amor para tu negocio o evento especial.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="openModal('web')">Cotiza tu Web</button>
+          <button class="btn-outline" onclick="openModal('invitacion')">Cotiza Invitación</button>
+        </div>
       </div>
-      <div class="phone phone-right">
-        <img src="Imagenes/Imagenroja.jpg" alt="Invitación" />
+      <div class="hero-phones">
+        <div class="phone phone-left">
+          <img src="Imagenes/Imagenblanca.jpg" alt="Diseño web" />
+        </div>
+        <div class="phone phone-right">
+          <img src="Imagenes/Imagenroja.jpg" alt="Invitación" />
+        </div>
       </div>
-    </div>
-    <div class="hero-wave">
-      <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <path d="M0,40 C180,80 360,0 540,40 C720,80 900,0 1080,40 C1260,80 1380,20 1440,40 L1440,80 L0,80 Z" fill="#fff"/>
-      </svg>
-    </div>
-  </section>
+      <div class="hero-wave">
+        <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <path d="M0,40 C180,80 360,0 540,40 C720,80 900,0 1080,40 C1260,80 1380,20 1440,40 L1440,80 L0,80 Z" fill="#fff"/>
+        </svg>
+      </div>
+    </section>
 
-  <section class="servicios" id="servicios">
-    <div class="section-label">Lo que hago</div>
-    <h2 class="section-title">Mis Servicios</h2>
+    <section class="servicios" id="servicios">
+      <div class="section-label">Lo que hago</div>
+      <h2 class="section-title">Mis Servicios</h2>
+      <div class="cards">
+        <div class="card card-web">
+          <div class="card-glow"></div>
+          <div class="card-icon">
+            <img src="Imagenes/Cotizapaginaweb.png" alt="Web" />
+          </div>
+          <h3>Páginas WEB</h3>
+          <p>Presencia digital profesional, rápida y 100% a tu medida. Diseño que vende.</p>
+          <button class="btn-primary" onclick="openModal('web')">Cotiza tu página WEB</button>
+        </div>
+
+        <div class="card card-inv">
+          <div class="card-glow"></div>
+          <div class="card-icon">
+            <img src="Imagenes/CotizaInvitacion.png" alt="Invitación" />
+          </div>
+          <h3>Invitaciones Interactivas</h3>
+          <p>Invitaciones digitales únicas con RSVP, mapas y cuenta regresiva para tu evento.</p>
+          <button class="btn-primary" onclick="openModal('invitacion')">Cotiza tu invitación</button>
+        </div>
+      </div>
+      <button class="btn-catalogo" onclick="mostrarCatalogo()">Catálogo de páginas web e invitaciones</button>
+    </section>
+
+    <section class="sobre" id="sobre-mi">
+      <div class="sobre-inner">
+        <div class="sobre-foto-wrap">
+          <img src="Imagenes/ImagenPerfil.jpeg" alt="Mayra Capetillo" />
+        </div>
+        <div class="sobre-texto">
+          <div class="section-label">Historia</div>
+          <h2>Hola, soy<br/><em>Mayra Capetillo</em></h2>
+          <p>Mi misión es transformar ideas en experiencias digitales que funcionen. Me apasiona el diseño que conecta.</p>
+          <p>Este emprendimiento nace desde una página web que impulsa tu negocio hasta una invitación interactiva que hará que tu evento sea inolvidable, estoy aquí para que dar el clic sea la parte más fácil de tu proyecto. </p>
+          <p class="tagline">¡Hagamos algo increíble juntos!</p>
+          <a href="#servicios" class="btn-primary">Ver mis servicios</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="contacto" id="contacto">
+      <div class="contacto-inner">
+        <h2>¿Lista para empezar?</h2>
+        <p>Escríbeme y platicamos de tu proyecto</p>
+        
+        <div class="social-buttons-grid">
+          <a href="https://wa.me/524494556465?text=¡Hola%20Clic_Creativo!%20Me%20gustaría%20saber%20más%20sobre%20sus%20servicios." target="_blank" class="btn-social btn-wa">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.882l6.186-1.448A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.371l-.36-.214-3.724.871.936-3.619-.235-.372A9.818 9.818 0 1112 21.818z"/>
+            </svg>
+            Escríbeme en WhatsApp
+          </a>
+
+          <a href="https://instagram.com/tu_usuario" target="_blank" class="btn-social btn-ig">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+            Sígueme en Instagram
+          </a>
+
+          <a href="https://facebook.com/tu_pagina" target="_blank" class="btn-social btn-fb">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+            Visítanos en Facebook
+          </a>
+        </div>
+
+        <button class="btn-dudas" onclick="openModal('contactoFlotante')">
+          <span class="btn-dudas-icon">❓</span> ¿Tienes dudas? ¡Contáctame aquí!
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <section class="servicios" id="catalogo-productos" style="display: none;">
+    <div class="section-label">Nuestros Diseños</div>
+    <h2 class="section-title">Catálogo Completo</h2>
     <div class="cards">
-
-      <div class="card card-web">
+      <div class="card">
         <div class="card-glow"></div>
         <div class="card-icon">
-          <img src="Imagenes/Cotizapaginaweb.png" alt="Web" />
+          <img src="Imagenes/Cotizapaginaweb.png" alt="Plantilla Web Pro" />
         </div>
-        <h3>Páginas WEB</h3>
-        <p>Presencia digital profesional, rápida y 100% a tu medida. Diseño que vende.</p>
-        <button class="btn-primary" onclick="openModal('web')">Cotiza tu página WEB</button>
+        <h3>Plantilla Web Pro</h3>
+        <p>$1,899 MXN</p>
+        <button class="btn-primary" onclick="verDetalleProducto('web-pro')">Ver detalle</button>
       </div>
-
-      <div class="card card-inv">
+      <div class="card">
         <div class="card-glow"></div>
         <div class="card-icon">
-          <img src="Imagenes/CotizaInvitacion.png" alt="Invitación" />
+          <img src="Imagenes/CotizaInvitacion.png" alt="Invitación Glamour" />
         </div>
-        <h3>Invitaciones Interactivas</h3>
-        <p>Invitaciones digitales únicas con RSVP, mapas y cuenta regresiva para tu evento.</p>
-        <button class="btn-primary" onclick="openModal('invitacion')">Cotiza tu invitación</button>
-      </div>
-
-    </div>
-    <button class="btn-catalogo">Catálogo de páginas web e invitaciones</button>
-  </section>
-
-  <section class="sobre" id="sobre-mi">
-    <div class="sobre-inner">
-      <div class="sobre-foto-wrap">
-        <img src="Imagenes/ImagenPerfil.jpeg" alt="Mayra Capetillo" />
-      </div>
-      <div class="sobre-texto">
-        <div class="section-label">Historia</div>
-        <h2>Hola, soy<br/><em>Mayra Capetillo</em></h2>
-        <p>Mi misión es transformar ideas en experiencias digitales que funcionen. Me apasiona el diseño que conecta.</p>
-        <p>Este emprendimiento nace desde una página web que impulsa tu negocio hasta una invitación interactiva que hará que tu evento sea inolvidable, estoy aquí para que dar el clic sea la parte más fácil de tu proyecto. </p>
-        <p class="tagline">¡Hagamos algo increíble juntos!</p>
-        <a href="#servicios" class="btn-primary">Ver mis servicios</a>
+        <h3>Invitación Glamour</h3>
+        <p>$450 MXN</p>
+        <button class="btn-primary" onclick="verDetalleProducto('inv-glamour')">Ver detalle</button>
       </div>
     </div>
+    <button class="btn-outline" onclick="regresarAlInicio()">Regresar al inicio</button>
   </section>
 
-  <section class="contacto" id="contacto">
-    <div class="contacto-inner">
-      <h2>¿Lista para empezar?</h2>
-      <p>Escríbeme y platicamos de tu proyecto</p>
-      
-      <div class="social-buttons-grid">
-        <a href="https://wa.me/524494556465?text=¡Hola%20Clic_Creativo!%20Me%20gustaría%20saber%20más%20sobre%20sus%20servicios." target="_blank" class="btn-social btn-wa">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.882l6.186-1.448A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.371l-.36-.214-3.724.871.936-3.619-.235-.372A9.818 9.818 0 1112 21.818z"/>
-          </svg>
-          Escríbeme en WhatsApp
-        </a>
-
-        <a href="https://instagram.com/tu_usuario" target="_blank" class="btn-social btn-ig">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-          </svg>
-          Sígueme en Instagram
-        </a>
-
-        <a href="https://facebook.com/tu_pagina" target="_blank" class="btn-social btn-fb">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-          </svg>
-          Visítanos en Facebook
-        </a>
+  <section class="sobre" id="detalle-producto" style="display: none; background: var(--blanco); padding: 5rem 2rem;">
+    <div class="sobre-inner" style="max-width: 850px; margin: 0 auto; text-align: left; gap: 3rem;">
+      <div class="sobre-foto-wrap" style="background: var(--rosa-pale); padding: 2.5rem; border-radius: 28px; border: 2px solid var(--rosa); display: flex; justify-content: center; align-items: center;">
+        <img id="det-foto" src="" alt="Producto" style="width: 100%; max-width: 240px; height: auto; object-fit: contain; border-radius: 0; box-shadow: none; border: none;" />
       </div>
-
-      <button class="btn-dudas" onclick="openModal('contactoFlotante')">
-        <span class="btn-dudas-icon">❓</span> ¿Tienes dudas? ¡Contáctame aquí!
-      </button>
+      <div class="sobre-texto" style="color: var(--gris); align-items: flex-start;">
+        <div class="section-label" id="det-categoria" style="background: var(--rosa-light); color: var(--magenta);">Categoría</div>
+        <h2 id="det-nombre" style="color: var(--magenta); font-family: 'Playfair Display', serif; font-size: 2.4rem; line-height: 1.2;">Nombre</h2>
+        <h3 id="det-precio" style="font-family: 'Quicksand', sans-serif; font-size: 1.6rem; color: var(--gris); font-weight: 700; margin: 0.5rem 0 1rem 0;">$0.00</h3>
+        <p id="det-descripcion" style="color: var(--gris-soft); font-size: 0.95rem; line-height: 1.7; text-align: left;">Descripción corta.</p>
+        
+        <div class="hero-btns" style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+          <button class="btn-primary" style="background: var(--gris-soft); cursor: not-allowed; box-shadow: none;" disabled>🛒 Agregar al carrito (Próximamente)</button>
+          <button class="btn-outline" onclick="mostrarCatalogo()">← Volver al catálogo</button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -149,7 +194,6 @@
         <img src="Imagenes/Logo.png" alt="Clic Creativo" class="modal-logo" />
       </div>
       <h3 class="modal-title">Envíame tus dudas</h3>
-      
       <form id="formContactoFlotante" onsubmit="handleContactoSubmit(event)">
         <div class="form-row">
           <label>Nombre completo *</label>
@@ -165,7 +209,6 @@
         </div>
         <button type="submit" class="btn-send">Enviar mensaje ✨</button>
       </form>
-
       <div id="mensajeExito" class="mensaje-exito" style="display: none;">
         <div class="exito-icono">🎉</div>
         <h4>¡Mensaje enviado!</h4>
