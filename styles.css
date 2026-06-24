@@ -218,7 +218,7 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
   transition: transform 0.2s, box-shadow 0.2s;
   box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
-.btn-social:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+.btn-social:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(66, 65, 65, 0.25); }
 
 .btn-wa { background-color: #25D366; color: white; }
 .btn-ig { background-color: #E1306C; }
