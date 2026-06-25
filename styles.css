@@ -29,7 +29,7 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
 }
 .logo { height: 100px; object-fit: contain; mix-blend-mode: multiply; }
 
-.nav { display: flex; gap: 2rem; }
+.nav { display: flex; align-items: center; gap: 2rem; }
 .nav a {
   text-decoration: none; color: var(--gris);
   font-size: 0.88rem; font-weight: 600;
@@ -351,4 +351,99 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
   form { padding: 1rem 1.2rem 1.5rem; }
   .check-grid { grid-template-columns: 1fr; }
   .social-buttons-grid { max-width: 100%; }
+}
+
+/* =========================================
+   ===== NUEVA ZONA: MODULO USUARIO =====
+   ========================================= */
+
+/* Estilos de Escritorio (Navbar) */
+.auth-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 1rem;
+  border-left: 2px solid rgba(30, 30, 46, 0.15); /* Separador sutil */
+  padding-left: 1.5rem;
+}
+
+.auth-nav a {
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+/* Botón "Registrarme" en Escritorio */
+.auth-nav .btn-registro-nav {
+  background: var(--magenta);
+  color: var(--blanco) !important;
+  box-shadow: 0 4px 10px rgba(255, 73, 164, 0.2);
+}
+
+.auth-nav .btn-registro-nav:hover {
+  background: var(--magenta-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(184, 0, 92, 0.35);
+}
+
+/* Texto de bienvenida cuando inicia sesión */
+.user-welcome-text {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--gris);
+}
+
+.user-profile-link {
+  background: var(--blanco);
+  color: var(--magenta) !important;
+  border: 1.5px solid var(--magenta);
+}
+
+.user-profile-link:hover {
+  background: var(--magenta) !important;
+  color: var(--blanco) !important;
+}
+
+/* Estilos de Móvil (Dentro del Menú Desplegable) */
+.auth-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(30, 30, 46, 0.15);
+}
+
+.auth-mobile a {
+  display: block;
+  text-align: center;
+  padding: 0.6rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+/* Iniciar Sesión en Móvil */
+.auth-mobile a:not(.user-profile-link):first-child {
+  background: rgba(30, 30, 46, 0.05);
+  color: var(--gris);
+}
+
+/* Registrarme en Móvil */
+.auth-mobile a:nth-child(2) {
+  background: var(--magenta);
+  color: var(--blanco);
+}
+
+/* Saludo de bienvenida en Móvil */
+.auth-mobile .user-welcome-text {
+  text-align: center;
+  padding: 0.2rem 0;
+  font-size: 0.95rem;
+  color: var(--magenta-dark);
 }

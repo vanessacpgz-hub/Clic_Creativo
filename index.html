@@ -17,16 +17,30 @@
         <a href="#servicios" onclick="regresarAlInicio()">Servicios</a>
         <a href="#sobre-mi" onclick="regresarAlInicio()">Sobre Mí</a>
         <a href="#contacto" onclick="regresarAlInicio()">Contáctanos</a>
+        
+        <!-- Enlaces Módulo Usuario (Escritorio) -->
+        <div class="auth-nav" id="auth-zone">
+          <a href="login.html">Iniciar Sesión</a>
+          <a href="registro.html" class="btn-registro-nav">Registrarme</a>
+        </div>
       </nav>
       <button class="hamburger" id="ham" aria-label="Menú">
         <span></span><span></span><span></span>
       </button>
     </div>
+    
+    <!-- Menú Móvil -->
     <div class="mobile-nav" id="mobileNav">
       <a href="#inicio" onclick="regresarAlInicio()">Inicio</a>
       <a href="#servicios" onclick="regresarAlInicio()">Servicios</a>
       <a href="#sobre-mi" onclick="regresarAlInicio()">Sobre Mí</a>
       <a href="#contacto" onclick="regresarAlInicio()">Contáctanos</a>
+      
+      <!-- Enlaces Módulo Usuario (Móvil) -->
+      <div class="auth-mobile" id="auth-zone-mobile">
+        <a href="login.html">Iniciar Sesión</a>
+        <a href="registro.html">Registrarme</a>
+      </div>
     </div>
   </header>
 
@@ -375,18 +389,27 @@
         <button type="submit" class="btn-send">Enviar cotización 💬</button>
       </form>
     </div>
-    <!-- Enlaces de navegación existentes -->
-<a href="#servicios" class="text-gray-600 hover:text-indigo-600 font-medium">Servicios</a>
-<a href="#contacto" class="text-gray-600 hover:text-indigo-600 font-medium">Contacto</a>
-
-<!-- Agrega estos botones aquí -->
-<div class="hidden md:flex items-center space-x-4 ml-4">
-    <a href="login.html" class="text-gray-600 hover:text-indigo-600 font-medium">Iniciar Sesión</a>
-    <a href="registro.html" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-        Registrarme
-    </a>
-</div>
   </div>
+
+  <!-- Script interactivo de sesión simulada -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const usuarioGuardado = localStorage.getItem('sim_user_name');
+        if (usuarioGuardado) {
+            const authZone = document.getElementById('auth-zone');
+            const authZoneMobile = document.getElementById('auth-zone-mobile');
+            
+            // El saludo HTML tomará sus variables de color directo desde tu CSS (.css)
+            const saludoHTML = `
+                <span class="user-welcome-text">¡Hola, ${usuarioGuardado}!</span>
+                <a href="perfil.html" class="user-profile-link">Ver Perfil</a>
+            `;
+            
+            if (authZone) authZone.innerHTML = saludoHTML;
+            if (authZoneMobile) authZoneMobile.innerHTML = saludoHTML;
+        }
+    });
+  </script>
 
   <script src="script.js"></script>
 </body>
