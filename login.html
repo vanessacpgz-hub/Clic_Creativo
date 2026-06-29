@@ -53,5 +53,20 @@
             window.location.href = "perfil.html";
         });
     </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 1. Detectar si venimos desde el formulario de registro
+        const urlParams = new URLSearchParams(window.location.search);
+        const correoRegistrado = urlParams.get('registrado');
+        
+        // Supongamos que el input de correo del login tiene id="loginCorreo"
+        const inputCorreo = document.getElementById('loginCorreo'); 
+        
+        if (correoRegistrado && inputCorreo) {
+            // Autocompleta el correo recién registrado para el flujo visual
+            inputCorreo.value = correoRegistrado;
+        }
+    });
+</script>
 </body>
 </html>
