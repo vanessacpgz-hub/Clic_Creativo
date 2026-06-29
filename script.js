@@ -171,3 +171,23 @@ function regresarAlInicio() {
     document.getElementById('landing-sections').style.display = 'block';
     window.scrollTo(0, 0);
 }
+// COMPORTAMIENTO PARA LA BARRA DE REDES SOCIALES FLOTANTE
+document.addEventListener("DOMContentLoaded", () => {
+  const floatingSocials = document.getElementById('floatingSocials');
+  let lastScrollTop = 0;
+
+  if (floatingSocials) {
+    window.addEventListener("scroll", () => {
+      let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (currentScroll > lastScrollTop && currentScroll > 200) {
+        // Al hacer scroll hacia abajo, se vuelve traslúcido para no molestar la lectura
+        floatingSocials.style.opacity = "0.4";
+      } else {
+        // Al subir o detenerse, se muestra al 100% de inmediato
+        floatingSocials.style.opacity = "1";
+      }
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    }, { passive: true });
+  }
+});

@@ -363,7 +363,7 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
   align-items: center;
   gap: 1rem;
   margin-left: 1rem;
-  border-left: 2px solid rgba(30, 30, 46, 0.15); /* Separador sutil */
+  border-left: 2px solid rgba(246, 106, 169); /* Separador sutil */
   padding-left: 1.5rem;
 }
 
@@ -446,4 +446,62 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
   padding: 0.2rem 0;
   font-size: 0.95rem;
   color: var(--magenta-dark);
+}
+/* === NUEVOS ESTILOS: BOTONES DE REDES SOCIALES FLOTANTES === */
+
+.floating-social-container {
+  position: fixed;
+  bottom: 30px;              /* Espaciado desde abajo */
+  right: 24px;               /* Espaciado desde el borde derecho */
+  display: flex;
+  flex-direction: column;    /* Acomodo en columna vertical */
+  gap: 14px;                 /* Separación perfecta entre botones */
+  z-index: 9999;             /* Máxima prioridad para que no se oculte con nada */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Estilo común redondo para los 3 botones flotantes */
+.btn-social-float {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;        /* Círculos perfectos */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+}
+
+/* Efecto hover: Crecen sutilmente al pasar el cursor */
+.btn-social-float:hover {
+  transform: scale(1.12);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+}
+
+/* Colores corporativos planos para máxima legibilidad */
+.btn-wa-float {
+  background-color: #25D366; /* Verde WhatsApp oficial */
+}
+
+.btn-ig-float {
+  background-color: #E1306C; /* Rosa/Magenta Instagram */
+}
+
+.btn-fb-float {
+  background-color: #1877F2; /* Azul Facebook oficial */
+}
+
+/* Ajuste responsivo para celulares muy pequeños */
+@media (max-width: 480px) {
+  .floating-social-container {
+    bottom: 20px;
+    right: 16px;
+    gap: 10px;
+  }
+  .btn-social-float {
+    width: 48px;
+    height: 48px;
+  }
 }
