@@ -35,38 +35,35 @@
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Todo consolidado en un solo bloque de JS al cargar el DOM
+        document.addEventListener("DOMContentLoaded", function() {
             
-            const correoIngresado = document.getElementById('logCorreo').value;
+            // 1. Lógica para capturar el correo del registro si viene en la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const correoRegistrado = urlParams.get('registrado');
+            const inputCorreo = document.getElementById('logCorreo'); // ID Corregido aquí
             
-            // 1. Intentamos ver si hay un usuario guardado desde el registro
-            const usuarioRegistrado = localStorage.getItem('sim_user_email');
-            
-            // 2. Si no coincide o no existe, creamos la sesión simulada por defecto
-            if (usuarioRegistrado !== correoIngresado) {
-                localStorage.setItem('sim_user_name', 'Usuario Ficticio');
-                localStorage.setItem('sim_user_email', correoIngresado);
+            if (correoRegistrado && inputCorreo) {
+                inputCorreo.value = correoRegistrado;
             }
-            
-            // Mandar directo al Perfil
-            window.location.href = "perfil.html";
+
+            // 2. Manejo del envío del formulario
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const correoIngresado = document.getElementById('logCorreo').value;
+                const usuarioRegistrado = localStorage.getItem('sim_user_email');
+                
+                // Si el correo no coincide con el que se registró, asignamos un fallback
+                if (usuarioRegistrado !== correoIngresado) {
+                    localStorage.setItem('sim_user_name', 'Usuario Ficticio');
+                    localStorage.setItem('sim_user_email', correoIngresado);
+                }
+                
+                // Redirección inmediata a la vista del Perfil
+                window.location.href = "perfil.html";
+            });
         });
     </script>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // 1. Detectar si venimos desde el formulario de registro
-        const urlParams = new URLSearchParams(window.location.search);
-        const correoRegistrado = urlParams.get('registrado');
-        
-        // Supongamos que el input de correo del login tiene id="loginCorreo"
-        const inputCorreo = document.getElementById('loginCorreo'); 
-        
-        if (correoRegistrado && inputCorreo) {
-            // Autocompleta el correo recién registrado para el flujo visual
-            inputCorreo.value = correoRegistrado;
-        }
-    });
-</script>
 </body>
 </html>
