@@ -4,65 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clic_Creativo - Registro</title>
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS v4 -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet" />
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
 </head>
-<body class="bg-slate-950 bg-white/5 backdrop-blur-xl focus:ring-pink-500/20 from-pink-600 to-rose-500">
+<body class="bg-slate-950 text-white min-h-screen flex flex-col relative overflow-hidden justify-center items-center p-4">
 
-    <!-- Contenedor del Formulario -->
-    <div class="flex-grow flex items-center justify-center p-6">
-        <div class="bg-white p-8 rounded-2xl shadow-md w-full max-w-md border border-gray-100">
-            <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">Crear Cuenta</h2>
-            <p class="text-sm text-gray-500 text-center mb-6">Regístrate en Clic_Creativo</p>
-            
-            <form id="registroForm" class="space-y-4">
-                <!-- Campo Nombre -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
-                    <input type="text" id="regNombre" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Tu nombre">
-                </div>
-                <!-- Campo Correo -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
-                    <input type="email" id="regCorreo" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="correo@ejemplo.com">
-                </div>
-                <!-- Campo Contraseña -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
-                    <input type="password" id="regPassword" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="••••••••">
-                </div>
-                
-                <!-- Botón Registrarme -->
-                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 rounded-lg transition-colors mt-6">
-                    Registrarme
-                </button>
-            </form>
-            
-            <p class="text-center text-sm text-gray-600 mt-4">
-                ¿Ya tienes cuenta? <a href="login.html" class="text-indigo-600 hover:underline">Inicia sesión aquí</a>
-            </p>
+    <!-- Círculos difuminados de fondo en tonos rosa e índigo -->
+    <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-pink-600 rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-72 h-72 bg-indigo-600 rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
+
+    <!-- Contenedor del Formulario Estilo Vidrio (Glassmorphism) -->
+    <div class="w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-3xl shadow-2xl relative z-10 my-auto space-y-6">
+        
+        <!-- Encabezado de Marca -->
+        <div class="text-center space-y-1">
+            <span class="text-xs font-bold uppercase tracking-widest bg-gradient-to-r from-pink-400 to-rose-300 bg-clip-text text-transparent">Clic_Creativo</span>
+            <h2 class="text-3xl font-black text-white tracking-tight">Crear Cuenta</h2>
+            <p class="text-sm text-slate-400">Regístrate y obtén tus diseños exclusivos</p>
         </div>
+        
+        <!-- Formulario -->
+        <form id="registroForm" class="space-y-4">
+            <!-- Campo Nombre -->
+            <div class="space-y-1.5">
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-300">Nombre Completo</label>
+                <input type="text" id="regNombre" required 
+                       class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 transition-all text-sm" 
+                       placeholder="Tu nombre">
+            </div>
+            
+            <!-- Campo Correo -->
+            <div class="space-y-1.5">
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-300">Correo Electrónico</label>
+                <input type="email" id="regCorreo" required 
+                       class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 transition-all text-sm" 
+                       placeholder="correo@ejemplo.com">
+            </div>
+            
+            <!-- Campo Contraseña -->
+            <div class="space-y-1.5">
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-300">Contraseña</label>
+                <input type="password" id="regPassword" required 
+                       class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 transition-all text-sm" 
+                       placeholder="••••••••">
+            </div>
+            
+            <!-- Botón Registrarme con Degradado Rosa -->
+            <button type="submit" 
+                    class="w-full bg-gradient-to-r from-pink-600 to-rose-500 hover:from-pink-500 hover:to-rose-400 text-white font-extrabold py-3.5 rounded-xl transition-all shadow-lg shadow-pink-600/20 tracking-wide mt-6 cursor-pointer hover:scale-[1.01] active:scale-[0.99]">
+                REGISTRARME
+            </button>
+        </form>
+        
+        <!-- Enlace a Login -->
+        <p class="text-center text-sm text-slate-400 pt-2">
+            ¿Ya tienes cuenta? <a href="login.html" class="text-pink-400 font-bold hover:text-pink-300 hover:underline transition-colors ml-1">Inicia sesión aquí</a>
+        </p>
     </div>
 
-    <!-- Lógica de simulación en JavaScript -->
+    <!-- Lógica de simulación en JavaScript (Intacta) -->
     <script>
         document.getElementById('registroForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Evita que se recargue la página
+            e.preventDefault(); 
             
-            // Captura de campos
             const nombre = document.getElementById('regNombre').value;
             const correo = document.getElementById('regCorreo').value;
             const password = document.getElementById('regPassword').value;
             
-            // Guardado temporal simulado en el navegador
             localStorage.setItem('sim_user_name', nombre);
             localStorage.setItem('sim_user_email', correo);
             localStorage.setItem('sim_user_pass', password);
             
-            // Mensaje de éxito requerido por rúbrica
             alert("Registro exitoso (simulado)");
             
-            // Redirección inmediata a login
             window.location.href = "login.html";
         });
     </script>
