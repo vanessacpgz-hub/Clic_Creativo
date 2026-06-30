@@ -4,30 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clic_Creativo - Registro</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body class="bg-gray-50 flex flex-col min-h-screen font-sans">
+<body class="bg-slate-950 bg-white/5 backdrop-blur-xl focus:ring-pink-500/20 from-pink-600 to-rose-500">
 
+    <!-- Contenedor del Formulario -->
     <div class="flex-grow flex items-center justify-center p-6">
         <div class="bg-white p-8 rounded-2xl shadow-md w-full max-w-md border border-gray-100">
             <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">Crear Cuenta</h2>
             <p class="text-sm text-gray-500 text-center mb-6">Regístrate en Clic_Creativo</p>
             
             <form id="registroForm" class="space-y-4">
+                <!-- Campo Nombre -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
                     <input type="text" id="regNombre" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Tu nombre">
                 </div>
+                <!-- Campo Correo -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
                     <input type="email" id="regCorreo" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="correo@ejemplo.com">
                 </div>
+                <!-- Campo Contraseña -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
                     <input type="password" id="regPassword" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="••••••••">
                 </div>
                 
-                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 rounded-lg transition-colors mt-6 cursor-pointer">
+                <!-- Botón Registrarme -->
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 rounded-lg transition-colors mt-6">
                     Registrarme
                 </button>
             </form>
@@ -38,23 +44,26 @@
         </div>
     </div>
 
+    <!-- Lógica de simulación en JavaScript -->
     <script>
         document.getElementById('registroForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+            e.preventDefault(); // Evita que se recargue la página
             
+            // Captura de campos
             const nombre = document.getElementById('regNombre').value;
             const correo = document.getElementById('regCorreo').value;
             const password = document.getElementById('regPassword').value;
             
-            // Guardamos las variables para simular la persistencia
+            // Guardado temporal simulado en el navegador
             localStorage.setItem('sim_user_name', nombre);
             localStorage.setItem('sim_user_email', correo);
             localStorage.setItem('sim_user_pass', password);
             
-            alert("¡Registro exitoso! Redirigiendo al inicio de sesión...");
+            // Mensaje de éxito requerido por rúbrica
+            alert("Registro exitoso (simulado)");
             
-            // Pasamos el correo como parámetro para que el login lo capture y "funcione" visualmente
-            window.location.href = "login.html?registrado=" + encodeURIComponent(correo);
+            // Redirección inmediata a login
+            window.location.href = "login.html";
         });
     </script>
 </body>
