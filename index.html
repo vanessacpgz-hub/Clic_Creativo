@@ -3,25 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clic Creativo</title>
+  <title>Clic Creativo - Páginas Web e Invitaciones Interactivas</title>
   <link rel="stylesheet" href="styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet" />
 </head>
 <body>
 
+  <!-- Encabezado / Navbar Global -->
   <header class="header">
     <div class="header-inner">
       <img src="Imagenes/Logo.png" alt="Clic Creativo" class="logo" />
       <nav class="nav">
-        <a href="#inicio" onclick="regresarAlInicio()">Inicio</a>
-        <a href="#servicios" onclick="regresarAlInicio()">Servicios</a>
-        <a href="#sobre-mi" onclick="regresarAlInicio()">Sobre Mí</a>
-        <a href="#contacto" onclick="regresarAlInicio()">Contáctanos</a>
+        <a href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#sobre-mi">Sobre Mí</a>
+        <a href="#contacto">Contáctanos</a>
         
         <!-- Enlaces Módulo Usuario (Escritorio) -->
         <div class="auth-nav" id="auth-zone">
           <a href="login.html">Iniciar Sesión</a>
-          <a href="registro.html" class="btn-registro-nav">Registrarme</a>
+          <a href="Registro.html" class="btn-registro-nav">Registrarme</a>
         </div>
       </nav>
       <button class="hamburger" id="ham" aria-label="Menú">
@@ -31,20 +32,23 @@
     
     <!-- Menú Móvil -->
     <div class="mobile-nav" id="mobileNav">
-      <a href="#inicio" onclick="regresarAlInicio()">Inicio</a>
-      <a href="#servicios" onclick="regresarAlInicio()">Servicios</a>
-      <a href="#sobre-mi" onclick="regresarAlInicio()">Sobre Mí</a>
-      <a href="#contacto" onclick="regresarAlInicio()">Contáctanos</a>
+      <a href="#inicio">Inicio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#sobre-mi">Sobre Mí</a>
+      <a href="#contacto">Contáctanos</a>
       
       <!-- Enlaces Módulo Usuario (Móvil) -->
       <div class="auth-mobile" id="auth-zone-mobile">
         <a href="login.html">Iniciar Sesión</a>
-        <a href="registro.html">Registrarme</a>
+        <a href="Registro.html">Registrarme</a>
       </div>
     </div>
   </header>
 
+  <!-- Contenedor Principal de la Landing Page -->
   <div id="landing-sections">
+    
+    <!-- Sección Hero -->
     <section class="hero" id="inicio">
       <div class="hero-bg-circles">
         <span class="circle c1"></span>
@@ -75,6 +79,7 @@
       </div>
     </section>
 
+    <!-- Sección Servicios -->
     <section class="servicios" id="servicios">
       <div class="section-label">Lo que hago</div>
       <h2 class="section-title">Mis Servicios</h2>
@@ -99,9 +104,11 @@
           <button class="btn-primary" onclick="openModal('invitacion')">Cotiza tu invitación</button>
         </div>
       </div>
+      <!-- Redirección limpia al archivo independiente de catálogo si es necesario, o toggle vía script.js -->
       <button class="btn-catalogo" onclick="mostrarCatalogo()">Catálogo de páginas web e invitaciones</button>
     </section>
 
+    <!-- Sección Sobre Mí -->
     <section class="sobre" id="sobre-mi">
       <div class="sobre-inner">
         <div class="sobre-foto-wrap">
@@ -111,19 +118,18 @@
           <div class="section-label">Historia</div>
           <h2>Hola, soy<br/><em>Mayra Capetillo</em></h2>
           <p>Mi misión es transformar ideas en experiencias digitales que funcionen. Me apasiona el diseño que conecta.</p>
-          <p>Este emprendimiento nace desde una página web que impulsa tu negocio hasta una invitación interactiva que hará que tu evento sea inolvidable, estoy aquí para que dar el clic sea la parte más fácil de tu proyecto. </p>
+          <p>Este emprendimiento nace desde una página web que impulsa tu negocio hasta una invitación interactiva que hará que tu evento sea inolvidable, estoy aquí para que dar el clic sea la parte más fácil de tu proyecto.</p>
           <p class="tagline">¡Hagamos algo increíble juntos!</p>
           <a href="#servicios" class="btn-primary">Ver mis servicios</a>
         </div>
       </div>
     </section>
 
+    <!-- Sección Contacto -->
     <section class="contacto" id="contacto">
       <div class="contacto-inner">
         <h2>¿Lista para empezar?</h2>
         <p>Escríbeme y platicamos de tu proyecto</p>
-        
-        <!-- El botón de dudas se queda estático aquí de forma elegante -->
         <button class="btn-dudas" onclick="openModal('contactoFlotante')" style="margin-top: 2rem;">
           <span class="btn-dudas-icon">❓</span> ¿Tienes dudas? ¡Contáctame aquí!
         </button>
@@ -131,6 +137,11 @@
     </section>
   </div>
 
+  <!-- ================================================================= -->
+  <!-- SECCIONES OCULTAS / VISTAS DINÁMICAS (Controladas por script.js) -->
+  <!-- ================================================================= -->
+
+  <!-- Catálogo de Productos -->
   <section class="servicios" id="catalogo-productos" style="display: none;">
     <div class="section-label">Nuestros Diseños</div>
     <h2 class="section-title">Catálogo Completo</h2>
@@ -139,9 +150,7 @@
     <div class="cards">
       <div class="card">
         <div class="card-glow"></div>
-        <div class="card-icon">
-          <img src="Imagenes/CotizaInvitacion.png" alt="Invitación Esencial" />
-        </div>
+        <div class="card-icon"><img src="Imagenes/CotizaInvitacion.png" alt="Invitación Esencial" /></div>
         <span class="hero-badge" style="background: var(--magenta); font-size: 0.65rem; padding: 0.2rem 0.6rem;">Económica</span>
         <h3>Invitación Esencial</h3>
         <p>$250 MXN</p>
@@ -150,9 +159,7 @@
 
       <div class="card">
         <div class="card-glow"></div>
-        <div class="card-icon">
-          <img src="Imagenes/CotizaInvitacion.png" alt="Invitación Interactiva" />
-        </div>
+        <div class="card-icon"><img src="Imagenes/CotizaInvitacion.png" alt="Invitación Interactiva" /></div>
         <span class="hero-badge" style="background: #25D366; font-size: 0.65rem; padding: 0.2rem 0.6rem;">Más Vendida</span>
         <h3>Invitación Interactiva</h3>
         <p>$450 MXN</p>
@@ -161,9 +168,7 @@
 
       <div class="card">
         <div class="card-glow"></div>
-        <div class="card-icon">
-          <img src="Imagenes/CotizaInvitacion.png" alt="Invitación Premium" />
-        </div>
+        <div class="card-icon"><img src="Imagenes/CotizaInvitacion.png" alt="Invitación Premium" /></div>
         <span class="hero-badge" style="background: #1877F2; font-size: 0.65rem; padding: 0.2rem 0.6rem;">VIP</span>
         <h3>Invitación Premium</h3>
         <p>$650 MXN</p>
@@ -175,9 +180,7 @@
     <div class="cards">
       <div class="card">
         <div class="card-glow"></div>
-        <div class="card-icon">
-          <img src="Imagenes/Cotizapaginaweb.png" alt="Landing Page Express" />
-        </div>
+        <div class="card-icon"><img src="Imagenes/Cotizapaginaweb.png" alt="Landing Page Express" /></div>
         <span class="hero-badge" style="background: var(--magenta); font-size: 0.65rem; padding: 0.2rem 0.6rem;">Sencilla</span>
         <h3>Landing Page Express</h3>
         <p>$1,200 MXN</p>
@@ -186,9 +189,7 @@
 
       <div class="card">
         <div class="card-glow"></div>
-        <div class="card-icon">
-          <img src="Imagenes/Cotizapaginaweb.png" alt="Web Comercial" />
-        </div>
+        <div class="card-icon"><img src="Imagenes/Cotizapaginaweb.png" alt="Web Comercial" /></div>
         <span class="hero-badge" style="background: #25D366; font-size: 0.65rem; padding: 0.2rem 0.6rem;">Ideal Negocios</span>
         <h3>Web Comercial</h3>
         <p>$2,400 MXN</p>
@@ -197,9 +198,7 @@
 
       <div class="card">
         <div class="card-glow"></div>
-        <div class="card-icon">
-          <img src="Imagenes/Cotizapaginaweb.png" alt="Web Premium Pro" />
-        </div>
+        <div class="card-icon"><img src="Imagenes/Cotizapaginaweb.png" alt="Web Premium Pro" /></div>
         <span class="hero-badge" style="background: #1877F2; font-size: 0.65rem; padding: 0.2rem 0.6rem;">Completa</span>
         <h3>Web Premium Pro</h3>
         <p>$4,500 MXN</p>
@@ -210,10 +209,11 @@
     <button class="btn-outline" onclick="regresarAlInicio()" style="margin-top: 2rem;">Regresar al inicio</button>
   </section>
 
+  <!-- Vista de Detalle de Producto -->
   <section class="sobre" id="detalle-producto" style="display: none; background: var(--blanco); padding: 5rem 2rem;">
     <div class="sobre-inner" style="max-width: 850px; margin: 0 auto; text-align: left; gap: 3rem;">
       <div class="sobre-foto-wrap" style="background: var(--rosa-pale); padding: 2.5rem; border-radius: 28px; border: 2px solid var(--rosa); display: flex; justify-content: center; align-items: center;">
-        <img id="det-foto" src="" alt="Producto" style="width: 100%; max-width: 240px; height: auto; object-fit: contain; border-radius: 0; box-shadow: none; border: none;" />
+        <img id="det-foto" src="" alt="Producto" style="width: 100%; max-width: 240px; height: auto; object-fit: contain;" />
       </div>
       <div class="sobre-texto" style="color: var(--gris); align-items: flex-start;">
         <div class="section-label" id="det-categoria" style="background: var(--rosa-light); color: var(--magenta);">Categoría</div>
@@ -229,6 +229,11 @@
     </div>
   </section>
 
+  <!-- ================================================================= -->
+  <!-- MODALES Y ELEMENTOS FLOTANTES -->
+  <!-- ================================================================= -->
+
+  <!-- Modal Contacto Flotante -->
   <div class="modal-overlay" id="modalContactoFlotante">
     <div class="modal">
       <button class="modal-close" onclick="closeModal('contactoFlotante')">✕</button>
@@ -259,13 +264,7 @@
     </div>
   </div>
 
-  <footer class="footer">
-    <img src="Imagenes/Logo.png" alt="Clic Creativo" class="footer-logo" />
-    <p>Atención al cliente de 8:00am-8:00pm</p>
-    <p>Ubicación: Av.Fondo de tu corazón, Calle Te amo guapi #221</p>
-    <p>© 2025 Clic Creativo · Diseño digital con amor</p>
-  </footer>
-
+  <!-- Modal Cotizar Web -->
   <div class="modal-overlay" id="modalWeb">
     <div class="modal">
       <button class="modal-close" onclick="closeModal('web')">✕</button>
@@ -319,6 +318,7 @@
     </div>
   </div>
 
+  <!-- Modal Cotizar Invitación -->
   <div class="modal-overlay" id="modalInvitacion">
     <div class="modal">
       <button class="modal-close" onclick="closeModal('invitacion')">✕</button>
@@ -366,7 +366,7 @@
     </div>
   </div>
 
-  <!-- NUEVO CONTENEDOR DE REDES SOCIALES FLOTANTE FIJO -->
+  <!-- Contenedor Flotante de Redes Sociales -->
   <div class="floating-social-container" id="floatingSocials">
     <a href="https://wa.me/524494556465?text=¡Hola%20Clic_Creativo!%20Me%20gustaría%20saber%20más%20sobre%20sus%20servicios." target="_blank" class="btn-social-float btn-wa-float" title="Escríbenos en WhatsApp">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
@@ -374,7 +374,6 @@
         <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.882l6.186-1.448A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.371l-.36-.214-3.724.871.936-3.619-.235-.372A9.818 9.818 0 1112 21.818z"/>
       </svg>
     </a>
-
     <a href="https://instagram.com/tu_usuario" target="_blank" class="btn-social-float btn-ig-float" title="Sígueme en Instagram">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -382,7 +381,6 @@
         <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
       </svg>
     </a>
-
     <a href="https://facebook.com/tu_pagina" target="_blank" class="btn-social-float btn-fb-float" title="Visítanos en Facebook">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -390,7 +388,15 @@
     </a>
   </div>
 
-  <!-- Script interactivo de sesión simulada -->
+  <!-- Footer Global -->
+  <footer class="footer">
+    <img src="Imagenes/Logo.png" alt="Clic Creativo" class="footer-logo" />
+    <p>Atención al cliente de 8:00am-8:00pm</p>
+    <p>Ubicación: Aguascalientes, Ags.</p>
+    <p>© 2026 Clic Creativo · Diseño digital con amor</p>
+  </footer>
+
+  <!-- Lógica del Módulo de Usuario Simulada -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
         const usuarioGuardado = localStorage.getItem('sim_user_name');
@@ -408,7 +414,6 @@
         }
     });
   </script>
-
   <script src="script.js"></script>
 </body>
 </html>
