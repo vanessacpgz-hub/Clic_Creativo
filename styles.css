@@ -414,7 +414,7 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
   gap: 0.6rem;
   margin-top: 0.5rem;
   padding-top: 1rem;
-  border-top: 1px dashed rgba(30, 30, 46, 0.15);
+  border-top: 1px dashed rgb(244, 10, 178);
 }
 
 .auth-mobile a {
@@ -430,7 +430,7 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
 
 /* Iniciar Sesión en Móvil */
 .auth-mobile a:not(.user-profile-link):first-child {
-  background: rgba(30, 30, 46, 0.05);
+  background: rgb(245, 50, 187);
   color: var(--gris);
 }
 
