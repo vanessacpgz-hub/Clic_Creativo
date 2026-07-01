@@ -431,5 +431,28 @@
     });
   </script>
   <script src="script.js"></script>
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search-catalog');
+    const productCards = document.querySelectorAll('.card-producto');
+
+    searchInput.addEventListener('input', (e) => {
+        // Convertimos el texto a minúsculas y quitamos espacios extras
+        const searchTerm = e.target.value.toLowerCase().trim();
+
+        productCards.forEach(card => {
+            // Buscamos el texto dentro del h3 (título) de cada tarjeta
+            const productTitle = card.querySelector('h3').textContent.toLowerCase();
+
+            // Si el título incluye lo que escribió el usuario, se muestra; si no, se oculta
+            if (productTitle.includes(searchTerm)) {
+                card.style.display = ""; // Vuelve a su estado original (visible)
+            } else {
+                card.style.display = "none"; // Se oculta
+            }
+        });
+    });
+});
+</script>
 </body>
 </html>
