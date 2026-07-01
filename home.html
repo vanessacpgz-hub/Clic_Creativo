@@ -141,30 +141,29 @@
   <!-- SECCIONES OCULTAS / VISTAS DINÁMICAS (Controladas por script.js) -->
   <!-- ================================================================= -->
 
-  <!-- Catálogo de Productos -->
   <section class="servicios" id="catalogo-productos" style="display: none;">
-    <div class="section-label">Nuestros Diseños</div>
-    <h2 class="section-title">Catálogo Completo</h2>
-       <!-- Contenedor de la barra de búsqueda -->
-<div class="max-w-md mx-auto mb-8 px-4">
-    <div class="relative flex items-center">
-        <!-- Ícono de Lupa (SVG) -->
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <svg class="w-5 h-5 text-pink-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-            </svg>
-        </div>
-        <!-- Input de búsqueda -->
-        <input 
-            type="search" 
-            id="search-catalog" 
-            class="block w-full p-3 pl-10 text-sm text-gray-800 border border-pink-200 rounded-full bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-pink-400 focus:border-pink-400 focus:outline-none shadow-sm placeholder-gray-400 transition-all duration-300" 
-            placeholder="Buscar invitaciones (ej. Boda, XV años)..." 
-            required
-        >
+  <div class="section-label">Nuestros Diseños</div>
+  <h2 class="section-title">Catálogo Completo</h2>
+
+  <div class="max-w-md mx-auto mb-8 px-4" style="max-width: 450px; margin-left: auto; margin-right: auto; margin-bottom: 2rem; padding-left: 1rem; padding-right: 1rem;">
+    <div class="relative flex items-center" style="position: relative; display: flex; align-items: center;">
+      
+      <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none" style="position: absolute; top: 0; bottom: 0; left: 0; display: flex; align-items: center; padding-left: 0.75rem; pointer-events: none;">
+        <svg class="text-pink-400" style="width: 20px; height: 20px; color: #f472b6;" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+        </svg>
+      </div>
+
+      <input 
+        type="search" 
+        id="search-catalog" 
+        class="block w-full p-3 pl-10 text-sm text-gray-800 border border-pink-200 rounded-full bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-pink-400 focus:border-pink-400 focus:outline-none shadow-sm placeholder-gray-400 transition-all duration-300" 
+        style="display: block; width: 100%; padding: 0.75rem 0.75rem 0.75rem 2.5rem; font-size: 0.875rem; color: #1f2937; border: 1px solid #fbcfe8; border-radius: 9999px; background-color: rgba(255, 255, 255, 0.8); outline: none;"
+        placeholder="Buscar invitaciones (ej. Boda, XV años)..." 
+        required
+      >
     </div>
-</div>
-    
+  </div>
     <h3 style="font-family: 'Playfair Display', serif; color: var(--magenta); font-size: 1.8rem; margin: 2rem 0 1.5rem;">Invitaciones Digitales</h3>
     <div class="cards">
       <div class="card">
