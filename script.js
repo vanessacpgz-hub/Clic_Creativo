@@ -192,28 +192,25 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 // ==========================================
-// 5. FILTRO EN TIEMPO REAL DEL CATÁLOGO
+// 5. FILTRO EN TIEMPO REAL DEL CATÁLOGO (POR ONCLICK)
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-catalog');
     
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
-            // Convertimos el texto a minúsculas y quitamos espacios extras
             const searchTerm = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u0308]/g, "").trim();
             
-            // Selecciona todas las tarjetas del catálogo (asumiendo que usan 'card-producto')
-            const productCards = document.querySelectorAll('.card-producto');
+            // Selecciona todos los elementos que tengan la función verDetalleProducto
+            const productCards = document.querySelectorAll('[onclick^="verDetalleProducto"]');
 
             productCards.forEach(card => {
-                // Buscamos cualquier texto dentro de la tarjeta (así no dependemos solo de un h3)
                 const cardText = card.textContent.toLowerCase().normalize("NFD").replace(/[\u0300-\u0308]/g, "");
 
-                // Si incluye lo buscado, se muestra. Si no, se oculta.
                 if (cardText.includes(searchTerm)) {
-                    card.style.display = ""; // Muestra en el layout (flex, grid, etc.)
+                    card.style.display = ""; 
                 } else {
-                    card.style.display = "none"; // Oculta la tarjeta
+                    card.style.display = "none"; 
                 }
             });
         });
