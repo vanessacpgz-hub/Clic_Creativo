@@ -142,6 +142,25 @@
   <!-- ================================================================= -->
 
   <!-- Catálogo de Productos -->
+   <!-- Contenedor de la barra de búsqueda -->
+<div class="max-w-md mx-auto mb-8 px-4">
+    <div class="relative flex items-center">
+        <!-- Ícono de Lupa (SVG) -->
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg class="w-5 h-5 text-pink-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            </svg>
+        </div>
+        <!-- Input de búsqueda -->
+        <input 
+            type="search" 
+            id="search-catalog" 
+            class="block w-full p-3 pl-10 text-sm text-gray-800 border border-pink-200 rounded-full bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-pink-400 focus:border-pink-400 focus:outline-none shadow-sm placeholder-gray-400 transition-all duration-300" 
+            placeholder="Buscar invitaciones (ej. Boda, XV años)..." 
+            required
+        >
+    </div>
+</div>
   <section class="servicios" id="catalogo-productos" style="display: none;">
     <div class="section-label">Nuestros Diseños</div>
     <h2 class="section-title">Catálogo Completo</h2>
