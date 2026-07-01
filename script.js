@@ -191,24 +191,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }, { passive: true });
   }
 });
+// ==========================================
+// 5. FILTRO EN TIEMPO REAL DEL CATÁLOGO
+// ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-catalog');
-    const productCards = document.querySelectorAll('.card-producto');
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            // Convertimos el texto a minúsculas y quitamos espacios extras
+            const searchTerm = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u0308]/g, "").trim();
+            
+            // Selecciona todas las tarjetas del catálogo (asumiendo que usan 'card-producto')
+            const productCards = document.querySelectorAll('.card-producto');
 
-    searchInput.addEventListener('input', (e) => {
-        // Convertimos el texto a minúsculas y quitamos espacios extras
-        const searchTerm = e.target.value.toLowerCase().trim();
+            productCards.forEach(card => {
+                // Buscamos cualquier texto dentro de la tarjeta (así no dependemos solo de un h3)
+                const cardText = card.textContent.toLowerCase().normalize("NFD").replace(/[\u0300-\u0308]/g, "");
 
-        productCards.forEach(card => {
-            // Buscamos el texto dentro del h3 (título) de cada tarjeta
-            const productTitle = card.querySelector('h3').textContent.toLowerCase();
-
-            // Si el título incluye lo que escribió el usuario, se muestra; si no, se oculta
-            if (productTitle.includes(searchTerm)) {
-                card.style.display = ""; // Vuelve a su estado original (visible)
-            } else {
-                card.style.display = "none"; // Se oculta
-            }
+                // Si incluye lo buscado, se muestra. Si no, se oculta.
+                if (cardText.includes(searchTerm)) {
+                    card.style.display = ""; // Muestra en el layout (flex, grid, etc.)
+                } else {
+                    card.style.display = "none"; // Oculta la tarjeta
+                }
+            });
         });
-    });
+    }
 });
