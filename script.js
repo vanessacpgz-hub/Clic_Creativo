@@ -191,31 +191,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }, { passive: true });
   }
 });
-// ==========================================
-// 5. FILTRO EN TIEMPO REAL DEL CATÁLOGO
-// ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-catalog');
     
     if (searchInput) {
+        // 1. Filtro en tiempo real (el que ya tienes)
         searchInput.addEventListener('input', (e) => {
-            // Limpiamos el texto de acentos y espacios
             const searchTerm = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u030f]/g, "").trim();
-            
-            // Seleccionamos directamente todas las tarjetas de producto
             const productCards = document.querySelectorAll('.cards .card');
 
             productCards.forEach(card => {
-                // Obtenemos el texto de la tarjeta y le quitamos acentos
                 const cardText = card.textContent.toLowerCase().normalize("NFD").replace(/[\u0300-\u030f]/g, "");
-
-                // Si coincide el término, se muestra; si no, se oculta la tarjeta completa
                 if (cardText.includes(searchTerm)) {
-                    card.style.style.display = ""; // Vuelve a su estado CSS original (flex/block)
+                    card.style.display = ""; 
                 } else {
                     card.style.display = "none"; 
                 }
             });
+        });
+
+        // 2. NUEVO: Evitar que el Enter recargue la página
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Evita que la página se refresque
+                searchInput.blur(); // Opcional: quita el foco del input para cerrar el teclado en celular
+            }
         });
     }
 });
