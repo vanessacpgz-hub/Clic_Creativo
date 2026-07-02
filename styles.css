@@ -505,3 +505,50 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
     height: 48px;
   }
 }
+/* Contenedor del botón del carrito */
+.carrito-contenedor-fijo {
+  position: relative;
+  display: inline-block;
+}
+
+.btn-carrito {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  position: relative;
+  padding: 5px;
+}
+
+/* LA BURBUJA FLOTANTE */
+.badge-flotante {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: var(--magenta); /* Usa tu color global */
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 3px 7px;
+  min-width: 15px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  font-family: 'Quicksand', sans-serif;
+}
+
+/* Estilos básicos para la ventana del carrito */
+.modal-carrito {
+  position: fixed;
+  z-index: 1000;
+  top: 0; right: 0;
+  width: 350px; height: 100%;
+  background: white;
+  box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+  padding: 2rem;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+.modal-contenido { position: relative; }
+.cerrar-modal { position: absolute; top: 0; right: 0; font-size: 1.5rem; cursor: pointer; }
+.item-carrito { display: flex; justify-content: space-between; margin: 1rem 0; padding-bottom: 0.5rem; border-bottom: 1px solid #eee; }

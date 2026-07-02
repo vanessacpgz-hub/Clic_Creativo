@@ -44,6 +44,27 @@
       </div>
     </div>
   </header>
+  <!-- Botón del Carrito en el Menú/Header -->
+<div class="carrito-contenedor-fijo">
+  <button class="btn-carrito" onclick="toggleModalCarrito()">
+    🛒 <span id="carrito-contador" class="badge-flotante">0</span>
+  </button>
+</div>
+
+<!-- Modal / Ventana flotante para ver el Carrito (Ponlo al final de tu index.html, antes de cerrar el </body>) -->
+<div id="modal-carrito" class="modal-carrito" style="display: none;">
+  <div class="modal-contenido">
+    <span class="cerrar-modal" onclick="toggleModalCarrito()">&times;</span>
+    <h3>Tu Carrito</h3>
+    <div id="carrito-items">
+      <!-- Aquí se meterán los productos dinámicamente con JS -->
+    </div>
+    <div class="carrito-total">
+      <strong>Total:</strong> <span id="carrito-total-precio">$0.00 MXN</span>
+    </div>
+    <button class="btn-primary" onclick="enviarPedidoWhatsApp()">Enviar pedido por WhatsApp</button>
+  </div>
+</div>
 
   <!-- Contenedor Principal de la Landing Page -->
   <div id="landing-sections">
@@ -238,7 +259,7 @@
         <p id="det-descripcion" style="color: var(--gris-soft); font-size: 0.95rem; line-height: 1.7; text-align: left;">Descripción corta.</p>
         
         <div class="hero-btns" style="margin-top: 1.5rem; display: flex; gap: 1rem;">
-          <button class="btn-primary" style="background: var(--gris-soft); cursor: not-allowed; box-shadow: none;" disabled>🛒 Agregar al carrito (Próximamente)</button>
+          <button class="btn-primary" id="btn-agregar-al-carrito">🛒 Agregar al carrito</button>
           <button class="btn-outline" onclick="mostrarCatalogo()">← Volver al catálogo</button>
         </div>
       </div>

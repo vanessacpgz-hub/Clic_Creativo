@@ -219,3 +219,132 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+// ==========================================
+// LÓGICA DEL CARRITO DE COMPRAS
+// ==========================================
+
+// Base de datos local de tus productos para saber qué agregar desde el detalle
+const productosDB = {
+    'inv-sencilla': { nombre: 'Invitación Esencial', precio: 250 },
+    'inv-ubicacion': { nombre: 'Invitación Interactiva', precio: 450 },
+    'inv-premium': { nombre: 'Invitación Premium', precio: 650 },
+    'web-sencilla': { nombre: 'Landing Page Express', precio: 1200 },
+    'web-intermedia': { nombre: 'Web Comercial', precio: 2400 },
+    'web-premium': { nombre: 'Web Premium Pro', precio: 4500 }
+};
+
+// Cargar el carrito desde LocalStorage o iniciar vacío
+let carrito = JSON.parse(localStorage.getItem('carrito_clic')) || [];
+
+document.addEventListener('DOMContentLoaded', () => {
+    actualizarInterfazCarrito();
+});
+
+// Función para abrir/cerrar la ventana del carrito
+function toggleModalCarrito() {
+    const modal = document.getElementById('modal-carrito');
+    modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
+}
+
+// Configurar el botón de agregar cuando se visualiza un producto en el detalle
+// Esta función la debes llamar dentro de tu función existente "verDetalleProducto(id)"
+function prepararBotonCarrito(idProducto) {
+    const btnAgregar = document.getElementById('btn-agregar-al-carrito');
+    if (!btnAgregar) return;
+
+    // Removemos oyentes viejos clonando el botón para evitar duplicados
+    const nuevoBtn = btnAgregar.cloneNode(true);
+    btnAgregar.parentNode.replaceChild(nuevoBtn, btnAgregar);
+
+    nuevoBtn.addEventListener('click', () => {
+        agregarAlCarrito(idProducto);
+    });
+}
+
+// Agregar producto al array
+function agregarAlCarrito(id) {
+    const producto = productosDB[id];
+    if (!producto) return;
+
+    // Verificar si ya existe en el carrito para sumar la cantidad
+    const itemExistente = carrito.find(item => item.id === id);
+
+    if (itemExistente) {
+        itemExistente.cantidad += 1;
+    } else {
+        carrito.push({
+            id: id,
+            nombre: producto.nombre,
+            precio: producto.precio,
+            cantidad: 1
+        });
+    }
+
+    // Guardar en LocalStorage y actualizar la vista
+    localStorage.setItem('carrito_clic', JSON.stringify(carrito));
+    actualizarInterfazCarrito();
+    
+    // Opcional: abrir el carrito automáticamente al agregar
+    toggleModalCarrito();
+}
+
+// Eliminar un producto del carrito
+function eliminarDelCarrito(id) {
+    carrito = carrito.filter(item => item.id !== id);
+    localStorage.setItem('carrito_clic', JSON.stringify(carrito));
+    actualizarInterfazCarrito();
+}
+
+// Dibujar el carrito en pantalla y actualizar el número flotante
+function actualizarInterfazCarrito() {
+    const contador = document.getElementById('carrito-contador');
+    const contenedorItems = document.getElementById('carrito-items');
+    const contenedorTotal = document.getElementById('carrito-total-precio');
+
+    // 1. Actualizar el número flotante
+    const totalProductos = carrito.reduce((suma, item) => suma + item.cantidad, 0);
+    contador.textContent = totalProductos;
+
+    // 2. Renderizar los items dentro del carrito
+    contenedorItems.innerHTML = '';
+    let precioTotal = 0;
+
+    carrito.forEach(item => {
+        precioTotal += item.precio * item.cantidad;
+        contenedorItems.innerHTML += `
+            <div class="item-carrito">
+                <div>
+                    <strong>${item.nombre}</strong> x${item.cantidad}
+                    <br><span style="font-size:0.85rem; color:gray;">$${item.precio * item.cantidad} MXN</span>
+                </div>
+                <button onclick="eliminarDelCarrito('${item.id}')" style="background:none; border:none; color:red; cursor:pointer;">❌</button>
+            </div>
+        `;
+    });
+
+    // 3. Actualizar precio total
+    contenedorTotal.textContent = `$${precioTotal.toLocaleString('es-MX')} MXN`;
+}
+
+// Integración con WhatsApp para procesar el pedido directamente
+function enviarPedidoWhatsApp() {
+    if (carrito.length === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+    }
+
+    let mensaje = "¡Hola Clic Creativo! Me gustaría cotizar/adquirir los siguientes servicios:\n\n";
+    let precioTotal = 0;
+
+    carrito.forEach(item => {
+        mensaje += `• ${item.nombre} (Cant: ${item.cantidad}) - $${item.precio * item.cantidad} MXN\n`;
+        precioTotal += item.precio * item.cantidad;
+    });
+
+    mensaje += `\n*Total estimado:* $${precioTotal.toLocaleString('es-MX')} MXN`;
+    
+    // Codificar mensaje para URL
+    const url = `https://wa.me/TU_NUMERO_DE_TELEFONO?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, '_blank');
+}
+
