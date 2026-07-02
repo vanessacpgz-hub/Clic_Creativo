@@ -157,32 +157,39 @@
       </div>
     </section>
   </div>
-
-  <!-- ================================================================= -->
+<!-- ================================================================= -->
   <!-- SECCIONES OCULTAS / VISTAS DINÁMICAS (Controladas por script.js) -->
   <!-- ================================================================= -->
 
- <section class="servicios" id="catalogo-productos" style="display: none;">
-  <div class="section-label">Nuestros Diseños</div>
-  <h2 class="section-title">Catálogo Completo</h2>
+  <!-- Botón flotante/fijo del Carrito (Se sugiere colocar cerca del menú o en una esquina superior) -->
+  <div class="carrito-nav-wrap" style="text-align: right; max-width: 1200px; margin: 1rem auto; padding: 0 2rem;">
+    <button class="btn-carrito" onclick="toggleModalCarrito()" style="background: none; border: none; font-size: 1.8rem; cursor: pointer; position: relative;">
+      🛒 <span id="carrito-contador" class="badge-flotante" style="position: absolute; top: -5px; right: -5px; background: var(--magenta); color: white; font-size: 0.75rem; font-weight: bold; border-radius: 50%; padding: 2px 6px; min-width: 14px; text-align: center;">0</span>
+    </button>
+  </div>
 
-  <div style="max-width: 450px; margin: 0 auto 2rem auto; padding: 0 1rem;">
-    <div style="position: relative; display: flex; align-items: center;">
-      
-      <span style="position: absolute; left: 12px; font-size: 16px; pointer-events: none; user-select: none;">
-        🔍
-      </span>
+  <!-- 1. Catálogo Completo -->
+  <section class="servicios" id="catalogo-productos" style="display: none;">
+    <div class="section-label">Nuestros Diseños</div>
+    <h2 class="section-title">Catálogo Completo</h2>
 
-      <input 
-        type="search" 
-        id="search-catalog" 
-        style="width: 100%; padding: 10px 12px 10px 40px; font-size: 14px; color: #1f2937; border: 1px solid #fbcfe8; border-radius: 50px; background-color: rgba(255, 255, 255, 0.9); outline: none; box-sizing: border-box;"
-        placeholder="Buscar invitaciones (ej. Boda, XV años)..." 
-        required
-      >
+    <!-- Buscador -->
+    <div style="max-width: 450px; margin: 0 auto 2rem auto; padding: 0 1rem;">
+      <div style="position: relative; display: flex; align-items: center;">
+        <span style="position: absolute; left: 12px; font-size: 16px; pointer-events: none; user-select: none;">
+          🔍
+        </span>
+        <input 
+          type="search" 
+          id="search-catalog" 
+          style="width: 100%; padding: 10px 12px 10px 40px; font-size: 14px; color: #1f2937; border: 1px solid #fbcfe8; border-radius: 50px; background-color: rgba(255, 255, 255, 0.9); outline: none; box-sizing: border-box;"
+          placeholder="Buscar invitaciones (ej. Boda, XV años)..." 
+          required
+        >
+      </div>
     </div>
-  </div>
-  </div>
+
+    <!-- Categoría: Invitaciones -->
     <h3 style="font-family: 'Playfair Display', serif; color: var(--magenta); font-size: 1.8rem; margin: 2rem 0 1.5rem;">Invitaciones Digitales</h3>
     <div class="cards">
       <div class="card">
@@ -213,6 +220,7 @@
       </div>
     </div>
 
+    <!-- Categoría: Páginas Web -->
     <h3 style="font-family: 'Playfair Display', serif; color: var(--magenta); font-size: 1.8rem; margin: 3rem 0 1.5rem;">Páginas Web</h3>
     <div class="cards">
       <div class="card">
@@ -230,7 +238,7 @@
         <span class="hero-badge" style="background: #25D366; font-size: 0.65rem; padding: 0.2rem 0.6rem;">Ideal Negocios</span>
         <h3>Web Comercial</h3>
         <p>$2,400 MXN</p>
-        <button class="btn-primary" onclick="verDetalleProducto('web-intermedia')">Ver detalle</button>
+        <button class="btn-primary" onclick="verDetalleProducto('web-intermedia') text-align: left;")">Ver detalle</button>
       </div>
 
       <div class="card">
@@ -243,28 +251,57 @@
       </div>
     </div>
     
-    <button class="btn-outline" onclick="regresarAlInicio()" style="margin-top: 2rem;">Regresar al inicio</button>
+    <div style="text-align: center;">
+      <button class="btn-outline" onclick="regresarAlInicio()" style="margin-top: 2rem;">Regresar al inicio</button>
+    </div>
   </section>
 
-  <!-- Vista de Detalle de Producto -->
+  <!-- 2. Vista de Detalle de Producto -->
   <section class="sobre" id="detalle-producto" style="display: none; background: var(--blanco); padding: 5rem 2rem;">
-    <div class="sobre-inner" style="max-width: 850px; margin: 0 auto; text-align: left; gap: 3rem;">
-      <div class="sobre-foto-wrap" style="background: var(--rosa-pale); padding: 2.5rem; border-radius: 28px; border: 2px solid var(--rosa); display: flex; justify-content: center; align-items: center;">
+    <div class="sobre-inner" style="max-width: 850px; margin: 0 auto; text-align: left; display: flex; gap: 3rem; flex-wrap: wrap;">
+      <div class="sobre-foto-wrap" style="background: var(--rosa-pale); padding: 2.5rem; border-radius: 28px; border: 2px solid var(--rosa); display: flex; justify-content: center; align-items: center; flex: 1; min-width: 280px;">
         <img id="det-foto" src="" alt="Producto" style="width: 100%; max-width: 240px; height: auto; object-fit: contain;" />
       </div>
-      <div class="sobre-texto" style="color: var(--gris); align-items: flex-start;">
-        <div class="section-label" id="det-categoria" style="background: var(--rosa-light); color: var(--magenta);">Categoría</div>
-        <h2 id="det-nombre" style="color: var(--magenta); font-family: 'Playfair Display', serif; font-size: 2.4rem; line-height: 1.2;">Nombre</h2>
+      <div class="sobre-texto" style="color: var(--gris); align-items: flex-start; flex: 1; min-width: 280px;">
+        <div class="section-label" id="det-categoria" style="background: var(--rosa-light); color: var(--magenta); display: inline-block; padding: 0.2rem 0.8rem; border-radius: 50px; font-size: 0.8rem; margin-bottom: 1rem;">Categoría</div>
+        <h2 id="det-nombre" style="color: var(--magenta); font-family: 'Playfair Display', serif; font-size: 2.4rem; line-height: 1.2; margin: 0 0 0.5rem 0;">Nombre</h2>
         <h3 id="det-precio" style="font-family: 'Quicksand', sans-serif; font-size: 1.6rem; color: var(--gris); font-weight: 700; margin: 0.5rem 0 1rem 0;">$0.00</h3>
-        <p id="det-descripcion" style="color: var(--gris-soft); font-size: 0.95rem; line-height: 1.7; text-align: left;">Descripción corta.</p>
+        <p id="det-descripcion" style="color: var(--gris-soft); font-size: 0.95rem; line-height: 1.7; text-align: left; margin-bottom: 1.5rem;">Descripción corta.</p>
         
-        <div class="hero-btns" style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+        <div class="hero-btns" style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
           <button class="btn-primary" id="btn-agregar-al-carrito">🛒 Agregar al carrito</button>
           <button class="btn-outline" onclick="mostrarCatalogo()">← Volver al catálogo</button>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- 3. Ventana Lateral Flotante del Carrito (Modal) -->
+  <div id="modal-carrito" style="display: none; position: fixed; z-index: 2000; top: 0; right: 0; width: 100%; max-width: 380px; height: 100%; background: white; box-shadow: -5px 0 25px rgba(0,0,0,0.15); padding: 2rem; box-sizing: border-box; overflow-y: auto; font-family: 'Quicksand', sans-serif;">
+    <div style="position: relative; height: 100%; display: flex; flex-direction: column;">
+      
+      <span onclick="toggleModalCarrito()" style="position: absolute; top: -0.5rem; right: 0; font-size: 2rem; cursor: pointer; color: var(--gris); line-height: 1;">&times;</span>
+      
+      <h3 style="font-family: 'Playfair Display', serif; color: var(--magenta); font-size: 1.8rem; margin: 0 0 1.5rem 0;">Tu Carrito</h3>
+      
+      <!-- Contenedor de Items dinámicos -->
+      <div id="carrito-items" style="flex: 1; overflow-y: auto; margin-bottom: 1.5rem;">
+        <!-- Se rellena con JS -->
+      </div>
+      
+      <!-- Zona de Total y Botón de Pedido -->
+      <div style="border-top: 2px solid var(--rosa-light); padding-top: 1rem;">
+        <div style="display: flex; justify-content: space-between; font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--gris); font-weight: bold;">
+          <span>Total:</span>
+          <span id="carrito-total-precio">$0.00 MXN</span>
+        </div>
+        <button class="btn-primary" onclick="enviarPedidoWhatsApp()" style="width: 100%; padding: 12px; font-size: 1rem;">
+          💬 Enviar Pedido por WhatsApp
+        </button>
+      </div>
+
+    </div>
+  </div>
 
   <!-- ================================================================= -->
   <!-- MODALES Y ELEMENTOS FLOTANTES -->
