@@ -192,23 +192,26 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 // ==========================================
-// 5. FILTRO EN TIEMPO REAL DEL CATÁLOGO (POR ONCLICK)
+// 5. FILTRO EN TIEMPO REAL DEL CATÁLOGO
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-catalog');
     
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u0308]/g, "").trim();
+            // Limpiamos el texto de acentos y espacios
+            const searchTerm = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u030f]/g, "").trim();
             
-            // Selecciona todos los elementos que tengan la función verDetalleProducto
-            const productCards = document.querySelectorAll('[onclick^="verDetalleProducto"]');
+            // Seleccionamos directamente todas las tarjetas de producto
+            const productCards = document.querySelectorAll('.cards .card');
 
             productCards.forEach(card => {
-                const cardText = card.textContent.toLowerCase().normalize("NFD").replace(/[\u0300-\u0308]/g, "");
+                // Obtenemos el texto de la tarjeta y le quitamos acentos
+                const cardText = card.textContent.toLowerCase().normalize("NFD").replace(/[\u0300-\u030f]/g, "");
 
+                // Si coincide el término, se muestra; si no, se oculta la tarjeta completa
                 if (cardText.includes(searchTerm)) {
-                    card.style.display = ""; 
+                    card.style.style.display = ""; // Vuelve a su estado CSS original (flex/block)
                 } else {
                     card.style.display = "none"; 
                 }
