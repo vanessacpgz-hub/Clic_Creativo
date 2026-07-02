@@ -160,6 +160,7 @@ function verDetalleProducto(idProducto) {
     const info = productosDB[idProducto];
     if (!info) return;
 
+    // 1. Llenar los datos principales del producto actual
     document.getElementById('det-foto').src = info.foto;
     document.getElementById('det-foto').alt = info.nombre;
     document.getElementById('det-categoria').innerText = info.categoria;
@@ -170,15 +171,45 @@ function verDetalleProducto(idProducto) {
     // Conecta dinámicamente la ID del producto actual al botón del carrito
     prepararBotonCarrito(idProducto);
 
+    // ==========================================================
+    // NUEVO: LÓGICA DE PRODUCTOS RELACIONADOS
+    // ==========================================================
+    const contenedorRelacionados = document.getElementById('relacionados-lista');
+    if (contenedorRelacionados) {
+        contenedorRelacionados.innerHTML = ''; // Limpiar recomendaciones anteriores
+
+        // Filtrar productos de la misma categoría, excluyendo el producto actual
+        const relacionados = Object.keys(productosDB).filter(key => {
+            return productosDB[key].categoria === info.categoria && key !== idProducto;
+        });
+
+        // Dibujar las tarjetas de los productos relacionados
+        relacionados.forEach(key => {
+            const prod = productosDB[key];
+            contenedorRelacionados.innerHTML += `
+                <div class="card" style="flex: 1; min-width: 250px; max-width: 320px; border: 1px solid #eee; padding: 15px; border-radius: 8px; text-align: center;">
+                    <img src="${prod.foto}" alt="${prod.nombre}" style="width: 100%; height: auto; border-radius: 6px; margin-bottom: 10px;">
+                    <span style="font-size: 0.8rem; color: gray; text-transform: uppercase;">${prod.categoria}</span>
+                    <h4 style="font-size: 1.1rem; margin: 5px 0;">${prod.nombre}</h4>
+                    <p style="font-weight: bold; color: #333; margin-bottom: 10px;">${prod.precioTexto}</p>
+                    <button onclick="verDetalleProducto('${key}')" style="background-color: #000; color: #fff; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; width: 100%;">
+                        Ver detalle
+                    </button>
+                </div>
+            `;
+        });
+
+        // Si por alguna razón no hubiera otros productos en esa categoría, ocultamos el título
+        const seccionRelacionados = document.getElementById('productos-relacionados');
+        if (seccionRelacionados) {
+            seccionRelacionados.style.display = relacionados.length > 0 ? 'block' : 'none';
+        }
+    }
+    // ==========================================================
+
+    // Cambiar de vistas
     document.getElementById('catalogo-productos').style.display = 'none';
     document.getElementById('detalle-producto').style.display = 'block';
-    window.scrollTo(0, 0);
-}
-
-function regresarAlInicio() {
-    document.getElementById('catalogo-productos').style.display = 'none';
-    document.getElementById('detalle-producto').style.display = 'none';
-    document.getElementById('landing-sections').style.block || (document.getElementById('landing-sections').style.display = 'block');
     window.scrollTo(0, 0);
 }
 
