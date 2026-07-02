@@ -28,13 +28,14 @@
       <button class="hamburger" id="ham" aria-label="Menú">
         <span></span><span></span><span></span>
       </button>
+          <!-- Botón Flotante del Carrito Unificado -->
+          <div class="carrito-contenedor-fijo">
+             <button class="btn-carrito" onclick="toggleModalCarrito()">
+              🛒 <span id="carrito-contador" class="badge-flotante">0</span>
+            </button>
+         </div>
     </div>
-    <!-- Botón Flotante del Carrito Unificado -->
-  <div class="carrito-contenedor-fijo">
-    <button class="btn-carrito" onclick="toggleModalCarrito()">
-      🛒 <span id="carrito-contador" class="badge-flotante">0</span>
-    </button>
-  </div>
+
     
     <!-- Menú Móvil -->
     <div class="mobile-nav" id="mobileNav">
