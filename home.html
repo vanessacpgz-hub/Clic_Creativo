@@ -236,31 +236,42 @@
   </section>
 
   <!-- 2. Vista de Detalle de Producto -->
-  <section class="sobre" id="detalle-producto" style="display: none; background: var(--blanco); padding: 5rem 2rem;">
-    <div class="sobre-inner" style="max-width: 850px; margin: 0 auto; text-align: left; display: flex; gap: 3rem; flex-wrap: wrap;">
-      <div class="sobre-foto-wrap" style="background: var(--rosa-pale); padding: 2.5rem; border-radius: 28px; border: 2px solid var(--rosa); display: flex; justify-content: center; align-items: center; flex: 1; min-width: 280px;">
+<section class="sobre" id="detalle-producto" style="display: none; background: var(--blanco); padding: 5rem 2rem;">
+  <div class="sobre-inner" style="max-width: 850px; margin: 0 auto; text-align: left;">
+    
+    <!-- CONTENEDOR PRINCIPAL: FOTO + INFO -->
+    <div style="display: flex; gap: 3rem; flex-wrap: wrap; margin-bottom: 3rem;">
+      
+      <!-- Columna Izquierda: Foto -->
+      <div class="sobre-foto-wrap" style="background: var(--rosa-pale); padding: 2.5rem; border-radius: 28px; border: 2px solid var(--rosa); display: flex; justify-content: center; align-items: center; flex: 1; min-width: 280px; max-height: 400px;">
         <img id="det-foto" src="" alt="Producto" style="width: 100%; max-width: 240px; height: auto; object-fit: contain;" />
       </div>
-      <div class="sobre-texto" style="color: var(--gris); align-items: flex-start; flex: 1; min-width: 280px;">
+      
+      <!-- Columna Derecha: Texto e Información -->
+      <div class="sobre-texto" style="color: var(--gris); display: flex; flex-direction: column; align-items: flex-start; flex: 1; min-width: 280px;">
         <div class="section-label" id="det-categoria" style="background: var(--rosa-light); color: var(--magenta); display: inline-block; padding: 0.2rem 0.8rem; border-radius: 50px; font-size: 0.8rem; margin-bottom: 1rem;">Categoría</div>
         <h2 id="det-nombre" style="color: var(--magenta); font-family: 'Playfair Display', serif; font-size: 2.4rem; line-height: 1.2; margin: 0 0 0.5rem 0;">Nombre</h2>
         <h3 id="det-precio" style="font-family: 'Quicksand', sans-serif; font-size: 1.6rem; color: var(--gris); font-weight: 700; margin: 0.5rem 0 1rem 0;">$0.00</h3>
         <p id="det-descripcion" style="color: var(--gris-soft); font-size: 0.95rem; line-height: 1.7; text-align: left; margin-bottom: 1.5rem;">Descripción corta.</p>
         
-        <div class="hero-btns" style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+        <div class="hero-btns" style="margin-top: auto; display: flex; gap: 1rem; flex-wrap: wrap; width: 100%;">
           <button class="btn-primary" id="btn-agregar-al-carrito">🛒 Agregar al carrito</button>
           <button class="btn-outline" onclick="mostrarCatalogo()">← Volver al catálogo</button>
         </div>
-        <!-- Sección de Productos Relacionados -->
-<div id="productos-relacionados" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee;">
-    <h3 style="margin-bottom: 20px; font-size: 1.3rem; color: #333;">Productos Relacionados</h3>
-    <div id="relacionados-lista" class="cards" style="display: flex; gap: 20px; flex-wrap: wrap;">
-        <!-- Aquí se van a meter las tarjetas dinámicamente desde JavaScript -->
+      </div>
+
     </div>
-</div>
+
+    <!-- SECCIÓN DE PRODUCTOS RELACIONADOS (Abajo del todo, ocupando el 100% de ancho) -->
+    <div id="productos-relacionados" style="margin-top: 50px; padding-top: 30px; border-top: 2px dashed var(--rosa-light);">
+      <h3 style="margin-bottom: 25px; font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--magenta); text-align: center;">Productos Relacionados</h3>
+      <div id="relacionados-lista" class="cards" style="display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; width: 100%;">
+        <!-- Aquí se van a meter las tarjetas dinámicamente desde JavaScript -->
       </div>
     </div>
-  </section>
+
+  </div>
+</section>
 
   <!-- ================================================================= -->
   <!-- MODALES, MODAL DE CARRITO Y COMPONENTES FLOTANTES                 -->
