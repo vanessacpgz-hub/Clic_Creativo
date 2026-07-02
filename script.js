@@ -168,22 +168,24 @@ function verDetalleProducto(idProducto) {
     document.getElementById('det-precio').innerText = info.precioTexto;
     document.getElementById('det-descripcion').innerText = info.descripcion;
 
+    // NUEVO: Reiniciar el input de cantidad a 1 cada vez que se abre un producto nuevo
+    const inputCant = document.getElementById('det-cantidad');
+    if (inputCant) inputCant.value = 1;
+
     // Conecta dinámicamente la ID del producto actual al botón del carrito
     prepararBotonCarrito(idProducto);
 
     // ==========================================================
-    // NUEVO: LÓGICA DE PRODUCTOS RELACIONADOS
+    // LÓGICA DE PRODUCTOS RELACIONADOS
     // ==========================================================
     const contenedorRelacionados = document.getElementById('relacionados-lista');
     if (contenedorRelacionados) {
-        contenedorRelacionados.innerHTML = ''; // Limpiar recomendaciones anteriores
+        contenedorRelacionados.innerHTML = ''; 
 
-        // Filtrar productos de la misma categoría, excluyendo el producto actual
         const relacionados = Object.keys(productosDB).filter(key => {
             return productosDB[key].categoria === info.categoria && key !== idProducto;
         });
 
-        // Dibujar las tarjetas de los productos relacionados
         relacionados.forEach(key => {
             const prod = productosDB[key];
             contenedorRelacionados.innerHTML += `
@@ -199,7 +201,6 @@ function verDetalleProducto(idProducto) {
             `;
         });
 
-        // Si por alguna razón no hubiera otros productos en esa categoría, ocultamos el título
         const seccionRelacionados = document.getElementById('productos-relacionados');
         if (seccionRelacionados) {
             seccionRelacionados.style.display = relacionados.length > 0 ? 'block' : 'none';
@@ -211,6 +212,35 @@ function verDetalleProducto(idProducto) {
     document.getElementById('catalogo-productos').style.display = 'none';
     document.getElementById('detalle-producto').style.display = 'block';
     window.scrollTo(0, 0);
+}
+
+// Agregar producto al array considerando la cantidad seleccionada
+function agregarAlCarrito(id) {
+    const producto = productosDB[id];
+    if (!producto) return;
+
+    // NUEVO: Obtener la cantidad seleccionada en el input (asegurando un número entero válido mayor a 0)
+    const inputCant = document.getElementById('det-cantidad');
+    const cantidadSeleccionada = inputCant ? parseInt(inputCant.value, 10) : 1;
+    const cantidadAAgregar = isNaN(cantidadSeleccionada) || cantidadSeleccionada < 1 ? 1 : cantidadSeleccionada;
+
+    const itemExistente = carrito.find(item => item.id === id);
+
+    if (itemExistente) {
+        // En lugar de hacer += 1, ahora sumamos la cantidad elegida
+        itemExistente.cantidad += cantidadAAgregar;
+    } else {
+        carrito.push({
+            id: id,
+            nombre: producto.nombre,
+            precio: producto.precio,
+            cantidad: cantidadAAgregar // Guardamos la cantidad elegida
+        });
+    }
+
+    localStorage.setItem('carrito_clic', JSON.stringify(carrito));
+    actualizarInterfazCarrito();
+    toggleModalCarrito(); 
 }
 
 // BARRA DE REDES SOCIALES FLOTANTE
