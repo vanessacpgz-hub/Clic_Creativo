@@ -390,11 +390,17 @@ function actualizarInterfazCarrito() {
     }
 }
 
-// Enviar el pedido completo a WhatsApp
 function enviarPedidoWhatsApp() {
     if (carrito.length === 0) {
         alert("Tu carrito está vacío.");
         return;
+    }
+
+    // NUEVO: Validación de Términos y Condiciones
+    const checkboxTerminos = document.getElementById('acepta-terminos');
+    if (!checkboxTerminos || !checkboxTerminos.checked) {
+        alert("Por favor, acepta los términos, condiciones y políticas de producto antes de enviar tu pedido. 🌸");
+        return; // Detiene por completo la ejecución y no abre WhatsApp
     }
 
     const phone = '524494556465'; // Clic_Creativo Aguascalientes
@@ -406,7 +412,7 @@ function enviarPedidoWhatsApp() {
         precioTotal += item.precio * item.cantidad;
     });
 
-    mensaje += `\n*Total estimado:* $${precioTotal.toLocaleString('es-MX')} MXN\n\n¿Cuáles son los pasos para comenzar con el diseño? ✨`;
+    mensaje += `\n*Total estimado:* $${precioTotal.toLocaleString('es-MX')} MXN\n\n He leído y acepto las políticas de diseño. ¿Cuáles son los pasos para comenzar? ✨`;
     
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(mensaje)}`, '_blank');
 }
