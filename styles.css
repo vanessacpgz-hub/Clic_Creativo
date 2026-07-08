@@ -28,7 +28,7 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
   padding: 0.4rem 2rem;
 }
 .logo {
-    height: 40px;        /* O el tamaño en píxeles que mejor se adapte a tu diseño */
+    height: 60px;        /* O el tamaño en píxeles que mejor se adapte a tu diseño */
     width: auto;
     display: block;
 }
@@ -582,8 +582,7 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
     border: none;
     cursor: pointer;
     padding: 0;
-    margin: 0;           /* Reseteamos márgenes extra */
-    flex-shrink: 0;      /* Evita que se aplaste en pantallas más chicas */
+    margin-right: 15px;
     z-index: 1001;
 }
 
