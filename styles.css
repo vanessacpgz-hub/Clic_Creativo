@@ -27,7 +27,11 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
   display: flex; align-items: center; justify-content: space-between;
   padding: 0.4rem 2rem;
 }
-.logo { height: 100px; object-fit: contain; mix-blend-mode: multiply; }
+.logo {
+    height: 40px;        /* O el tamaño en píxeles que mejor se adapte a tu diseño */
+    width: auto;
+    display: block;
+}
 
 .nav { display: flex; align-items: center; gap: 2rem; }
 .nav a {
@@ -578,7 +582,8 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
     border: none;
     cursor: pointer;
     padding: 0;
-    margin-right: 15px;
+    margin: 0;           /* Reseteamos márgenes extra */
+    flex-shrink: 0;      /* Evita que se aplaste en pantallas más chicas */
     z-index: 1001;
 }
 
