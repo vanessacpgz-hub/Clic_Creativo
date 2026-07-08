@@ -552,3 +552,167 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
 .modal-contenido { position: relative; }
 .cerrar-modal { position: absolute; top: 0; right: 0; font-size: 1.5rem; cursor: pointer; }
 .item-carrito { display: flex; justify-content: space-between; margin: 1rem 0; padding-bottom: 0.5rem; border-bottom: 1px solid #eee; }
+/* ==========================================================================
+   PANEL DE ADMINISTRACIÓN Y COMPONENTES (CLIC_CREATIVO)
+   ========================================================================== */
+
+:root {
+    --magenta: #db2777;
+    --rosa: #fbcfe8;
+    --rosa-light: #fdf2f8;
+    --rosa-pale: #fff1f2;
+    --blanco: #ffffff;
+    --gris: #1f2937;
+    --gris-soft: #4b5563;
+    --gris-light: #9ca3af;
+}
+
+/* Botón Hamburguesa específico para Admin (Lado Izquierdo) */
+.hamburger-admin {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 15px;
+    z-index: 1001;
+}
+
+.hamburger-admin span {
+    width: 100%;
+    height: 3px;
+    background-color: var(--magenta);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Barra Lateral de Administración (Sidebar) */
+.admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px; /* Oculta por defecto a la izquierda */
+    width: 280px;
+    height: 100%;
+    background-color: var(--blanco);
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.05);
+    z-index: 2500;
+    transition: left 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--rosa);
+    font-family: 'Quicksand', sans-serif;
+}
+
+/* Clase activa para mostrar la barra lateral con JS */
+.admin-sidebar.active {
+    left: 0;
+}
+
+.sidebar-header {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--rosa-light);
+    background: var(--rosa-pale);
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    color: var(--gris);
+    font-size: 1.3rem;
+}
+
+.close-sidebar {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--gris-light);
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close-sidebar:hover {
+    color: var(--magenta);
+}
+
+.sidebar-links {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+}
+
+.sidebar-links a {
+    padding: 0.85rem 1.5rem;
+    color: var(--gris-soft);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+}
+
+.sidebar-links a:hover {
+    background-color: var(--rosa-light);
+    color: var(--magenta);
+    padding-left: 1.8rem;
+}
+
+/* Contenedor Principal del Dashboard */
+.admin-panel-container {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Ajustes de interactividad para las tarjetas de métricas */
+.admin-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(219, 39, 119, 0.05);
+}
+
+/* Animación de entrada suave para el panel */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   ADAPTACIONES RESPONSIVAS (MEDIA QUERIES)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    #admin-dashboard-panel {
+        padding: 1rem !important;
+        margin-top: 80px !important;
+    }
+    
+    .admin-heading h2 {
+        font-size: 1.8rem !important;
+    }
+    
+    .admin-cards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+        gap: 1rem !important;
+    }
+    
+    .admin-bottom-split {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+}
