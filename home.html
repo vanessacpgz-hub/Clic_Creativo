@@ -61,13 +61,75 @@
       <button class="close-sidebar" onclick="toggleAdminMenu()">&times;</button>
     </div>
     <nav class="sidebar-links">
-      <a href="#dashboard" onclick="toggleAdminMenu()">📊 Dashboard</a>
+      <a href="#dashboard" onclick="mostrarDashboardAdmin()">📊 Dashboard</a>
       <a href="#productos" onclick="toggleAdminMenu()">📦 Productos</a>
       <a href="#pedidos" onclick="toggleAdminMenu()">🛒 Pedidos</a>
       <a href="#promociones" onclick="toggleAdminMenu()">🏷️ Promociones</a>
       <a href="#clientes" onclick="toggleAdminMenu()">👥 Clientes</a>
       <a href="#reportes" onclick="toggleAdminMenu()">📈 Reportes</a>
     </nav>
+  </div>
+
+  <div id="admin-dashboard-panel" class="admin-panel-container" style="display: none; padding: 2rem; max-width: 1200px; margin: 90px auto 2rem auto; font-family: 'Quicksand', sans-serif;">
+    <div class="admin-heading" style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <h2 style="font-family: 'Playfair Display', serif; color: #1f2937; font-size: 2.2rem; margin: 0;">Panel de Administrador</h2>
+        <p style="color: #6b7280; margin: 0.5rem 0 0 0;">Resumen visual y acciones rápidas de Clic_Creativo.</p>
+      </div>
+      <button class="btn-outline" onclick="regresarAlInicio()" style="margin: 0;">Volver a la Tienda</button>
+    </div>
+
+    <div class="admin-cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;">
+      <div class="admin-card" style="background: #fff; padding: 1.5rem; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid #fbcfe8;">
+        <span style="font-size: 0.85rem; color: #9ca3af; font-weight: 600; text-transform: uppercase;">Productos publicados</span>
+        <div style="font-size: 2rem; font-weight: 700; color: #1f2937; margin-top: 0.5rem;">12</div>
+      </div>
+      <div class="admin-card" style="background: #fff; padding: 1.5rem; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid #fbcfe8;">
+        <span style="font-size: 0.85rem; color: #9ca3af; font-weight: 600; text-transform: uppercase;">Pedidos del día</span>
+        <div style="font-size: 2rem; font-weight: 700; color: #1f2937; margin-top: 0.5rem;">5</div>
+      </div>
+      <div class="admin-card" style="background: #fff; padding: 1.5rem; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid #fbcfe8;">
+        <span style="font-size: 0.85rem; color: #9ca3af; font-weight: 600; text-transform: uppercase;">Ventas del mes</span>
+        <div style="font-size: 2rem; font-weight: 700; color: #db2777; margin-top: 0.5rem;">$12,500</div>
+      </div>
+      <div class="admin-card" style="background: #fff; padding: 1.5rem; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid #fbcfe8;">
+        <span style="font-size: 0.85rem; color: #9ca3af; font-weight: 600; text-transform: uppercase;">Clientes registrados</span>
+        <div style="font-size: 2rem; font-weight: 700; color: #1f2937; margin-top: 0.5rem;">38</div>
+      </div>
+      <div class="admin-card" style="background: #fff; padding: 1.5rem; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid #fee2e2;">
+        <span style="font-size: 0.85rem; color: #ef4444; font-weight: 600; text-transform: uppercase;">Productos agotados</span>
+        <div style="font-size: 2rem; font-weight: 700; color: #dc2626; margin-top: 0.5rem;">2</div>
+      </div>
+    </div>
+
+    <div class="admin-bottom-split" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+      <div class="admin-actions-box" style="background: #fff; padding: 1.5rem; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid #e5e7eb;">
+        <h3 style="font-size: 1.2rem; color: #1f2937; margin: 0 0 1.2rem 0; font-weight: 700;">Acciones rápidas</h3>
+        <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+          <button class="btn-primary" style="margin: 0; padding: 0.75rem; font-size: 0.95rem;">+ Agregar producto</button>
+          <button class="btn-outline" style="margin: 0; padding: 0.75rem; font-size: 0.95rem; border: 1px solid #d1d5db; color: #374151;">Ver pedidos</button>
+          <button class="btn-outline" style="margin: 0; padding: 0.75rem; font-size: 0.95rem; border: 1px solid #d1d5db; color: #374151;">Crear promoción</button>
+        </div>
+      </div>
+
+      <div class="admin-activity-box" style="background: #fff; padding: 1.5rem; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid #e5e7eb;">
+        <h3 style="font-size: 1.2rem; color: #1f2937; margin: 0 0 1.2rem 0; font-weight: 700;">Actividad reciente</h3>
+        <div class="activity-list" style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f3f4f6; padding-bottom: 0.5rem;">
+            <span style="font-size: 0.95rem; color: #4b5563; font-weight: 500;">🛒 Pedido #125 recibido</span>
+            <span style="font-size: 0.8rem; color: #9ca3af;">Hace un momento</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f3f4f6; padding-bottom: 0.5rem;">
+            <span style="font-size: 0.95rem; color: #4b5563;">👥 Nuevo cliente registrado</span>
+            <span style="font-size: 0.8rem; color: #9ca3af;">Hace 15 min</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 0.95rem; color: #4b5563;">📦 Producto actualizado</span>
+            <span style="font-size: 0.8rem; color: #9ca3af;">Hace 1 hora</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div id="landing-sections">
@@ -510,6 +572,37 @@
             if (authZoneMobile) authZoneMobile.innerHTML = saludoHTML;
         }
     });
+
+    // Función para manejar el despliegue limpio del panel de administrador
+    function mostrarDashboardAdmin() {
+      toggleAdminMenu(); // Cierra el menú lateral (ejecuta tu función existente)
+      
+      // Ocultamos todas las vistas públicas de la landing
+      const landingSections = document.getElementById('landing-sections');
+      const catalogoSection = document.getElementById('catalogo-productos');
+      const detalleSection = document.getElementById('detalle-producto');
+      
+      if (landingSections) landingSections.style.display = 'none';
+      if (catalogoSection) catalogoSection.style.display = 'none';
+      if (detalleSection) detalleSection.style.display = 'none';
+      
+      // Mostramos el panel de control
+      const adminPanel = document.getElementById('admin-dashboard-panel');
+      if (adminPanel) adminPanel.style.display = 'block';
+    }
+
+    // Adaptación a tu función de retorno para que también restablezca el dashboard si está abierto
+    function regresarAlInicio() {
+      const adminPanel = document.getElementById('admin-dashboard-panel');
+      const landingSections = document.getElementById('landing-sections');
+      const catalogoSection = document.getElementById('catalogo-productos');
+      
+      if (adminPanel) adminPanel.style.display = 'none';
+      if (catalogoSection) catalogoSection.style.display = 'none';
+      if (landingSections) landingSections.style.display = 'block';
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   </script>
   <script src="script.js"></script>
 </body>
