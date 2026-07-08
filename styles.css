@@ -582,7 +582,7 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
     border: none;
     cursor: pointer;
     padding: 0;
-    margin-left: 50px;
+    margin-right: 120px;
     z-index: 1001;
 }
 
