@@ -101,6 +101,150 @@
         <div style="font-size: 2rem; font-weight: 700; color: #dc2626; margin-top: 0.5rem;">2</div>
       </div>
     </div>
+    <div id="admin-productos-section" style="margin-top: 3rem; background: #ffffff; padding: 2rem; border-radius: 16px; border: 1px solid #fbcfe8; font-family: 'Quicksand', sans-serif;">
+  
+  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
+    <div>
+      <h3 style="font-family: 'Playfair Display', serif; color: #1f2937; font-size: 1.8rem; margin: 0;">📦 Gestión de Catálogo</h3>
+      <p style="color: #6b7280; margin: 0.3rem 0 0 0;">Agrega, edita o elimina los productos visibles en la tienda.</p>
+    </div>
+    <button class="btn-primary" onclick="abrirFormularioProducto()" style="margin: 0; padding: 0.7rem 1.5rem;">+ Agregar Producto</button>
+  </div>
+
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; background: #fff1f2; padding: 1rem; border-radius: 12px;">
+    <input 
+      type="text" 
+      id="admin-search-prod" 
+      placeholder="🔍 Buscar por nombre..." 
+      style="flex: 1; min-width: 200px; padding: 10px; border: 1px solid #fbcfe8; border-radius: 8px; outline: none;"
+    />
+    <select id="admin-filter-categoria" style="padding: 10px; border: 1px solid #fbcfe8; border-radius: 8px; color: #4b5563; background: white;">
+      <option value="">Todas las categorías</option>
+      <option value="invitacion">Invitaciones Digitales</option>
+      <option value="web">Páginas Web</option>
+    </select>
+    <select id="admin-filter-estado" style="padding: 10px; border: 1px solid #fbcfe8; border-radius: 8px; color: #4b5563; background: white;">
+      <option value="">Todos los estados</option>
+      <option value="Disponible">Disponible</option>
+      <option value="Agotado">Agotado</option>
+    </select>
+  </div>
+
+  <div style="overflow-x: auto; border: 1px solid #e5e7eb; border-radius: 12px;">
+    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
+      <thead>
+        <tr style="background: #fdf2f8; color: #1f2937; border-bottom: 2px solid #fbcfe8;">
+          <th style="padding: 12px;">Imagen</th>
+          <th style="padding: 12px;">Nombre</th>
+          <th style="padding: 12px;">Categoría</th>
+          <th style="padding: 12px;">Precio</th>
+          <th style="padding: 12px; text-align: center;">Existencia</th>
+          <th style="padding: 12px;">Estado</th>
+          <th style="padding: 12px; text-align: center;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-productos-admin">
+        <tr style="border-bottom: 1px solid #e5e7eb;">
+          <td style="padding: 12px;"><img src="Imagenes/CotizaInvitacion.png" alt="Preview" style="width: 40px; height: 40px; object-fit: cover; border-radius: 6px;" /></td>
+          <td style="padding: 12px; font-weight: 600; color: #1f2937;">Invitación Interactiva</td>
+          <td style="padding: 12px; color: #4b5563;">Invitación Digital</td>
+          <td style="padding: 12px; font-weight: bold; color: #db2777;">$450.00</td>
+          <td style="padding: 12px; text-align: center; color: #4b5563;">25</td>
+          <td style="padding: 12px;"><span style="background: #d1fae5; color: #065f46; padding: 4px 8px; border-radius: 50px; font-size: 0.8rem; font-weight: bold;">Disponible</span></td>
+          <td style="padding: 12px; text-align: center;">
+            <div style="display: flex; gap: 6px; justify-content: center;">
+              <button title="Ver detalle" style="background: #f3f4f6; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer;">👁️</button>
+              <button title="Editar" style="background: #eff6ff; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; color: #1d4ed8;">✏️</button>
+              <button title="Eliminar" style="background: #fef2f2; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; color: #dc2626;">🗑️</button>
+            </div>
+          </td>
+        </tr>
+        <tr style="border-bottom: 1px solid #e5e7eb;">
+          <td style="padding: 12px;"><img src="Imagenes/Cotizapaginaweb.png" alt="Preview" style="width: 40px; height: 40px; object-fit: cover; border-radius: 6px;" /></td>
+          <td style="padding: 12px; font-weight: 600; color: #1f2937;">Landing Page Express</td>
+          <td style="padding: 12px; color: #4b5563;">Página Web</td>
+          <td style="padding: 12px; font-weight: bold; color: #db2777;">$1,200.00</td>
+          <td style="padding: 12px; text-align: center; color: #4b5563;">0</td>
+          <td style="padding: 12px;"><span style="background: #fee2e2; color: #991b1b; padding: 4px 8px; border-radius: 50px; font-size: 0.8rem; font-weight: bold;">Agotado</span></td>
+          <td style="padding: 12px; text-align: center;">
+            <div style="display: flex; gap: 6px; justify-content: center;">
+              <button title="Ver detalle" style="background: #f3f4f6; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer;">👁️</button>
+              <button title="Editar" style="background: #eff6ff; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; color: #1d4ed8;">✏️</button>
+              <button title="Eliminar" style="background: #fef2f2; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; color: #dc2626;">🗑️</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="modal-form-producto" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 3000; justify-content: center; align-items: center; padding: 1rem;">
+  <div style="background: #ffffff; max-width: 550px; width: 100%; max-height: 90vh; border-radius: 24px; padding: 2rem; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 2px solid #fbcfe8;">
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed #fbcfe8; padding-bottom: 1rem; margin-bottom: 1.5rem;">
+      <h3 id="form-producto-titulo" style="font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #1f2937; margin: 0;">Formulario del Producto</h3>
+      <button onclick="cerrarFormularioProducto()" style="background: none; border: none; font-size: 1.5rem; color: #9ca3af; cursor: pointer;">&times;</button>
+    </div>
+
+    <form id="form-registro-producto" onsubmit="guardarProductoAdmin(event)" style="overflow-y: auto; flex: 1; padding-right: 5px; display: flex; flex-direction: column; gap: 1rem; text-align: left;">
+      
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <label style="font-weight: 600; color: #4b5563; font-size: 0.9rem;">Nombre del producto *</label>
+        <input type="text" id="prod-nombre" required placeholder="Ej. Invitación Premium Boda" style="padding: 10px; border: 1px solid #fbcfe8; border-radius: 8px; outline: none;" />
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="font-weight: 600; color: #4b5563; font-size: 0.9rem;">Categoría *</label>
+          <select id="prod-categoria" required style="padding: 10px; border: 1px solid #fbcfe8; border-radius: 8px; background: white;">
+            <option value="invitacion">Invitaciones Digitales</option>
+            <option value="web">Páginas Web</option>
+          </select>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="font-weight: 600; color: #4b5563; font-size: 0.9rem;">Precio (MXN) *</label>
+          <input type="number" id="prod-precio" required min="0" placeholder="450" style="padding: 10px; border: 1px solid #fbcfe8; border-radius: 8px; outline: none;" />
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <label style="font-weight: 600; color: #4b5563; font-size: 0.9rem;">Descripción</label>
+        <textarea id="prod-descripcion" rows="3" placeholder="Detalla las funciones incluidas en este paquete..." style="padding: 10px; border: 1px solid #fbcfe8; border-radius: 8px; outline: none; font-family: inherit;"></textarea>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <label style="font-weight: 600; color: #4b5563; font-size: 0.9rem;">Imagen del Producto</label>
+        <select id="prod-imagen-select" onchange="actualizarPrevisualizacionImagen(this.value)" style="padding: 10px; border: 1px solid #fbcfe8; border-radius: 8px; background: white; margin-bottom: 0.5rem;">
+          <option value="Imagenes/CotizaInvitacion.png">Icono Invitación (Predeterminado)</option>
+          <option value="Imagenes/Cotizapaginaweb.png">Icono Página Web</option>
+        </select>
+        <div style="display: flex; justify-content: center; background: #fff1f2; padding: 10px; border-radius: 12px; border: 1px dashed #fbcfe8;">
+          <img id="prod-preview-img" src="Imagenes/CotizaInvitacion.png" alt="Previsualización" style="max-height: 80px; object-fit: contain;" />
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="font-weight: 600; color: #4b5563; font-size: 0.9rem;">Existencia (Simulada) *</label>
+          <input type="number" id="prod-existencia" required min="0" value="10" style="padding: 10px; border: 1px solid #fbcfe8; border-radius: 8px; outline: none;" />
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="font-weight: 600; color: #4b5563; font-size: 0.9rem;">Estado del Registro</label>
+          <select id="prod-estado" style="padding: 10px; border: 1px solid #fbcfe8; border-radius: 8px; background: white;">
+            <option value="Activo">Activo (Visible)</option>
+            <option value="Inactivo">Inactivo (Oculto)</option>
+          </select>
+         </div>
+       </div>
+
+       <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+        <button type="button" class="btn-outline" onclick="cerrarFormularioProducto()" style="flex: 1; margin: 0; padding: 0.8rem;">Cancelar</button>
+        <button type="submit" class="btn-primary" style="flex: 1; margin: 0; padding: 0.8rem;">Guardar Producto</button>
+       </div>
+        </form>
+      </div>
+    </div>
 
     <div class="admin-bottom-split" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
       <div class="admin-actions-box" style="background: #fff; padding: 1.5rem; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid #e5e7eb;">

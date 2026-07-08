@@ -465,3 +465,52 @@ function regresarAlInicio() {
     
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+// Funciones para controlar el Formulario Modular de Productos
+function abrirFormularioProducto(esEdicion = false) {
+    const modal = document.getElementById('modal-form-producto');
+    const titulo = document.getElementById('form-producto-titulo');
+    
+    if (modal) {
+        modal.style.display = 'flex';
+        // Cambia el título dependiendo de la acción
+        if (titulo) {
+            titulo.textContent = esEdicion ? "✏️ Editar Producto" : "📦 Agregar Nuevo Producto";
+        }
+    }
+}
+
+function cerrarFormularioProducto() {
+    const modal = document.getElementById('modal-form-producto');
+    const formulario = document.getElementById('form-registro-producto');
+    
+    if (modal) modal.style.display = 'none';
+    if (formulario) formulario.reset(); // Limpia los campos al cerrar
+    
+    // Resetea la imagen de previsualización al icono base
+    actualizarPrevisualizacionImagen("Imagenes/CotizaInvitacion.png");
+}
+
+function actualizarPrevisualizacionImagen(rutaImagen) {
+    const preview = document.getElementById('prod-preview-img');
+    if (preview) {
+        preview.src = rutaImagen;
+    }
+}
+
+function guardarProductoAdmin(event) {
+    event.preventDefault(); // Evita que la página recargue
+    
+    // Captura de datos estructurada
+    const nombre = document.getElementById('prod-nombre').value;
+    const categoria = document.getElementById('prod-categoria').value;
+    const precio = document.getElementById('prod-precio').value;
+    const descripcion = document.getElementById('prod-descripcion').value;
+    const imagen = document.getElementById('prod-imagen-select').value;
+    const existencia = document.getElementById('prod-existencia').value;
+    const estado = document.getElementById('prod-estado').value;
+
+    // Aquí irá tu lógica de inserción o actualización (ej. LocalStorage o Base de Datos)
+    alert(`✨ ¡Producto "${nombre}" guardado con éxito simulado!\nEstado: ${estado} | Stock: ${existencia}`);
+    
+    cerrarFormularioProducto();
+}
