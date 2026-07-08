@@ -588,7 +588,7 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
 
 .hamburger-admin span {
     width: 100%;
-    height: 20px;
+    height: 3px;
     background-color: var(--magenta);
     border-radius: 2px;
     transition: all 0.3s ease;
