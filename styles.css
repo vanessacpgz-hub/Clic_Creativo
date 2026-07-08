@@ -707,7 +707,7 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
     }
     
     .admin-cards-grid {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
         gap: 1rem !important;
     }
     
