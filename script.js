@@ -416,3 +416,52 @@ function enviarPedidoWhatsApp() {
     
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(mensaje)}`, '_blank');
 }
+// Función para abrir y cerrar la barra lateral de administración
+function toggleAdminMenu() {
+    const sidebar = document.getElementById('adminSidebar');
+    if (sidebar) {
+        sidebar.classList.toggle('active');
+    }
+}
+
+// Función para mostrar el panel de administración y ocultar el contenido público
+function mostrarDashboardAdmin() {
+    // 1. Cerramos el menú lateral para limpiar la pantalla
+    const sidebar = document.getElementById('adminSidebar');
+    if (sidebar) {
+        sidebar.classList.remove('active');
+    }
+    
+    // 2. Ocultamos las secciones de la tienda/landing
+    const landingSections = document.getElementById('landing-sections');
+    const catalogoSection = document.getElementById('catalogo-productos');
+    const detalleSection = document.getElementById('detalle-producto');
+    
+    if (landingSections) landingSections.style.display = 'none';
+    if (catalogoSection) catalogoSection.style.display = 'none';
+    if (detalleSection) detalleSection.style.display = 'none';
+    
+    // 3. Mostramos el panel de control del administrador
+    const adminPanel = document.getElementById('admin-dashboard-panel');
+    if (adminPanel) {
+        adminPanel.style.display = 'block';
+    }
+    
+    // Movemos el scroll al inicio para que se vea desde arriba
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Función para regresar a la vista pública de la tienda
+function regresarAlInicio() {
+    const adminPanel = document.getElementById('admin-dashboard-panel');
+    const landingSections = document.getElementById('landing-sections');
+    const catalogoSection = document.getElementById('catalogo-productos');
+    
+    if (adminPanel) adminPanel.style.display = 'none';
+    if (catalogoSection) catalogoSection.style.display = 'none';
+    
+    // Volvemos a encender la estructura principal de la landing
+    if (landingSections) landingSections.style.display = 'block';
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
