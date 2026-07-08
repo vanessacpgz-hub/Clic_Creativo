@@ -28,7 +28,7 @@ body { font-family: 'Quicksand', sans-serif; color: var(--gris); overflow-x: hid
   padding: 0.4rem 2rem;
 }
 .logo {
-    height: 60px;        /* O el tamaño en píxeles que mejor se adapte a tu diseño */
+    height: 100px;        /* O el tamaño en píxeles que mejor se adapte a tu diseño */
     width: auto;
     display: block;
 }
