@@ -64,8 +64,8 @@
       <a href="#productos" onclick="mostrarSeccionAdmin('productos')">📦 Productos</a>
       <a href="#pedidos" onclick="mostrarSeccionAdmin('pedidos')">🛒 Pedidos</a>
       <a href="#promociones" onclick="mostrarSeccionAdmin('promociones')">🏷️ Promociones</a>
-      <a href="#clientes" onclick="toggleAdminMenu()">👥 Clientes</a>
-      <a href="#reportes" onclick="toggleAdminMenu()">📈 Reportes</a>
+      <a href="#clientes" onclick="mostrarSeccionAdmin('clientes')">👥 Clientes</a>
+      <a href="#reportes" onclick="mostrarSeccionAdmin('reportes')">📈 Reportes</a>
     </nav>
   </div>
 
@@ -306,6 +306,168 @@
     <div style="background:#fff; border:1px solid #fbcfe8; border-radius:16px; padding:1.8rem;">
       <h3 style="font-family:'Playfair Display',serif; font-size:1.3rem; color:#1f2937; margin:0 0 1.2rem 0;">Códigos activos</h3>
       <div id="lista-promociones" style="display:flex;flex-direction:column;gap:1rem;"></div>
+    </div>
+  </div>
+
+  <!-- ===== PANEL CLIENTES ===== -->
+  <div id="admin-clientes-panel" class="admin-panel-container" style="display:none; padding:2rem; max-width:1200px; margin:90px auto 2rem auto; font-family:'Quicksand',sans-serif;">
+    <div style="margin-bottom:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <h2 style="font-family:'Playfair Display',serif; color:#1f2937; font-size:2rem; margin:0;">👥 Clientes</h2>
+        <p style="color:#6b7280; margin:0.3rem 0 0 0;">Directorio de clientes registrados.</p>
+      </div>
+      <button class="btn-outline" onclick="mostrarSeccionAdmin('dashboard')" style="margin:0;">← Dashboard</button>
+    </div>
+    <div style="overflow-x:auto; border:1px solid #e5e7eb; border-radius:12px;">
+      <table style="width:100%; border-collapse:collapse; text-align:left; font-size:0.92rem;">
+        <thead>
+          <tr style="background:#fdf2f8; color:#1f2937; border-bottom:2px solid #fbcfe8;">
+            <th style="padding:14px;">Cliente</th>
+            <th style="padding:14px;">Teléfono</th>
+            <th style="padding:14px;">Dirección / Contacto</th>
+            <th style="padding:14px; text-align:center;">Pedido pendiente</th>
+            <th style="padding:14px; text-align:center;">Pedidos anteriores</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #e5e7eb;">
+            <td style="padding:14px;">
+              <div style="font-weight:700; color:#1f2937;">Ana García</div>
+              <div style="font-size:0.8rem; color:#9ca3af;">ana.garcia@email.com</div>
+            </td>
+            <td style="padding:14px; color:#4b5563;">+52 449 123 4567</td>
+            <td style="padding:14px; color:#4b5563;">Av. López Mateos 45, Aguascalientes</td>
+            <td style="padding:14px; text-align:center;"><span style="background:#fef9c3;color:#854d0e;padding:4px 12px;border-radius:50px;font-size:0.8rem;font-weight:700;">Sí</span></td>
+            <td style="padding:14px; text-align:center; font-weight:700; color:#db2777;">3</td>
+          </tr>
+          <tr style="border-bottom:1px solid #e5e7eb;">
+            <td style="padding:14px;">
+              <div style="font-weight:700; color:#1f2937;">Laura Martínez</div>
+              <div style="font-size:0.8rem; color:#9ca3af;">laura.m@email.com</div>
+            </td>
+            <td style="padding:14px; color:#4b5563;">+52 449 234 5678</td>
+            <td style="padding:14px; color:#4b5563;">Calle Morelos 12, Guadalajara</td>
+            <td style="padding:14px; text-align:center;"><span style="background:#d1fae5;color:#065f46;padding:4px 12px;border-radius:50px;font-size:0.8rem;font-weight:700;">No</span></td>
+            <td style="padding:14px; text-align:center; font-weight:700; color:#db2777;">1</td>
+          </tr>
+          <tr style="border-bottom:1px solid #e5e7eb;">
+            <td style="padding:14px;">
+              <div style="font-weight:700; color:#1f2937;">Sofía Ramírez</div>
+              <div style="font-size:0.8rem; color:#9ca3af;">sofia.r@email.com</div>
+            </td>
+            <td style="padding:14px; color:#4b5563;">+52 449 345 6789</td>
+            <td style="padding:14px; color:#4b5563;">Blvd. Convención 300, Aguascalientes</td>
+            <td style="padding:14px; text-align:center;"><span style="background:#fef9c3;color:#854d0e;padding:4px 12px;border-radius:50px;font-size:0.8rem;font-weight:700;">Sí</span></td>
+            <td style="padding:14px; text-align:center; font-weight:700; color:#db2777;">5</td>
+          </tr>
+          <tr>
+            <td style="padding:14px;">
+              <div style="font-weight:700; color:#1f2937;">María Torres</div>
+              <div style="font-size:0.8rem; color:#9ca3af;">maria.t@email.com</div>
+            </td>
+            <td style="padding:14px; color:#4b5563;">+52 55 456 7890</td>
+            <td style="padding:14px; color:#4b5563;">Calle Juárez 88, CDMX</td>
+            <td style="padding:14px; text-align:center;"><span style="background:#d1fae5;color:#065f46;padding:4px 12px;border-radius:50px;font-size:0.8rem;font-weight:700;">No</span></td>
+            <td style="padding:14px; text-align:center; font-weight:700; color:#db2777;">2</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== PANEL REPORTES ===== -->
+  <div id="admin-reportes-panel" class="admin-panel-container" style="display:none; padding:2rem; max-width:1200px; margin:90px auto 2rem auto; font-family:'Quicksand',sans-serif;">
+    <div style="margin-bottom:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <h2 style="font-family:'Playfair Display',serif; color:#1f2937; font-size:2rem; margin:0;">📈 Reportes</h2>
+        <p style="color:#6b7280; margin:0.3rem 0 0 0;">Métricas y rendimiento del negocio.</p>
+      </div>
+      <button class="btn-outline" onclick="mostrarSeccionAdmin('dashboard')" style="margin:0;">← Dashboard</button>
+    </div>
+
+    <!-- Métricas principales -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:1.5rem; margin-bottom:2.5rem;">
+      <div style="background:#fff; padding:1.5rem; border-radius:16px; border:1px solid #fbcfe8; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);">
+        <div style="font-size:0.8rem; color:#9ca3af; font-weight:700; text-transform:uppercase; margin-bottom:0.5rem;">Ventas totales</div>
+        <div style="font-size:2rem; font-weight:800; color:#db2777;">$17,350</div>
+        <div style="font-size:0.8rem; color:#6b7280; margin-top:0.3rem;">MXN este mes</div>
+      </div>
+      <div style="background:#fff; padding:1.5rem; border-radius:16px; border:1px solid #fbcfe8; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);">
+        <div style="font-size:0.8rem; color:#9ca3af; font-weight:700; text-transform:uppercase; margin-bottom:0.5rem;">Pedidos completados</div>
+        <div style="font-size:2rem; font-weight:800; color:#1f2937;">11</div>
+        <div style="font-size:0.8rem; color:#6b7280; margin-top:0.3rem;">En los últimos 30 días</div>
+      </div>
+      <div style="background:#fff; padding:1.5rem; border-radius:16px; border:1px solid #fbcfe8; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);">
+        <div style="font-size:0.8rem; color:#9ca3af; font-weight:700; text-transform:uppercase; margin-bottom:0.5rem;">Ticket promedio</div>
+        <div style="font-size:2rem; font-weight:800; color:#1f2937;">$1,577</div>
+        <div style="font-size:0.8rem; color:#6b7280; margin-top:0.3rem;">Por pedido</div>
+      </div>
+      <div style="background:#fff; padding:1.5rem; border-radius:16px; border:1px solid #fbcfe8; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);">
+        <div style="font-size:0.8rem; color:#9ca3af; font-weight:700; text-transform:uppercase; margin-bottom:0.5rem;">Clientes nuevos</div>
+        <div style="font-size:2rem; font-weight:800; color:#1f2937;">4</div>
+        <div style="font-size:0.8rem; color:#6b7280; margin-top:0.3rem;">Este mes</div>
+      </div>
+    </div>
+
+    <!-- Producto estrella + tabla de ventas por producto -->
+    <div style="display:grid; grid-template-columns:1fr 2fr; gap:2rem; flex-wrap:wrap;">
+
+      <!-- Producto estrella -->
+      <div style="background:linear-gradient(135deg,#fdf2f8,#fce7f3); padding:2rem; border-radius:16px; border:2px solid #fbcfe8; text-align:center;">
+        <div style="font-size:2.5rem; margin-bottom:0.5rem;">⭐</div>
+        <div style="font-size:0.8rem; color:#db2777; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">Producto Estrella</div>
+        <div style="font-family:'Playfair Display',serif; font-size:1.4rem; color:#1f2937; font-weight:700; margin-bottom:0.3rem;">Invitación Interactiva</div>
+        <div style="font-size:0.9rem; color:#6b7280; margin-bottom:1rem;">6 ventas este mes</div>
+        <div style="background:#db2777; color:white; padding:0.5rem 1.2rem; border-radius:50px; display:inline-block; font-size:0.85rem; font-weight:700;">$2,700 MXN generados</div>
+      </div>
+
+      <!-- Tabla ventas por producto -->
+      <div style="background:#fff; border:1px solid #e5e7eb; border-radius:16px; overflow:hidden;">
+        <div style="padding:1.2rem 1.5rem; border-bottom:1px solid #e5e7eb; font-weight:700; color:#1f2937; font-size:1rem;">Ventas por producto</div>
+        <table style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+          <thead>
+            <tr style="background:#fdf2f8; color:#4b5563;">
+              <th style="padding:10px 14px; text-align:left;">Producto</th>
+              <th style="padding:10px 14px; text-align:center;">Unidades</th>
+              <th style="padding:10px 14px; text-align:right;">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #f3f4f6;">
+              <td style="padding:10px 14px; font-weight:600; color:#1f2937;">Invitación Interactiva</td>
+              <td style="padding:10px 14px; text-align:center; color:#4b5563;">6</td>
+              <td style="padding:10px 14px; text-align:right; font-weight:700; color:#db2777;">$2,700</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f3f4f6;">
+              <td style="padding:10px 14px; font-weight:600; color:#1f2937;">Web Comercial</td>
+              <td style="padding:10px 14px; text-align:center; color:#4b5563;">2</td>
+              <td style="padding:10px 14px; text-align:right; font-weight:700; color:#db2777;">$4,800</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f3f4f6;">
+              <td style="padding:10px 14px; font-weight:600; color:#1f2937;">Invitación Premium</td>
+              <td style="padding:10px 14px; text-align:center; color:#4b5563;">4</td>
+              <td style="padding:10px 14px; text-align:right; font-weight:700; color:#db2777;">$2,600</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f3f4f6;">
+              <td style="padding:10px 14px; font-weight:600; color:#1f2937;">Landing Page Express</td>
+              <td style="padding:10px 14px; text-align:center; color:#4b5563;">3</td>
+              <td style="padding:10px 14px; text-align:right; font-weight:700; color:#db2777;">$3,600</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 14px; font-weight:600; color:#1f2937;">Invitación Esencial</td>
+              <td style="padding:10px 14px; text-align:center; color:#4b5563;">3</td>
+              <td style="padding:10px 14px; text-align:right; font-weight:700; color:#db2777;">$750</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr style="background:#fdf2f8; border-top:2px solid #fbcfe8;">
+              <td style="padding:10px 14px; font-weight:800; color:#1f2937;">Total</td>
+              <td style="padding:10px 14px; text-align:center; font-weight:800; color:#1f2937;">18</td>
+              <td style="padding:10px 14px; text-align:right; font-weight:800; color:#db2777;">$14,450</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     </div>
   </div>
 
@@ -743,7 +905,8 @@
     function ocultarTodosLosPaneles() {
       ['landing-sections','catalogo-productos','detalle-producto',
        'admin-dashboard-panel','admin-productos-panel',
-       'admin-pedidos-panel','admin-promociones-panel'].forEach(id => {
+       'admin-pedidos-panel','admin-promociones-panel',
+       'admin-clientes-panel','admin-reportes-panel'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = 'none';
       });
@@ -756,17 +919,22 @@
         dashboard:   'admin-dashboard-panel',
         productos:   'admin-productos-panel',
         pedidos:     'admin-pedidos-panel',
-        promociones: 'admin-promociones-panel'
+        promociones: 'admin-promociones-panel',
+        clientes:    'admin-clientes-panel',
+        reportes:    'admin-reportes-panel'
       };
       const el = document.getElementById(map[seccion]);
       if (el) el.style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function mostrarDashboardAdmin() { mostrarSeccionAdmin('dashboard'); }
-
     function regresarAlInicio() {
-      ocultarTodosLosPaneles();
+      ['admin-dashboard-panel','admin-productos-panel','admin-pedidos-panel',
+       'admin-promociones-panel','admin-clientes-panel','admin-reportes-panel',
+       'catalogo-productos'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
       document.getElementById('landing-sections').style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
