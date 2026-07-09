@@ -62,7 +62,7 @@
             </div>
             <button type="submit" 
                     class="w-full bg-gradient-to-r from-pink-600 to-rose-500 hover:from-pink-500 hover:to-rose-400 text-white font-extrabold py-3.5 rounded-xl transition-all shadow-lg shadow-pink-600/20 tracking-wide mt-6 cursor-pointer hover:scale-[1.01] active:scale-[0.99]">
-                    <a href="home.html" class="btn-back">INICIAR</a>
+                    INICIAR SESIÓN
             </button>
         </form>
         
@@ -72,21 +72,12 @@
         </p>
     </div>
 
-    <!-- Lógica de simulación en JavaScript (Intacta) -->
+    <!-- Lógica de simulación en JavaScript -->
     <script>
         document.getElementById('registroForm').addEventListener('submit', function(e) {
-            e.preventDefault(); 
-            
-            const nombre = document.getElementById('regNombre').value;
-            const correo = document.getElementById('regCorreo').value;
-            const password = document.getElementById('regPassword').value;
-            
+            e.preventDefault();
+            const nombre = document.getElementById('regNombre').value.trim() || 'Mayra';
             localStorage.setItem('sim_user_name', nombre);
-            localStorage.setItem('sim_user_email', correo);
-            localStorage.setItem('sim_user_pass', password);
-            
-            alert("Registro exitoso (simulado)");
-            
             window.location.href = "home.html";
         });
     </script>

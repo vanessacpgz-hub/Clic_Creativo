@@ -20,20 +20,19 @@
       </div>
 
       <nav class="nav">
-        <a href="#inicio">Inicio</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#sobre-mi">Sobre Mí</a>
-        <a href="#contacto">Contáctanos</a>
+        <a href="#inicio" onclick="regresarAlInicio()">Inicio</a>
+        <a href="#servicios" onclick="regresarAlInicio()">Servicios</a>
+        <a href="#sobre-mi" onclick="regresarAlInicio()">Sobre Mí</a>
+        <a href="#contacto" onclick="regresarAlInicio()">Contáctanos</a>
 
         <div class="auth-nav" id="auth-zone">
           <a href="login.html">Iniciar Sesión</a>
           <a href="Registro.html" class="btn-registro-nav">Registrarme</a>
-          
-          <div class="carrito-contenedor-fijo">
-            <button class="btn-carrito" onclick="toggleModalCarrito()">
-              🛒 <span id="carrito-contador" class="badge-flotante">0</span>
-            </button>
-          </div>
+        </div>
+        <div class="carrito-contenedor-fijo">
+          <button class="btn-carrito" onclick="toggleModalCarrito()">
+            🛒 <span id="carrito-contador" class="badge-flotante">0</span>
+          </button>
         </div>
       </nav>
       
@@ -61,10 +60,10 @@
       <button class="close-sidebar" onclick="toggleAdminMenu()">&times;</button>
     </div>
     <nav class="sidebar-links">
-      <a href="#dashboard" onclick="mostrarDashboardAdmin()">📊 Dashboard</a>
-      <a href="#productos" onclick="toggleAdminMenu()">📦 Productos</a>
-      <a href="#pedidos" onclick="toggleAdminMenu()">🛒 Pedidos</a>
-      <a href="#promociones" onclick="toggleAdminMenu()">🏷️ Promociones</a>
+      <a href="#dashboard" onclick="mostrarSeccionAdmin('dashboard')">📊 Dashboard</a>
+      <a href="#productos" onclick="mostrarSeccionAdmin('productos')">📦 Productos</a>
+      <a href="#pedidos" onclick="mostrarSeccionAdmin('pedidos')">🛒 Pedidos</a>
+      <a href="#promociones" onclick="mostrarSeccionAdmin('promociones')">🏷️ Promociones</a>
       <a href="#clientes" onclick="toggleAdminMenu()">👥 Clientes</a>
       <a href="#reportes" onclick="toggleAdminMenu()">📈 Reportes</a>
     </nav>
@@ -101,158 +100,14 @@
         <div style="font-size: 2rem; font-weight: 700; color: #dc2626; margin-top: 0.5rem;">2</div>
       </div>
     </div>
-    <div id="admin-productos-section" style="margin-top: 3rem; background: #ffffff; padding: 2rem; border-radius: 16px; border: 1px solid #fbcfe8; font-family: 'Quicksand', sans-serif;">
-  
-  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
-    <div>
-      <h3 style="font-family: 'Playfair Display', serif; color: #1f2937; font-size: 1.8rem; margin: 0;">📦 Gestión de Catálogo</h3>
-      <p style="color: #6b7280; margin: 0.3rem 0 0 0;">Agrega, edita o elimina los productos visibles en la tienda.</p>
-    </div>
-    <button class="btn-primary" onclick="abrirFormularioProducto()" style="margin: 0; padding: 0.7rem 1.5rem;">+ Agregar Producto</button>
-  </div>
-
-  <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; background: #fff1f2; padding: 1rem; border-radius: 12px;">
-    <input 
-      type="text" 
-      id="admin-search-prod" 
-      placeholder="🔍 Buscar por nombre..." 
-      style="flex: 1; min-width: 200px; padding: 10px; border: 1px solid #fbcfe8; border-radius: 8px; outline: none;"
-    />
-    <select id="admin-filter-categoria" style="padding: 10px; border: 1px solid #fbcfe8; border-radius: 8px; color: #4b5563; background: white;">
-      <option value="">Todas las categorías</option>
-      <option value="invitacion">Invitaciones Digitales</option>
-      <option value="web">Páginas Web</option>
-    </select>
-    <select id="admin-filter-estado" style="padding: 10px; border: 1px solid #fbcfe8; border-radius: 8px; color: #4b5563; background: white;">
-      <option value="">Todos los estados</option>
-      <option value="Disponible">Disponible</option>
-      <option value="Agotado">Agotado</option>
-    </select>
-  </div>
-
-  <div style="overflow-x: auto; border: 1px solid #e5e7eb; border-radius: 12px;">
-    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
-      <thead>
-        <tr style="background: #fdf2f8; color: #1f2937; border-bottom: 2px solid #fbcfe8;">
-          <th style="padding: 12px;">Imagen</th>
-          <th style="padding: 12px;">Nombre</th>
-          <th style="padding: 12px;">Categoría</th>
-          <th style="padding: 12px;">Precio</th>
-          <th style="padding: 12px; text-align: center;">Existencia</th>
-          <th style="padding: 12px;">Estado</th>
-          <th style="padding: 12px; text-align: center;">Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="tabla-productos-admin">
-        <tr style="border-bottom: 1px solid #e5e7eb;">
-          <td style="padding: 12px;"><img src="Imagenes/CotizaInvitacion.png" alt="Preview" style="width: 40px; height: 40px; object-fit: cover; border-radius: 6px;" /></td>
-          <td style="padding: 12px; font-weight: 600; color: #1f2937;">Invitación Interactiva</td>
-          <td style="padding: 12px; color: #4b5563;">Invitación Digital</td>
-          <td style="padding: 12px; font-weight: bold; color: #db2777;">$450.00</td>
-          <td style="padding: 12px; text-align: center; color: #4b5563;">25</td>
-          <td style="padding: 12px;"><span style="background: #d1fae5; color: #065f46; padding: 4px 8px; border-radius: 50px; font-size: 0.8rem; font-weight: bold;">Disponible</span></td>
-          <td style="padding: 12px; text-align: center;">
-            <div style="display: flex; gap: 6px; justify-content: center;">
-              <button title="Ver detalle" style="background: #f3f4f6; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer;">👁️</button>
-              <button title="Editar" style="background: #eff6ff; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; color: #1d4ed8;">✏️</button>
-              <button title="Eliminar" style="background: #fef2f2; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; color: #dc2626;">🗑️</button>
-            </div>
-          </td>
-        </tr>
-        <tr style="border-bottom: 1px solid #e5e7eb;">
-          <td style="padding: 12px;"><img src="Imagenes/Cotizapaginaweb.png" alt="Preview" style="width: 40px; height: 40px; object-fit: cover; border-radius: 6px;" /></td>
-          <td style="padding: 12px; font-weight: 600; color: #1f2937;">Landing Page Express</td>
-          <td style="padding: 12px; color: #4b5563;">Página Web</td>
-          <td style="padding: 12px; font-weight: bold; color: #db2777;">$1,200.00</td>
-          <td style="padding: 12px; text-align: center; color: #4b5563;">0</td>
-          <td style="padding: 12px;"><span style="background: #fee2e2; color: #991b1b; padding: 4px 8px; border-radius: 50px; font-size: 0.8rem; font-weight: bold;">Agotado</span></td>
-          <td style="padding: 12px; text-align: center;">
-            <div style="display: flex; gap: 6px; justify-content: center;">
-              <button title="Ver detalle" style="background: #f3f4f6; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer;">👁️</button>
-              <button title="Editar" style="background: #eff6ff; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; color: #1d4ed8;">✏️</button>
-              <button title="Eliminar" style="background: #fef2f2; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; color: #dc2626;">🗑️</button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<div id="modal-form-producto" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 3000; justify-content: center; align-items: center; padding: 1rem;">
-  <div style="background: #ffffff; max-width: 550px; width: 100%; max-height: 90vh; border-radius: 24px; padding: 2rem; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 2px solid #fbcfe8;">
-    
-    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed #fbcfe8; padding-bottom: 1rem; margin-bottom: 1.5rem;">
-      <h3 id="form-producto-titulo" style="font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #1f2937; margin: 0;">Formulario del Producto</h3>
-      <button onclick="cerrarFormularioProducto()" style="background: none; border: none; font-size: 1.5rem; color: #9ca3af; cursor: pointer;">&times;</button>
-    </div>
-
-    <form id="form-registro-producto" onsubmit="guardarProductoAdmin(event)" style="overflow-y: auto; flex: 1; padding-right: 5px; display: flex; flex-direction: column; gap: 1rem; text-align: left;">
-      
-      <div style="display: flex; flex-direction: column; gap: 4px;">
-        <label style="font-weight: 600; color: #4b5563; font-size: 0.9rem;">Nombre del producto *</label>
-        <input type="text" id="prod-nombre" required placeholder="Ej. Invitación Premium Boda" style="padding: 10px; border: 1px solid #fbcfe8; border-radius: 8px; outline: none;" />
-      </div>
-
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-        <div style="display: flex; flex-direction: column; gap: 4px;">
-          <label style="font-weight: 600; color: #4b5563; font-size: 0.9rem;">Categoría *</label>
-          <select id="prod-categoria" required style="padding: 10px; border: 1px solid #fbcfe8; border-radius: 8px; background: white;">
-            <option value="invitacion">Invitaciones Digitales</option>
-            <option value="web">Páginas Web</option>
-          </select>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 4px;">
-          <label style="font-weight: 600; color: #4b5563; font-size: 0.9rem;">Precio (MXN) *</label>
-          <input type="number" id="prod-precio" required min="0" placeholder="450" style="padding: 10px; border: 1px solid #fbcfe8; border-radius: 8px; outline: none;" />
-        </div>
-      </div>
-
-      <div style="display: flex; flex-direction: column; gap: 4px;">
-        <label style="font-weight: 600; color: #4b5563; font-size: 0.9rem;">Descripción</label>
-        <textarea id="prod-descripcion" rows="3" placeholder="Detalla las funciones incluidas en este paquete..." style="padding: 10px; border: 1px solid #fbcfe8; border-radius: 8px; outline: none; font-family: inherit;"></textarea>
-      </div>
-
-      <div style="display: flex; flex-direction: column; gap: 4px;">
-        <label style="font-weight: 600; color: #4b5563; font-size: 0.9rem;">Imagen del Producto</label>
-        <select id="prod-imagen-select" onchange="actualizarPrevisualizacionImagen(this.value)" style="padding: 10px; border: 1px solid #fbcfe8; border-radius: 8px; background: white; margin-bottom: 0.5rem;">
-          <option value="Imagenes/CotizaInvitacion.png">Icono Invitación (Predeterminado)</option>
-          <option value="Imagenes/Cotizapaginaweb.png">Icono Página Web</option>
-        </select>
-        <div style="display: flex; justify-content: center; background: #fff1f2; padding: 10px; border-radius: 12px; border: 1px dashed #fbcfe8;">
-          <img id="prod-preview-img" src="Imagenes/CotizaInvitacion.png" alt="Previsualización" style="max-height: 80px; object-fit: contain;" />
-        </div>
-      </div>
-
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-        <div style="display: flex; flex-direction: column; gap: 4px;">
-          <label style="font-weight: 600; color: #4b5563; font-size: 0.9rem;">Existencia (Simulada) *</label>
-          <input type="number" id="prod-existencia" required min="0" value="10" style="padding: 10px; border: 1px solid #fbcfe8; border-radius: 8px; outline: none;" />
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 4px;">
-          <label style="font-weight: 600; color: #4b5563; font-size: 0.9rem;">Estado del Registro</label>
-          <select id="prod-estado" style="padding: 10px; border: 1px solid #fbcfe8; border-radius: 8px; background: white;">
-            <option value="Activo">Activo (Visible)</option>
-            <option value="Inactivo">Inactivo (Oculto)</option>
-          </select>
-         </div>
-       </div>
-
-       <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-        <button type="button" class="btn-outline" onclick="cerrarFormularioProducto()" style="flex: 1; margin: 0; padding: 0.8rem;">Cancelar</button>
-        <button type="submit" class="btn-primary" style="flex: 1; margin: 0; padding: 0.8rem;">Guardar Producto</button>
-       </div>
-        </form>
-      </div>
-    </div>
 
     <div class="admin-bottom-split" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
       <div class="admin-actions-box" style="background: #fff; padding: 1.5rem; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid #e5e7eb;">
         <h3 style="font-size: 1.2rem; color: #1f2937; margin: 0 0 1.2rem 0; font-weight: 700;">Acciones rápidas</h3>
         <div style="display: flex; flex-direction: column; gap: 0.8rem;">
-          <button class="btn-primary" style="margin: 0; padding: 0.75rem; font-size: 0.95rem;">+ Agregar producto</button>
-          <button class="btn-outline" style="margin: 0; padding: 0.75rem; font-size: 0.95rem; border: 1px solid #d1d5db; color: #374151;">Ver pedidos</button>
-          <button class="btn-outline" style="margin: 0; padding: 0.75rem; font-size: 0.95rem; border: 1px solid #d1d5db; color: #374151;">Crear promoción</button>
+          <button class="btn-primary" style="margin: 0; padding: 0.75rem; font-size: 0.95rem;" onclick="mostrarSeccionAdmin('productos')">+ Agregar producto</button>
+          <button class="btn-outline" style="margin: 0; padding: 0.75rem; font-size: 0.95rem; border: 1px solid #d1d5db; color: #374151;" onclick="mostrarSeccionAdmin('pedidos')">Ver pedidos</button>
+          <button class="btn-outline" style="margin: 0; padding: 0.75rem; font-size: 0.95rem; border: 1px solid #d1d5db; color: #374151;" onclick="mostrarSeccionAdmin('promociones')">Crear promoción</button>
         </div>
       </div>
 
@@ -273,6 +128,184 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  
+  <!-- ===== PANEL PRODUCTOS ===== -->
+  <div id="admin-productos-panel" class="admin-panel-container" style="display:none; padding:2rem; max-width:1200px; margin:90px auto 2rem auto; font-family:'Quicksand',sans-serif;">
+    <div style="margin-bottom:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <h2 style="font-family:'Playfair Display',serif; color:#1f2937; font-size:2rem; margin:0;">📦 Gestión de Catálogo</h2>
+        <p style="color:#6b7280; margin:0.3rem 0 0 0;">Agrega, edita o elimina los productos visibles en la tienda.</p>
+      </div>
+      <div style="display:flex;gap:0.8rem;">
+        <button class="btn-outline" onclick="mostrarSeccionAdmin('dashboard')" style="margin:0;">← Dashboard</button>
+        <button class="btn-primary" onclick="abrirFormProducto()" style="margin:0;">+ Agregar Producto</button>
+      </div>
+    </div>
+    <div style="overflow-x:auto; border:1px solid #e5e7eb; border-radius:12px;">
+      <table style="width:100%; border-collapse:collapse; text-align:left; font-size:0.93rem;">
+        <thead>
+          <tr style="background:#fdf2f8; color:#1f2937; border-bottom:2px solid #fbcfe8;">
+            <th style="padding:12px;">Imagen</th>
+            <th style="padding:12px;">Nombre</th>
+            <th style="padding:12px;">Categoría</th>
+            <th style="padding:12px;">Precio</th>
+            <th style="padding:12px;text-align:center;">Existencia</th>
+            <th style="padding:12px;">Estado</th>
+            <th style="padding:12px;text-align:center;">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-catalogo-admin"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal Producto -->
+  <div id="modal-producto" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:3000; justify-content:center; align-items:center; padding:1rem;">
+    <div style="background:#fff; max-width:520px; width:100%; max-height:90vh; border-radius:24px; padding:2rem; overflow-y:auto; box-shadow:0 10px 30px rgba(0,0,0,0.15); border:2px solid #fbcfe8;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px dashed #fbcfe8; padding-bottom:1rem; margin-bottom:1.5rem;">
+        <h3 id="modal-prod-titulo" style="font-family:'Playfair Display',serif; font-size:1.5rem; color:#1f2937; margin:0;">Nuevo Producto</h3>
+        <button onclick="cerrarFormProducto()" style="background:none;border:none;font-size:1.5rem;color:#9ca3af;cursor:pointer;">&times;</button>
+      </div>
+      <form onsubmit="guardarProducto(event)" style="display:flex;flex-direction:column;gap:1rem;">
+        <input type="hidden" id="prod-edit-index" value="-1" />
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <label style="font-weight:600;color:#4b5563;font-size:0.88rem;">Nombre *</label>
+          <input type="text" id="prod-nombre" required placeholder="Ej. Invitación Premium Boda" style="padding:10px;border:1px solid #fbcfe8;border-radius:8px;outline:none;" />
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            <label style="font-weight:600;color:#4b5563;font-size:0.88rem;">Categoría *</label>
+            <select id="prod-categoria" style="padding:10px;border:1px solid #fbcfe8;border-radius:8px;background:white;">
+              <option value="Invitación Digital">Invitación Digital</option>
+              <option value="Página Web">Página Web</option>
+            </select>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            <label style="font-weight:600;color:#4b5563;font-size:0.88rem;">Precio (MXN) *</label>
+            <input type="number" id="prod-precio" required min="0" placeholder="450" style="padding:10px;border:1px solid #fbcfe8;border-radius:8px;outline:none;" />
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            <label style="font-weight:600;color:#4b5563;font-size:0.88rem;">Existencia</label>
+            <input type="number" id="prod-existencia" min="0" value="10" style="padding:10px;border:1px solid #fbcfe8;border-radius:8px;outline:none;" />
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            <label style="font-weight:600;color:#4b5563;font-size:0.88rem;">Estado</label>
+            <select id="prod-estado" style="padding:10px;border:1px solid #fbcfe8;border-radius:8px;background:white;">
+              <option value="Disponible">Disponible</option>
+              <option value="Agotado">Agotado</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;margin-top:0.5rem;">
+          <button type="button" class="btn-outline" onclick="cerrarFormProducto()" style="flex:1;margin:0;padding:0.8rem;">Cancelar</button>
+          <button type="submit" class="btn-primary" style="flex:1;margin:0;padding:0.8rem;">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== PANEL PEDIDOS ===== -->
+  <div id="admin-pedidos-panel" class="admin-panel-container" style="display:none; padding:2rem; max-width:1200px; margin:90px auto 2rem auto; font-family:'Quicksand',sans-serif;">
+    <div style="margin-bottom:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <h2 style="font-family:'Playfair Display',serif; color:#1f2937; font-size:2rem; margin:0;">🛒 Pedidos</h2>
+        <p style="color:#6b7280; margin:0.3rem 0 0 0;">Listado de pedidos recibidos.</p>
+      </div>
+      <button class="btn-outline" onclick="mostrarSeccionAdmin('dashboard')" style="margin:0;">← Dashboard</button>
+    </div>
+    <div style="overflow-x:auto; border:1px solid #e5e7eb; border-radius:12px;">
+      <table style="width:100%; border-collapse:collapse; text-align:left; font-size:0.93rem;">
+        <thead>
+          <tr style="background:#fdf2f8; color:#1f2937; border-bottom:2px solid #fbcfe8;">
+            <th style="padding:12px;">#</th>
+            <th style="padding:12px;">Cliente</th>
+            <th style="padding:12px;">Producto</th>
+            <th style="padding:12px;">Cantidad</th>
+            <th style="padding:12px;">Dirección</th>
+            <th style="padding:12px;">Total</th>
+            <th style="padding:12px;">Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #e5e7eb;">
+            <td style="padding:12px;font-weight:700;color:#db2777;">#001</td>
+            <td style="padding:12px;font-weight:600;">Ana García</td>
+            <td style="padding:12px;">Invitación Interactiva</td>
+            <td style="padding:12px;text-align:center;">1</td>
+            <td style="padding:12px;color:#4b5563;">Av. López Mateos 45, Aguascalientes</td>
+            <td style="padding:12px;font-weight:700;color:#db2777;">$450.00</td>
+            <td style="padding:12px;"><span style="background:#d1fae5;color:#065f46;padding:4px 10px;border-radius:50px;font-size:0.8rem;font-weight:700;">Entregado</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #e5e7eb;">
+            <td style="padding:12px;font-weight:700;color:#db2777;">#002</td>
+            <td style="padding:12px;font-weight:600;">Laura Martínez</td>
+            <td style="padding:12px;">Landing Page Express</td>
+            <td style="padding:12px;text-align:center;">1</td>
+            <td style="padding:12px;color:#4b5563;">Calle Morelos 12, Guadalajara</td>
+            <td style="padding:12px;font-weight:700;color:#db2777;">$1,200.00</td>
+            <td style="padding:12px;"><span style="background:#fef9c3;color:#854d0e;padding:4px 10px;border-radius:50px;font-size:0.8rem;font-weight:700;">En proceso</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #e5e7eb;">
+            <td style="padding:12px;font-weight:700;color:#db2777;">#003</td>
+            <td style="padding:12px;font-weight:600;">Sofía Ramírez</td>
+            <td style="padding:12px;">Invitación Premium Boda</td>
+            <td style="padding:12px;text-align:center;">2</td>
+            <td style="padding:12px;color:#4b5563;">Blvd. Convención 300, Aguascalientes</td>
+            <td style="padding:12px;font-weight:700;color:#db2777;">$1,300.00</td>
+            <td style="padding:12px;"><span style="background:#fee2e2;color:#991b1b;padding:4px 10px;border-radius:50px;font-size:0.8rem;font-weight:700;">Pendiente</span></td>
+          </tr>
+          <tr>
+            <td style="padding:12px;font-weight:700;color:#db2777;">#004</td>
+            <td style="padding:12px;font-weight:600;">María Torres</td>
+            <td style="padding:12px;">Web Comercial</td>
+            <td style="padding:12px;text-align:center;">1</td>
+            <td style="padding:12px;color:#4b5563;">Calle Juárez 88, CDMX</td>
+            <td style="padding:12px;font-weight:700;color:#db2777;">$2,400.00</td>
+            <td style="padding:12px;"><span style="background:#d1fae5;color:#065f46;padding:4px 10px;border-radius:50px;font-size:0.8rem;font-weight:700;">Entregado</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== PANEL PROMOCIONES ===== -->
+  <div id="admin-promociones-panel" class="admin-panel-container" style="display:none; padding:2rem; max-width:1000px; margin:90px auto 2rem auto; font-family:'Quicksand',sans-serif;">
+    <div style="margin-bottom:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <h2 style="font-family:'Playfair Display',serif; color:#1f2937; font-size:2rem; margin:0;">🏷️ Promociones</h2>
+        <p style="color:#6b7280; margin:0.3rem 0 0 0;">Crea y gestiona códigos de descuento.</p>
+      </div>
+      <button class="btn-outline" onclick="mostrarSeccionAdmin('dashboard')" style="margin:0;">← Dashboard</button>
+    </div>
+
+    <!-- Crear código -->
+    <div style="background:#fff; border:1px solid #fbcfe8; border-radius:16px; padding:1.8rem; margin-bottom:2rem;">
+      <h3 style="font-family:'Playfair Display',serif; font-size:1.3rem; color:#1f2937; margin:0 0 1.2rem 0;">Crear nuevo código</h3>
+      <form onsubmit="crearPromocion(event)" style="display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:1rem; align-items:end; flex-wrap:wrap;">
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <label style="font-weight:600;color:#4b5563;font-size:0.85rem;">Código *</label>
+          <input type="text" id="promo-codigo" required placeholder="Ej. CLIC20" style="padding:10px;border:1px solid #fbcfe8;border-radius:8px;outline:none;text-transform:uppercase;" />
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <label style="font-weight:600;color:#4b5563;font-size:0.85rem;">Descuento (%) *</label>
+          <input type="number" id="promo-descuento" required min="1" max="100" placeholder="20" style="padding:10px;border:1px solid #fbcfe8;border-radius:8px;outline:none;" />
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <label style="font-weight:600;color:#4b5563;font-size:0.85rem;">Vence el</label>
+          <input type="date" id="promo-vence" style="padding:10px;border:1px solid #fbcfe8;border-radius:8px;outline:none;" />
+        </div>
+        <button type="submit" class="btn-primary" style="margin:0;padding:10px 1.5rem;white-space:nowrap;">+ Crear</button>
+      </form>
+    </div>
+
+    <!-- Lista de códigos existentes -->
+    <div style="background:#fff; border:1px solid #fbcfe8; border-radius:16px; padding:1.8rem;">
+      <h3 style="font-family:'Playfair Display',serif; font-size:1.3rem; color:#1f2937; margin:0 0 1.2rem 0;">Códigos activos</h3>
+      <div id="lista-promociones" style="display:flex;flex-direction:column;gap:1rem;"></div>
     </div>
   </div>
 
@@ -697,57 +730,243 @@
     <img src="Imagenes/Logo.png" alt="Clic Creativo" class="footer-logo" />
     <p>Atención al cliente de 8:00am-8:00pm</p>
     <p>Ubicación: Aguascalientes, Ags.</p>
+    <p>
+      <a href="#" onclick="openModalPoliticas(event)" style="color:#f9c8e0;text-decoration:underline;font-weight:600;">
+        Políticas del producto, términos y condiciones
+      </a>
+    </p>
     <p>© 2026 Clic Creativo · Diseño digital con amor</p>
   </footer>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const usuarioGuardado = localStorage.getItem('sim_user_name');
-        if (usuarioGuardado) {
-            const authZone = document.getElementById('auth-zone');
-            const authZoneMobile = document.getElementById('auth-zone-mobile');
-            
-            const saludoHTML = `
-                <span class="user-welcome-text">¡Hola, ${usuarioGuardado}!</span>
-                <a href="perfil.html" class="user-profile-link">Ver Perfil</a>
-            `;
-            
-            if (authZone) authZone.innerHTML = saludoHTML;
-            if (authZoneMobile) authZoneMobile.innerHTML = saludoHTML;
-        }
-    });
-
-    // Función para manejar el despliegue limpio del panel de administrador
-    function mostrarDashboardAdmin() {
-      toggleAdminMenu(); // Cierra el menú lateral (ejecuta tu función existente)
-      
-      // Ocultamos todas las vistas públicas de la landing
-      const landingSections = document.getElementById('landing-sections');
-      const catalogoSection = document.getElementById('catalogo-productos');
-      const detalleSection = document.getElementById('detalle-producto');
-      
-      if (landingSections) landingSections.style.display = 'none';
-      if (catalogoSection) catalogoSection.style.display = 'none';
-      if (detalleSection) detalleSection.style.display = 'none';
-      
-      // Mostramos el panel de control
-      const adminPanel = document.getElementById('admin-dashboard-panel');
-      if (adminPanel) adminPanel.style.display = 'block';
+    // ── Navegación entre paneles admin ──
+    function ocultarTodosLosPaneles() {
+      ['landing-sections','catalogo-productos','detalle-producto',
+       'admin-dashboard-panel','admin-productos-panel',
+       'admin-pedidos-panel','admin-promociones-panel'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
     }
 
-    // Adaptación a tu función de retorno para que también restablezca el dashboard si está abierto
-    function regresarAlInicio() {
-      const adminPanel = document.getElementById('admin-dashboard-panel');
-      const landingSections = document.getElementById('landing-sections');
-      const catalogoSection = document.getElementById('catalogo-productos');
-      
-      if (adminPanel) adminPanel.style.display = 'none';
-      if (catalogoSection) catalogoSection.style.display = 'none';
-      if (landingSections) landingSections.style.display = 'block';
-      
+    function mostrarSeccionAdmin(seccion) {
+      toggleAdminMenu();
+      ocultarTodosLosPaneles();
+      const map = {
+        dashboard:   'admin-dashboard-panel',
+        productos:   'admin-productos-panel',
+        pedidos:     'admin-pedidos-panel',
+        promociones: 'admin-promociones-panel'
+      };
+      const el = document.getElementById(map[seccion]);
+      if (el) el.style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  </script>
+
+    function mostrarDashboardAdmin() { mostrarSeccionAdmin('dashboard'); }
+
+    function regresarAlInicio() {
+      ocultarTodosLosPaneles();
+      document.getElementById('landing-sections').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ── Productos (simulado en memoria) ──
+    let productos = [
+      { nombre: 'Invitación Interactiva', categoria: 'Invitación Digital', precio: 450,  existencia: 25, estado: 'Disponible', img: 'Imagenes/CotizaInvitacion.png' },
+      { nombre: 'Landing Page Express',   categoria: 'Página Web',         precio: 1200, existencia: 0,  estado: 'Agotado',    img: 'Imagenes/Cotizapaginaweb.png'  },
+      { nombre: 'Invitación Premium',     categoria: 'Invitación Digital', precio: 650,  existencia: 10, estado: 'Disponible', img: 'Imagenes/CotizaInvitacion.png' },
+    ];
+
+    function renderTablaProductos() {
+      const tbody = document.getElementById('tabla-catalogo-admin');
+      if (!tbody) return;
+      tbody.innerHTML = productos.map((p, i) => `
+        <tr style="border-bottom:1px solid #e5e7eb;">
+          <td style="padding:12px;"><img src="${p.img}" style="width:40px;height:40px;object-fit:cover;border-radius:6px;" /></td>
+          <td style="padding:12px;font-weight:600;color:#1f2937;">${p.nombre}</td>
+          <td style="padding:12px;color:#4b5563;">${p.categoria}</td>
+          <td style="padding:12px;font-weight:700;color:#db2777;">$${p.precio.toLocaleString()}.00</td>
+          <td style="padding:12px;text-align:center;">${p.existencia}</td>
+          <td style="padding:12px;"><span style="background:${p.estado==='Disponible'?'#d1fae5':'#fee2e2'};color:${p.estado==='Disponible'?'#065f46':'#991b1b'};padding:4px 10px;border-radius:50px;font-size:0.8rem;font-weight:700;">${p.estado}</span></td>
+          <td style="padding:12px;text-align:center;">
+            <div style="display:flex;gap:6px;justify-content:center;">
+              <button onclick="editarProducto(${i})" style="background:#eff6ff;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;color:#1d4ed8;" title="Editar">✏️</button>
+              <button onclick="eliminarProducto(${i})" style="background:#fef2f2;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;color:#dc2626;" title="Eliminar">🗑️</button>
+            </div>
+          </td>
+        </tr>`).join('');
+    }
+
+    function abrirFormProducto(index) {
+      index = (index === undefined) ? -1 : index;
+      document.getElementById('prod-edit-index').value = index;
+      document.getElementById('modal-prod-titulo').textContent = index === -1 ? 'Nuevo Producto' : 'Editar Producto';
+      if (index >= 0) {
+        const p = productos[index];
+        document.getElementById('prod-nombre').value = p.nombre;
+        document.getElementById('prod-categoria').value = p.categoria;
+        document.getElementById('prod-precio').value = p.precio;
+        document.getElementById('prod-existencia').value = p.existencia;
+        document.getElementById('prod-estado').value = p.estado;
+      } else {
+        document.getElementById('prod-nombre').value = '';
+        document.getElementById('prod-precio').value = '';
+        document.getElementById('prod-existencia').value = 10;
+        document.getElementById('prod-estado').value = 'Disponible';
+      }
+      document.getElementById('modal-producto').style.display = 'flex';
+    }
+
+    function cerrarFormProducto() {
+      document.getElementById('modal-producto').style.display = 'none';
+    }
+
+    function guardarProducto(e) {
+      e.preventDefault();
+      const idx = parseInt(document.getElementById('prod-edit-index').value);
+      const cat = document.getElementById('prod-categoria').value;
+      const obj = {
+        nombre:     document.getElementById('prod-nombre').value.trim(),
+        categoria:  cat,
+        precio:     parseFloat(document.getElementById('prod-precio').value),
+        existencia: parseInt(document.getElementById('prod-existencia').value),
+        estado:     document.getElementById('prod-estado').value,
+        img:        cat === 'Página Web' ? 'Imagenes/Cotizapaginaweb.png' : 'Imagenes/CotizaInvitacion.png'
+      };
+      if (idx === -1) productos.push(obj);
+      else productos[idx] = obj;
+      renderTablaProductos();
+      cerrarFormProducto();
+      showToast(idx === -1 ? '✅ Producto agregado' : '✅ Producto actualizado');
+    }
+
+    function editarProducto(i)  { abrirFormProducto(i); }
+    function eliminarProducto(i) {
+      mostrarConfirm(
+        '🗑️ Eliminar producto',
+        '¿Segura que deseas eliminar "' + productos[i].nombre + '"? Esta acción no se puede deshacer.',
+        function() {
+          productos.splice(i, 1);
+          renderTablaProductos();
+          showToast('✅ Producto eliminado correctamente');
+        }
+      );
+    }
+
+    function eliminarPromocion(i) {
+      mostrarConfirm(
+        '🏷️ Eliminar código',
+        '¿Segura que deseas eliminar el código "' + promociones[i].codigo + '"?',
+        function() {
+          promociones.splice(i, 1);
+          renderPromociones();
+          showToast('✅ Código eliminado correctamente');
+        }
+      );
+    }
+
+    // ── Modal confirmación genérico ──
+    let _confirmCallback = null;
+    function mostrarConfirm(titulo, mensaje, callback) {
+      document.getElementById('confirm-title').textContent = titulo;
+      document.getElementById('confirm-msg').textContent = mensaje;
+      _confirmCallback = callback;
+      const m = document.getElementById('modal-confirm');
+      m.style.display = 'flex';
+    }
+    function confirmCancel() {
+      document.getElementById('modal-confirm').style.display = 'none';
+      _confirmCallback = null;
+    }
+    document.getElementById('confirm-ok-btn').addEventListener('click', function() {
+      document.getElementById('modal-confirm').style.display = 'none';
+      if (_confirmCallback) { _confirmCallback(); _confirmCallback = null; }
+    });
+
+    // ── Toast ──
+    function showToast(msg) {
+      const t = document.getElementById('toast-ok');
+      document.getElementById('toast-msg').textContent = msg;
+      t.style.display = 'block';
+      setTimeout(() => { t.style.display = 'none'; }, 3000);
+    }
+
+    // ── Promociones (simulado en memoria) ──
+    let promociones = [
+      { codigo: 'BIENVENIDA10', descuento: 10, vence: '2025-12-31' },
+      { codigo: 'CLIC20',       descuento: 20, vence: '2025-09-15' },
+    ];
+
+    function renderPromociones() {
+      const lista = document.getElementById('lista-promociones');
+      if (!lista) return;
+      if (promociones.length === 0) {
+        lista.innerHTML = '<p style="color:#9ca3af;text-align:center;">No hay códigos activos.</p>';
+        return;
+      }
+      lista.innerHTML = promociones.map((p, i) => `
+        <div style="display:flex;justify-content:space-between;align-items:center;background:#fdf2f8;border:1px solid #fbcfe8;border-radius:12px;padding:1rem 1.2rem;flex-wrap:wrap;gap:0.8rem;">
+          <div>
+            <span style="font-size:1.1rem;font-weight:700;color:#db2777;letter-spacing:0.05em;">${p.codigo}</span>
+            <span style="margin-left:0.8rem;background:#fce7f3;color:#db2777;padding:3px 10px;border-radius:50px;font-size:0.8rem;font-weight:700;">${p.descuento}% OFF</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:1rem;">
+            <span style="font-size:0.85rem;color:#6b7280;">Vence: ${p.vence || 'Sin límite'}</span>
+            <button onclick="eliminarPromocion(${i})" style="background:#fef2f2;border:none;padding:6px 12px;border-radius:8px;cursor:pointer;color:#dc2626;font-size:0.85rem;font-weight:600;">Eliminar</button>
+          </div>
+        </div>`).join('');
+    }
+
+    function crearPromocion(e) {
+      e.preventDefault();
+      const codigo = document.getElementById('promo-codigo').value.trim().toUpperCase();
+      const descuento = parseInt(document.getElementById('promo-descuento').value);
+      const vence = document.getElementById('promo-vence').value;
+      if (!codigo || !descuento) return;
+      if (promociones.find(p => p.codigo === codigo)) {
+        showToast('⚠️ Ese código ya existe');
+        return;
+      }
+      promociones.push({ codigo, descuento, vence });
+      renderPromociones();
+      document.getElementById('promo-codigo').value = '';
+      document.getElementById('promo-descuento').value = '';
+      document.getElementById('promo-vence').value = '';
+      showToast('✅ Código "' + codigo + '" creado');
+    }
+
+        document.addEventListener("DOMContentLoaded", function() {
+      const usuarioGuardado = localStorage.getItem('sim_user_name');
+      if (usuarioGuardado) {
+        const saludoHTML = `<span class="user-welcome-text">¡Hola, ${usuarioGuardado}!</span><a href="perfil.html" class="user-profile-link">Ver Perfil</a>`;
+        const z1 = document.getElementById('auth-zone');
+        const z2 = document.getElementById('auth-zone-mobile');
+        if (z1) z1.innerHTML = saludoHTML;
+        if (z2) z2.innerHTML = saludoHTML;
+      }
+      renderTablaProductos();
+      renderPromociones();
+    });  </script>
+
+  <!-- Modal confirmación genérico -->
+  <div id="modal-confirm" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:9000;justify-content:center;align-items:center;padding:1rem;">
+    <div style="background:#fff;max-width:380px;width:100%;border-radius:20px;padding:2rem;box-shadow:0 20px 60px rgba(0,0,0,0.2);border:2px solid #fbcfe8;text-align:center;font-family:'Quicksand',sans-serif;">
+      <div style="font-size:2.5rem;margin-bottom:0.8rem;" id="confirm-icon">⚠️</div>
+      <h3 id="confirm-title" style="font-family:'Playfair Display',serif;color:#1f2937;font-size:1.4rem;margin:0 0 0.6rem 0;">¿Estás segura?</h3>
+      <p id="confirm-msg" style="color:#6b7280;font-size:0.9rem;line-height:1.5;margin:0 0 1.5rem 0;"></p>
+      <div style="display:flex;gap:1rem;">
+        <button onclick="confirmCancel()" class="btn-outline" style="flex:1;margin:0;padding:0.75rem;">Cancelar</button>
+        <button id="confirm-ok-btn" class="btn-primary" style="flex:1;margin:0;padding:0.75rem;background:#dc2626;">Sí, eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast notificación -->
+  <div id="toast-ok" style="display:none;position:fixed;bottom:2rem;right:2rem;background:#1f2937;color:white;padding:0.9rem 1.5rem;border-radius:12px;font-family:'Quicksand',sans-serif;font-size:0.9rem;font-weight:600;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,0.2);">
+    <span id="toast-msg">✅ Listo</span>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>

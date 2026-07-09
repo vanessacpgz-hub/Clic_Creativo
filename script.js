@@ -348,9 +348,18 @@ function agregarAlCarrito(id) {
 
 // Eliminar un producto del carrito
 function eliminarDelCarrito(id) {
-    carrito = carrito.filter(item => item.id !== id);
-    localStorage.setItem('carrito_clic', JSON.stringify(carrito));
-    actualizarInterfazCarrito();
+    const item = carrito.find(i => i.id === id);
+    const nombre = item ? item.nombre : 'este producto';
+    mostrarConfirm(
+        '🛒 ¿Eliminar del carrito?',
+        '¿Deseas eliminar "' + nombre + '" de tu carrito?',
+        function() {
+            carrito = carrito.filter(i => i.id !== id);
+            localStorage.setItem('carrito_clic', JSON.stringify(carrito));
+            actualizarInterfazCarrito();
+            showToast('✅ Producto eliminado del carrito');
+        }
+    );
 }
 
 // Actualizar contadores y renderizar elementos en HTML
@@ -392,30 +401,33 @@ function actualizarInterfazCarrito() {
 
 function enviarPedidoWhatsApp() {
     if (carrito.length === 0) {
-        alert("Tu carrito está vacío.");
+        showToast('⚠️ Tu carrito está vacío');
+        return;
+    }
+    const checkboxTerminos = document.getElementById('acepta-terminos');
+    if (!checkboxTerminos || !checkboxTerminos.checked) {
+        showToast('⚠️ Acepta los términos y condiciones primero 🌸');
         return;
     }
 
-    // NUEVO: Validación de Términos y Condiciones
-    const checkboxTerminos = document.getElementById('acepta-terminos');
-    if (!checkboxTerminos || !checkboxTerminos.checked) {
-        alert("Por favor, acepta los términos, condiciones y políticas de producto antes de enviar tu pedido. 🌸");
-        return; // Detiene por completo la ejecución y no abre WhatsApp
-    }
-
-    const phone = '524494556465'; // Clic_Creativo Aguascalientes
-    let mensaje = "¡Hola Clic_Creativo! 🌟 Me interesa contratar los siguientes servicios de mi carrito:\n\n";
+    const phone = '524494556465';
+    let mensaje = '¡Hola Clic_Creativo! 🌟 Me interesa contratar los siguientes servicios:\n\n';
     let precioTotal = 0;
-
     carrito.forEach(item => {
-        mensaje += `• ${item.nombre} (Cant: ${item.cantidad}) - $${item.precio * item.cantidad} MXN\n`;
+        mensaje += `• ${item.nombre} (Cant: ${item.cantidad}) - $${(item.precio * item.cantidad).toLocaleString('es-MX')} MXN\n`;
         precioTotal += item.precio * item.cantidad;
     });
+    mensaje += `\n*Total estimado:* $${precioTotal.toLocaleString('es-MX')} MXN\n\nHe leído y acepto las políticas de diseño. ¿Cuáles son los pasos para comenzar? ✨`;
 
-    mensaje += `\n*Total estimado:* $${precioTotal.toLocaleString('es-MX')} MXN\n\n He leído y acepto las políticas de diseño. ¿Cuáles son los pasos para comenzar? ✨`;
-    
-    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(mensaje)}`, '_blank');
+    mostrarConfirm(
+        '💬 Enviar pedido',
+        `Se abrirá WhatsApp con tu pedido por $${precioTotal.toLocaleString('es-MX')} MXN. ¿Confirmas?`,
+        function() {
+            window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(mensaje), '_blank');
+        }
+    );
 }
+
 // Función para abrir y cerrar la barra lateral de administración
 function toggleAdminMenu() {
     const sidebar = document.getElementById('adminSidebar');
@@ -424,93 +436,58 @@ function toggleAdminMenu() {
     }
 }
 
-// Función para mostrar el panel de administración y ocultar el contenido público
+// Funciones legacy — la navegación real está en home.html inline script
 function mostrarDashboardAdmin() {
-    // 1. Cerramos el menú lateral para limpiar la pantalla
-    const sidebar = document.getElementById('adminSidebar');
-    if (sidebar) {
-        sidebar.classList.remove('active');
-    }
-    
-    // 2. Ocultamos las secciones de la tienda/landing
-    const landingSections = document.getElementById('landing-sections');
-    const catalogoSection = document.getElementById('catalogo-productos');
-    const detalleSection = document.getElementById('detalle-producto');
-    
-    if (landingSections) landingSections.style.display = 'none';
-    if (catalogoSection) catalogoSection.style.display = 'none';
-    if (detalleSection) detalleSection.style.display = 'none';
-    
-    // 3. Mostramos el panel de control del administrador
-    const adminPanel = document.getElementById('admin-dashboard-panel');
-    if (adminPanel) {
-        adminPanel.style.display = 'block';
-    }
-    
-    // Movemos el scroll al inicio para que se vea desde arriba
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (typeof mostrarSeccionAdmin === 'function') mostrarSeccionAdmin('dashboard');
 }
 
-// Función para regresar a la vista pública de la tienda
 function regresarAlInicio() {
-    const adminPanel = document.getElementById('admin-dashboard-panel');
-    const landingSections = document.getElementById('landing-sections');
-    const catalogoSection = document.getElementById('catalogo-productos');
-    
-    if (adminPanel) adminPanel.style.display = 'none';
-    if (catalogoSection) catalogoSection.style.display = 'none';
-    
-    // Volvemos a encender la estructura principal de la landing
-    if (landingSections) landingSections.style.display = 'block';
-    
+    ['admin-dashboard-panel','admin-productos-panel','admin-pedidos-panel',
+     'admin-promociones-panel','catalogo-productos'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+    });
+    const ls = document.getElementById('landing-sections');
+    if (ls) ls.style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-// Funciones para controlar el Formulario Modular de Productos
-function abrirFormularioProducto(esEdicion = false) {
-    const modal = document.getElementById('modal-form-producto');
-    const titulo = document.getElementById('form-producto-titulo');
-    
-    if (modal) {
-        modal.style.display = 'flex';
-        // Cambia el título dependiendo de la acción
-        if (titulo) {
-            titulo.textContent = esEdicion ? "✏️ Editar Producto" : "📦 Agregar Nuevo Producto";
-        }
+
+// Toast global (usado desde home.html y script.js)
+function showToast(msg) {
+    const t = document.getElementById('toast-ok');
+    const m = document.getElementById('toast-msg');
+    if (!t || !m) return;
+    m.textContent = msg;
+    t.style.display = 'block';
+    setTimeout(() => { t.style.display = 'none'; }, 3000);
+}
+
+// Confirm modal global
+function mostrarConfirm(titulo, mensaje, callback) {
+    const m = document.getElementById('modal-confirm');
+    if (!m) { if (confirm(mensaje)) callback(); return; }
+    document.getElementById('confirm-title').textContent = titulo;
+    document.getElementById('confirm-msg').textContent = mensaje;
+    window._confirmCallback = callback;
+    m.style.display = 'flex';
+}
+function confirmCancel() {
+    const m = document.getElementById('modal-confirm');
+    if (m) m.style.display = 'none';
+    window._confirmCallback = null;
+}
+document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('confirm-ok-btn');
+    if (btn) {
+        btn.addEventListener('click', function() {
+            document.getElementById('modal-confirm').style.display = 'none';
+            if (window._confirmCallback) { window._confirmCallback(); window._confirmCallback = null; }
+        });
     }
-}
+});
 
-function cerrarFormularioProducto() {
-    const modal = document.getElementById('modal-form-producto');
-    const formulario = document.getElementById('form-registro-producto');
-    
-    if (modal) modal.style.display = 'none';
-    if (formulario) formulario.reset(); // Limpia los campos al cerrar
-    
-    // Resetea la imagen de previsualización al icono base
-    actualizarPrevisualizacionImagen("Imagenes/CotizaInvitacion.png");
-}
-
-function actualizarPrevisualizacionImagen(rutaImagen) {
-    const preview = document.getElementById('prod-preview-img');
-    if (preview) {
-        preview.src = rutaImagen;
-    }
-}
-
-function guardarProductoAdmin(event) {
-    event.preventDefault(); // Evita que la página recargue
-    
-    // Captura de datos estructurada
-    const nombre = document.getElementById('prod-nombre').value;
-    const categoria = document.getElementById('prod-categoria').value;
-    const precio = document.getElementById('prod-precio').value;
-    const descripcion = document.getElementById('prod-descripcion').value;
-    const imagen = document.getElementById('prod-imagen-select').value;
-    const existencia = document.getElementById('prod-existencia').value;
-    const estado = document.getElementById('prod-estado').value;
-
-    // Aquí irá tu lógica de inserción o actualización (ej. LocalStorage o Base de Datos)
-    alert(`✨ ¡Producto "${nombre}" guardado con éxito simulado!\nEstado: ${estado} | Stock: ${existencia}`);
-    
-    cerrarFormularioProducto();
-}
+// Funciones antiguas del formulario (no usadas, mantenidas para compatibilidad)
+function abrirFormularioProducto() {}
+function cerrarFormularioProducto() {}
+function actualizarPrevisualizacionImagen() {}
+function guardarProductoAdmin(e) { if(e) e.preventDefault(); }
