@@ -316,7 +316,10 @@
         <h2 style="font-family:'Playfair Display',serif; color:#1f2937; font-size:2rem; margin:0;">👥 Clientes</h2>
         <p style="color:#6b7280; margin:0.3rem 0 0 0;">Directorio de clientes registrados.</p>
       </div>
-      <button class="btn-outline" onclick="mostrarSeccionAdmin('dashboard')" style="margin:0;">← Dashboard</button>
+      <div style="display:flex; gap:0.8rem;">
+        <button class="btn-outline" onclick="mostrarSeccionAdmin('dashboard')" style="margin:0;">← Dashboard</button>
+        <button class="btn-primary" onclick="abrirFormCliente()" style="margin:0;">+ Nuevo Cliente</button>
+      </div>
     </div>
     <div style="overflow-x:auto; border:1px solid #e5e7eb; border-radius:12px;">
       <table style="width:100%; border-collapse:collapse; text-align:left; font-size:0.92rem;">
@@ -327,51 +330,58 @@
             <th style="padding:14px;">Dirección / Contacto</th>
             <th style="padding:14px; text-align:center;">Pedido pendiente</th>
             <th style="padding:14px; text-align:center;">Pedidos anteriores</th>
+            <th style="padding:14px; text-align:center;">Acciones</th>
           </tr>
         </thead>
-        <tbody>
-          <tr style="border-bottom:1px solid #e5e7eb;">
-            <td style="padding:14px;">
-              <div style="font-weight:700; color:#1f2937;">Ana García</div>
-              <div style="font-size:0.8rem; color:#9ca3af;">ana.garcia@email.com</div>
-            </td>
-            <td style="padding:14px; color:#4b5563;">+52 449 123 4567</td>
-            <td style="padding:14px; color:#4b5563;">Av. López Mateos 45, Aguascalientes</td>
-            <td style="padding:14px; text-align:center;"><span style="background:#fef9c3;color:#854d0e;padding:4px 12px;border-radius:50px;font-size:0.8rem;font-weight:700;">Sí</span></td>
-            <td style="padding:14px; text-align:center; font-weight:700; color:#db2777;">3</td>
-          </tr>
-          <tr style="border-bottom:1px solid #e5e7eb;">
-            <td style="padding:14px;">
-              <div style="font-weight:700; color:#1f2937;">Laura Martínez</div>
-              <div style="font-size:0.8rem; color:#9ca3af;">laura.m@email.com</div>
-            </td>
-            <td style="padding:14px; color:#4b5563;">+52 449 234 5678</td>
-            <td style="padding:14px; color:#4b5563;">Calle Morelos 12, Guadalajara</td>
-            <td style="padding:14px; text-align:center;"><span style="background:#d1fae5;color:#065f46;padding:4px 12px;border-radius:50px;font-size:0.8rem;font-weight:700;">No</span></td>
-            <td style="padding:14px; text-align:center; font-weight:700; color:#db2777;">1</td>
-          </tr>
-          <tr style="border-bottom:1px solid #e5e7eb;">
-            <td style="padding:14px;">
-              <div style="font-weight:700; color:#1f2937;">Sofía Ramírez</div>
-              <div style="font-size:0.8rem; color:#9ca3af;">sofia.r@email.com</div>
-            </td>
-            <td style="padding:14px; color:#4b5563;">+52 449 345 6789</td>
-            <td style="padding:14px; color:#4b5563;">Blvd. Convención 300, Aguascalientes</td>
-            <td style="padding:14px; text-align:center;"><span style="background:#fef9c3;color:#854d0e;padding:4px 12px;border-radius:50px;font-size:0.8rem;font-weight:700;">Sí</span></td>
-            <td style="padding:14px; text-align:center; font-weight:700; color:#db2777;">5</td>
-          </tr>
-          <tr>
-            <td style="padding:14px;">
-              <div style="font-weight:700; color:#1f2937;">María Torres</div>
-              <div style="font-size:0.8rem; color:#9ca3af;">maria.t@email.com</div>
-            </td>
-            <td style="padding:14px; color:#4b5563;">+52 55 456 7890</td>
-            <td style="padding:14px; color:#4b5563;">Calle Juárez 88, CDMX</td>
-            <td style="padding:14px; text-align:center;"><span style="background:#d1fae5;color:#065f46;padding:4px 12px;border-radius:50px;font-size:0.8rem;font-weight:700;">No</span></td>
-            <td style="padding:14px; text-align:center; font-weight:700; color:#db2777;">2</td>
-          </tr>
-        </tbody>
+        <tbody id="tabla-clientes-admin"></tbody>
       </table>
+    </div>
+  </div>
+
+  <!-- Modal nuevo cliente -->
+  <div id="modal-cliente" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:3000; justify-content:center; align-items:center; padding:1rem;">
+    <div style="background:#fff; max-width:500px; width:100%; border-radius:24px; padding:2rem; box-shadow:0 20px 60px rgba(0,0,0,0.15); border:2px solid #fbcfe8; overflow-y:auto; max-height:90vh;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px dashed #fbcfe8; padding-bottom:1rem; margin-bottom:1.5rem;">
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.5rem; color:#1f2937; margin:0;">Nuevo Cliente</h3>
+        <button onclick="cerrarFormCliente()" style="background:none;border:none;font-size:1.5rem;color:#9ca3af;cursor:pointer;">&times;</button>
+      </div>
+      <form onsubmit="guardarCliente(event)" style="display:flex; flex-direction:column; gap:1rem;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <label style="font-weight:600; color:#4b5563; font-size:0.85rem;">Nombre *</label>
+            <input type="text" id="cli-nombre" required placeholder="Nombre completo" style="padding:10px; border:1px solid #fbcfe8; border-radius:8px; outline:none; font-family:'Quicksand',sans-serif;" />
+          </div>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <label style="font-weight:600; color:#4b5563; font-size:0.85rem;">Correo *</label>
+            <input type="email" id="cli-email" required placeholder="correo@ejemplo.com" style="padding:10px; border:1px solid #fbcfe8; border-radius:8px; outline:none; font-family:'Quicksand',sans-serif;" />
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <label style="font-weight:600; color:#4b5563; font-size:0.85rem;">Teléfono *</label>
+            <input type="text" id="cli-tel" required placeholder="+52 449 000 0000" style="padding:10px; border:1px solid #fbcfe8; border-radius:8px; outline:none; font-family:'Quicksand',sans-serif;" />
+          </div>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <label style="font-weight:600; color:#4b5563; font-size:0.85rem;">Pedidos anteriores</label>
+            <input type="number" id="cli-pedidos" min="0" value="0" style="padding:10px; border:1px solid #fbcfe8; border-radius:8px; outline:none; font-family:'Quicksand',sans-serif;" />
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <label style="font-weight:600; color:#4b5563; font-size:0.85rem;">Dirección</label>
+          <input type="text" id="cli-dir" placeholder="Calle, número, ciudad" style="padding:10px; border:1px solid #fbcfe8; border-radius:8px; outline:none; font-family:'Quicksand',sans-serif;" />
+        </div>
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <label style="font-weight:600; color:#4b5563; font-size:0.85rem;">¿Tiene pedido pendiente?</label>
+          <select id="cli-pendiente" style="padding:10px; border:1px solid #fbcfe8; border-radius:8px; background:white; font-family:'Quicksand',sans-serif;">
+            <option value="No">No</option>
+            <option value="Sí">Sí</option>
+          </select>
+        </div>
+        <div style="display:flex; gap:1rem; margin-top:0.5rem;">
+          <button type="button" class="btn-outline" onclick="cerrarFormCliente()" style="flex:1; margin:0; padding:0.8rem;">Cancelar</button>
+          <button type="submit" class="btn-primary" style="flex:1; margin:0; padding:0.8rem;">Guardar Cliente</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -1060,6 +1070,69 @@
       setTimeout(() => { t.style.display = 'none'; }, 3000);
     }
 
+    // ── Clientes (simulado en memoria) ──
+    let clientes = [
+      { nombre: 'Ana García',    email: 'ana.garcia@email.com', tel: '+52 449 123 4567', dir: 'Av. López Mateos 45, Aguascalientes',  pendiente: 'Sí', pedidos: 3 },
+      { nombre: 'Laura Martínez',email: 'laura.m@email.com',    tel: '+52 449 234 5678', dir: 'Calle Morelos 12, Guadalajara',         pendiente: 'No', pedidos: 1 },
+      { nombre: 'Sofía Ramírez', email: 'sofia.r@email.com',    tel: '+52 449 345 6789', dir: 'Blvd. Convención 300, Aguascalientes', pendiente: 'Sí', pedidos: 5 },
+      { nombre: 'María Torres',  email: 'maria.t@email.com',    tel: '+52 55 456 7890',  dir: 'Calle Juárez 88, CDMX',               pendiente: 'No', pedidos: 2 },
+    ];
+
+    function renderTablaClientes() {
+      const tbody = document.getElementById('tabla-clientes-admin');
+      if (!tbody) return;
+      tbody.innerHTML = clientes.map((c, i) => `
+        <tr style="border-bottom:1px solid #e5e7eb;">
+          <td style="padding:14px;">
+            <div style="font-weight:700;color:#1f2937;">${c.nombre}</div>
+            <div style="font-size:0.8rem;color:#9ca3af;">${c.email}</div>
+          </td>
+          <td style="padding:14px;color:#4b5563;">${c.tel}</td>
+          <td style="padding:14px;color:#4b5563;">${c.dir}</td>
+          <td style="padding:14px;text-align:center;">
+            <span style="background:${c.pendiente==='Sí'?'#fef9c3':'#d1fae5'};color:${c.pendiente==='Sí'?'#854d0e':'#065f46'};padding:4px 12px;border-radius:50px;font-size:0.8rem;font-weight:700;">${c.pendiente}</span>
+          </td>
+          <td style="padding:14px;text-align:center;font-weight:700;color:#db2777;">${c.pedidos}</td>
+          <td style="padding:14px;text-align:center;">
+            <button onclick="eliminarCliente(${i})" style="background:#fef2f2;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;color:#dc2626;" title="Eliminar">🗑️</button>
+          </td>
+        </tr>`).join('');
+    }
+
+    function abrirFormCliente() {
+      document.getElementById('modal-cliente').style.display = 'flex';
+    }
+    function cerrarFormCliente() {
+      document.getElementById('modal-cliente').style.display = 'none';
+      document.getElementById('cli-nombre').value = '';
+      document.getElementById('cli-email').value = '';
+      document.getElementById('cli-tel').value = '';
+      document.getElementById('cli-dir').value = '';
+      document.getElementById('cli-pedidos').value = '0';
+      document.getElementById('cli-pendiente').value = 'No';
+    }
+    function guardarCliente(e) {
+      e.preventDefault();
+      clientes.push({
+        nombre:    document.getElementById('cli-nombre').value.trim(),
+        email:     document.getElementById('cli-email').value.trim(),
+        tel:       document.getElementById('cli-tel').value.trim(),
+        dir:       document.getElementById('cli-dir').value.trim() || '—',
+        pendiente: document.getElementById('cli-pendiente').value,
+        pedidos:   parseInt(document.getElementById('cli-pedidos').value) || 0,
+      });
+      renderTablaClientes();
+      cerrarFormCliente();
+      showToast('✅ Cliente agregado correctamente');
+    }
+    function eliminarCliente(i) {
+      mostrarConfirm('🗑️ Eliminar cliente', '¿Segura que deseas eliminar a "' + clientes[i].nombre + '"?', function() {
+        clientes.splice(i, 1);
+        renderTablaClientes();
+        showToast('✅ Cliente eliminado');
+      });
+    }
+
     // ── Promociones (simulado en memoria) ──
     let promociones = [
       { codigo: 'BIENVENIDA10', descuento: 10, vence: '2025-12-31' },
@@ -1115,6 +1188,7 @@
       }
       renderTablaProductos();
       renderPromociones();
+      renderTablaClientes();
     });  </script>
 
   <!-- Modal confirmación genérico -->
