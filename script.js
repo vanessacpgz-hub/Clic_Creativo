@@ -491,3 +491,32 @@ function abrirFormularioProducto() {}
 function cerrarFormularioProducto() {}
 function actualizarPrevisualizacionImagen() {}
 function guardarProductoAdmin(e) { if(e) e.preventDefault(); }
+
+    function aplicarDescuento() {
+        // 1. Obtenemos lo que el usuario escribió, quitamos espacios y lo pasamos a mayúsculas
+        const input = document.getElementById('coupon-input').value.trim().toUpperCase();
+        
+        // 2. Traemos los elementos de la pantalla que vamos a modificar
+        const mensajeExito = document.getElementById('success-message');
+        const elementoTotal = document.getElementById('total-price');
+
+        // 3. Validamos si el código es el correcto
+        if (input === 'CREATIVO10') {
+            
+            // Muestra el mensaje de éxito quitando la clase que lo ocultaba
+            mensajeExito.classList.remove('hidden');
+            
+            // Cambia el texto del precio simulando el 10% de descuento ($1,000 -> $900)
+            elementoTotal.textContent = '$900.00';
+            
+            // Cambia el color del precio a verde para que se note el cambio visual
+            elementoTotal.style.color = '#10b981'; 
+
+        } else if (input === '') {
+            // Alerta si el usuario da clic con el campo vacío
+            alert('Por favor, ingresa un código de descuento.');
+        } else {
+            // Alerta si el código está mal escrito
+            alert('Código no válido. Intenta con: CREATIVO10');
+        }
+    }

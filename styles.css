@@ -720,3 +720,137 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
         gap: 1.5rem !important;
     }
 }
+/* ==========================================
+   ESTILOS PARA LA SECCIÓN DE PROMOCIONES
+   ========================================== */
+
+/* Contenedor principal de la sección */
+.promo-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    width: 350px;
+    text-align: center;
+    margin: 20px auto; /* Lo centra horizontalmente en la pantalla */
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Título de la sección */
+.promo-container h2 {
+    color: #333333;
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+/* Contenedor de las etiquetas/badges */
+.badges {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+/* Estilo base para las etiquetas de promo */
+.badge {
+    background-color: #f0f0f0;
+    color: #555555;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Etiqueta con tono rosa destacado */
+.badge.pink {
+    background-color: #ffe4e6;
+    color: #f43f5e;
+}
+
+/* Tarjeta visual del código de descuento */
+.coupon-card {
+    background: linear-gradient(135deg, #fff5f5 0%, #ffe4e6 100%);
+    border: 2px dashed #f43f5e;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+
+.coupon-card p {
+    margin: 0 0 8px 0;
+    font-size: 0.9rem;
+    color: #666666;
+}
+
+/* Texto del código en grande y llamativo */
+.coupon-code {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #f43f5e;
+    letter-spacing: 1px;
+}
+
+/* Sección de precio y caja de texto */
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #444444;
+}
+
+/* Contenedor del input y el botón alineados */
+.input-group {
+    display: flex;
+    gap: 8px;
+}
+
+/* Caja de entrada de texto */
+#coupon-input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+/* Cambio de borde al dar clic en el input */
+#coupon-input:focus {
+    border-color: #f43f5e;
+}
+
+/* Botón de aplicar */
+#apply-btn {
+    background-color: #f43f5e;
+    color: #ffffff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+/* Efecto hover para el botón */
+#apply-btn:hover {
+    background-color: #e11d48;
+}
+
+/* Mensaje de éxito (oculto por defecto) */
+#success-message {
+    color: #10b981; /* Verde de éxito */
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+
+/* Clase utilitaria para ocultar elementos */
+.hidden {
+    display: none;
+}
