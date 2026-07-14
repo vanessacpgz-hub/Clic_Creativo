@@ -520,3 +520,37 @@ function guardarProductoAdmin(e) { if(e) e.preventDefault(); }
             alert('Código no válido. Intenta con: CREATIVO10');
         }
     }
+function agregarComentario() {
+    const nombreInput = document.getElementById('comment-name');
+    const textoInput = document.getElementById('comment-text');
+    const listaComentarios = document.getElementById('comments-list');
+
+    const nombre = nombreInput.value.trim();
+    const texto = textoInput.value.trim();
+
+    // Validación básica de campos vacíos
+    if (nombre === '' || texto === '') {
+        alert('Por favor, completa tu nombre y escribe un comentario antes de publicar.');
+        return;
+    }
+
+    // Crear el contenedor del nuevo comentario
+    const nuevoComentario = document.createElement('div');
+    nuevoComentario.classList.add('comment-item', 'new-comment-animation');
+
+    // Estructura interna del comentario
+    nuevoComentario.innerHTML = `
+        <div class="comment-header">
+            <span class="comment-user">${nombre}</span>
+            <span class="comment-date">Justo ahora</span>
+        </div>
+        <p class="comment-body">${texto}</p>
+    `;
+
+    // Insertar el nuevo comentario al inicio de la lista
+    listaComentarios.insertBefore(nuevoComentario, listaComentarios.firstChild);
+
+    // Limpiar los campos del formulario
+    nombreInput.value = '';
+    textoInput.value = '';
+}

@@ -854,3 +854,261 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
 .hidden {
     display: none;
 }
+/* ==========================================
+   ESTILOS PARA ESCAPARATE DE MARKETING
+   ========================================== */
+.marketing-campaign {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Tarjeta del producto destacado */
+.campaign-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px;
+    border: 1px solid #ffe4e6;
+}
+
+.campaign-badge {
+    background: #f43f5e;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.campaign-title {
+    color: #222;
+    font-size: 1.8rem;
+    margin: 0 0 10px 0;
+}
+
+.campaign-description {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 500px;
+    margin: 0 auto 20px auto;
+}
+
+.campaign-price {
+    margin-bottom: 25px;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #aaa;
+    font-size: 1.1rem;
+    margin-right: 10px;
+}
+
+.new-price {
+    color: #f43f5e;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+/* Botón de Llamado a la Acción (CTA) */
+.cta-button {
+    background: #f43f5e;
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(244, 63, 94, 0.3);
+    transition: transform 0.2s, background 0.2s;
+}
+
+.cta-button:hover {
+    background: #e11d48;
+    transform: translateY(-2px);
+}
+
+/* Testimonios */
+.testimonials-container {
+    text-align: center;
+}
+
+.testimonials-container h3 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.testimonial-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+    border-left: 4px solid #ffe4e6;
+    text-align: left;
+}
+
+.stars {
+    color: #f59e0b; /* Dorado para las estrellas */
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.testimonial-text {
+    font-style: italic;
+    color: #555;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin: 0 0 10px 0;
+}
+
+.testimonial-author {
+    font-size: 0.8rem;
+    color: #888;
+    font-weight: 600;
+}
+
+/* ==========================================
+   ESTILOS PARA LA COMUNIDAD / COMENTARIOS
+   ========================================== */
+.community-section {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.community-section h3 {
+    color: #222;
+    margin: 0 0 5px 0;
+}
+
+.community-subtitle {
+    color: #777;
+    font-size: 0.9rem;
+    margin: 0 0 20px 0;
+}
+
+/* Formulario de comentarios */
+.comment-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.comment-box input,
+.comment-box textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.comment-box input:focus,
+.comment-box textarea:focus {
+    border-color: #f43f5e;
+}
+
+#post-comment-btn {
+    background: #333333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    align-self: flex-end;
+    transition: background 0.2s;
+}
+
+#post-comment-btn:hover {
+    background: #f43f5e;
+}
+
+/* Lista de comentarios */
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 20px;
+}
+
+.comment-item {
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border-left: 3px solid #cbd5e1;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+}
+
+.comment-user {
+    font-weight: 700;
+    color: #334155;
+}
+
+.comment-date {
+    color: #94a3b8;
+}
+
+.comment-body {
+    margin: 0;
+    color: #475569;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Pequeña animación cuando entra un comentario nuevo */
+.new-comment-animation {
+    animation: slideIn 0.3s ease-out;
+    border-left-color: #f43f5e; /* Resalta en rosa el nuevo comentario */
+    background: #fff5f5;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ajuste responsivo para tablets/móviles */
+@media (max-width: 600px) {
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+}
