@@ -553,7 +553,8 @@ function agregarComentario() {
     // Limpiar los campos del formulario
     nombreInput.value = '';
     textoInput.value = '';
-}}
+}
+
 // Función para abrir la ventana emergente
 function abrirModalComunidad() {
     document.getElementById('modal-comunidad').style.display = 'flex';
