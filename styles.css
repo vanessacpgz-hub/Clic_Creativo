@@ -1112,3 +1112,168 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
         grid-template-columns: 1fr;
     }
 }
+/* Estilo del enlace "Comunidad" en el menú */
+.nav .btn-comunidad-nav {
+    color: #f43f5e !important; /* Resalta en rosa */
+    font-weight: bold;
+}
+
+/* ==========================================
+   ESTILOS DEL MODAL (VENTANA EMERGENTE)
+   ========================================== */
+.modal-overlay {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 9999; /* Por encima de cualquier menú o contenido */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro translúcido */
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 550px;
+    max-height: 85vh; /* Evita que se salga de pantallas pequeñas */
+    overflow-y: auto; /* Scroll interno si hay muchos comentarios */
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: zoomIn 0.3s ease-out;
+}
+
+/* Animación de entrada de la ventana */
+@keyframes zoomIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Botón de cerrar (X) */
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-modal:hover {
+    color: #f43f5e;
+}
+
+/* Caja de comentarios y lista dentro del modal */
+.community-subtitle {
+    color: #777;
+    font-size: 0.9rem;
+    margin: 0 0 20px 0;
+}
+
+.comment-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.comment-box input,
+.comment-box textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.comment-box input:focus,
+.comment-box textarea:focus {
+    border-color: #f43f5e;
+}
+
+#post-comment-btn {
+    background: #333333;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    align-self: flex-end;
+    transition: background 0.2s;
+}
+
+#post-comment-btn:hover {
+    background: #f43f5e;
+}
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 15px;
+}
+
+.comment-item {
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border-left: 3px solid #cbd5e1;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 0.8rem;
+}
+
+.comment-user {
+    font-weight: 700;
+    color: #334155;
+}
+
+.comment-date {
+    color: #94a3b8;
+}
+
+.comment-body {
+    margin: 0;
+    color: #475569;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.new-comment-animation {
+    animation: slideIn 0.3s ease-out;
+    border-left-color: #f43f5e;
+    background: #fff5f5;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

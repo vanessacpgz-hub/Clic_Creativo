@@ -553,4 +553,52 @@ function agregarComentario() {
     // Limpiar los campos del formulario
     nombreInput.value = '';
     textoInput.value = '';
+}}
+// Función para abrir la ventana emergente
+function abrirModalComunidad() {
+    document.getElementById('modal-comunidad').style.display = 'flex';
+}
+
+// Función para cerrar la ventana emergente
+function cerrarModalComunidad() {
+    document.getElementById('modal-comunidad').style.display = 'none';
+}
+
+// Cerrar la ventana si el usuario da clic fuera del cuadro blanco
+window.onclick = function(event) {
+    const modal = document.getElementById('modal-comunidad');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Función para publicar comentarios dentro del modal
+function agregarComentario() {
+    const nombreInput = document.getElementById('comment-name');
+    const textoInput = document.getElementById('comment-text');
+    const listaComentarios = document.getElementById('comments-list');
+
+    const nombre = nombreInput.value.trim();
+    const texto = textoInput.value.trim();
+
+    if (nombre === '' || texto === '') {
+        alert('Por favor, completa tu nombre y escribe un comentario.');
+        return;
+    }
+
+    const nuevoComentario = document.createElement('div');
+    nuevoComentario.classList.add('comment-item', 'new-comment-animation');
+
+    nuevoComentario.innerHTML = `
+        <div class="comment-header">
+            <span class="comment-user">${nombre}</span>
+            <span class="comment-date">Justo ahora</span>
+        </div>
+        <p class="comment-body">${texto}</p>
+    `;
+
+    listaComentarios.insertBefore(nuevoComentario, listaComentarios.firstChild);
+
+    nombreInput.value = '';
+    textoInput.value = '';
 }

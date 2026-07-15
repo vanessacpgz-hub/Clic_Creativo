@@ -24,6 +24,9 @@
         <a href="#servicios" onclick="regresarAlInicio()">Servicios</a>
         <a href="#sobre-mi" onclick="regresarAlInicio()">Sobre Mí</a>
         <a href="#contacto" onclick="regresarAlInicio()">Contáctanos</a>
+        <a href="#comunidad" onclick="regresarAlInicio()">Contáctanos</a>
+
+        <a href="javascript:void(0)" onclick="abrirModalComunidad()" class="btn-comunidad-nav">Comunidad</a>
 
         <div class="auth-nav" id="auth-zone">
           <a href="login.html">Iniciar Sesión</a>
@@ -67,7 +70,46 @@
       <a href="#reportes" onclick="mostrarSeccionAdmin('reportes')">📈 Reportes</a>
     </nav>
   </div>
+  <!-- ==========================================
+     VENTANA EMERGENTE (MODAL) DE COMUNIDAD
+     ========================================== -->
+<div id="modal-comunidad" class="modal-overlay">
+    <div class="modal-content">
+        <!-- Botón para cerrar la ventana -->
+        <span class="close-modal" onclick="cerrarModalComunidad()">&times;</span>
+        
+        <h3>Comunidad Clic Creativo 💬</h3>
+        <p class="community-subtitle">Comparte tus dudas, ideas o proyectos con nosotros.</p>
 
+        <!-- Caja para Dejar Comentario -->
+        <div class="comment-box">
+            <input type="text" id="comment-name" placeholder="Tu nombre">
+            <textarea id="comment-text" rows="3" placeholder="Escribe tu comentario aquí..."></textarea>
+            <button id="post-comment-btn" onclick="agregarComentario()">Publicar comentario</button>
+        </div>
+
+        <!-- Lista de Comentarios -->
+        <div class="comments-list" id="comments-list">
+            <!-- Comentario inicial 1 -->
+            <div class="comment-item">
+                <div class="comment-header">
+                    <span class="comment-user">Ana Gómez</span>
+                    <span class="comment-date">Hace 2 horas</span>
+                </div>
+                <p class="comment-body">¿El Kit Premium incluye las propuestas en formato vectorial (SVG/AI)? ¡Me interesa mucho!</p>
+            </div>
+
+            <!-- Comentario inicial 2 -->
+            <div class="comment-item">
+                <div class="comment-header">
+                    <span class="comment-user">Luis Fernando</span>
+                    <span class="comment-date">Ayer</span>
+                </div>
+                <p class="comment-body">Excelente servicio y atención. Recomiendo totalmente trabajar con ellos para el diseño de tu web.</p>
+            </div>
+        </div>
+    </div>
+</div>
   <div id="admin-dashboard-panel" class="admin-panel-container" style="display: none; padding: 2rem; max-width: 1200px; margin: 90px auto 2rem auto; font-family: 'Quicksand', sans-serif;">
     <div class="admin-heading" style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
       <div>
@@ -567,79 +609,7 @@
             <p id="success-message" class="hidden">✓ Descuento aplicado (simulado)</p>
         </div>
     </div>
-        <!-- ==========================================
-     2. ESCAPARATE DE MARKETING (CAMPANA/LANDING)
-     ========================================== -->
-<section class="marketing-campaign">
-    <!-- Producto Destacado -->
-    <div class="campaign-card">
-        <div class="campaign-badge">EDICIÓN LIMITADA ✨</div>
-        <h2 class="campaign-title">Kit de Identidad Visual Premium</h2>
-        <p class="campaign-description">
-            Dale a tu marca el impulso que necesita. Incluye diseño de logotipo, paleta de colores personalizada, tipografías exclusivas y plantillas listas para tus redes sociales.
-        </p>
-        <div class="campaign-price">
-            <span class="old-price">$1,500.00</span>
-            <span class="new-price">$1,350.00</span>
-        </div>
-        <button class="cta-button" onclick="alert('¡Gracias por tu interés! Te estamos redirigiendo a la pasarela de pago (simulado).')">
-            Comprar ahora
-        </button>
-    </div>
-
-    <!-- Testimonios/Reseñas -->
-    <div class="testimonials-container">
-        <h3>Lo que dicen nuestros clientes ⭐</h3>
-        <div class="testimonials-grid">
-            <div class="testimonial-card">
-                <div class="stars">★★★★★</div>
-                <p class="testimonial-text">"Me encantó el rediseño de mi marca. El proceso fue súper rápido y entendieron a la perfección lo que quería."</p>
-                <span class="testimonial-author">— Sofía R., Emprendedora</span>
-            </div>
-            <div class="testimonial-card">
-                <div class="stars">★★★★★</div>
-                <p class="testimonial-text">"La mejor inversión para mi negocio. Los detalles en rose gold que agregaron se ven sumamente profesionales."</p>
-                <span class="testimonial-author">— Carlos M., Consultor</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==========================================
-     3. COMUNIDAD / COMENTARIOS
-     ========================================== -->
-   <section class="community-section">
-    <h3>Comunidad Clic Creativo 💬</h3>
-    <p class="community-subtitle">Comparte tus dudas, ideas o proyectos con nosotros.</p>
-
-    <!-- Caja para Dejar Comentario -->
-    <div class="comment-box">
-        <input type="text" id="comment-name" placeholder="Tu nombre">
-        <textarea id="comment-text" rows="3" placeholder="Escribe tu comentario aquí..."></textarea>
-        <button id="post-comment-btn" onclick="agregarComentario()">Publicar comentario</button>
-    </div>
-
-    <!-- Lista de Comentarios (Con datos iniciales simulados) -->
-    <div class="comments-list" id="comments-list">
-        <!-- Comentario inicial 1 -->
-        <div class="comment-item">
-            <div class="comment-header">
-                <span class="comment-user">Ana Gómez</span>
-                <span class="comment-date">Hace 2 horas</span>
-            </div>
-            <p class="comment-body">¿El Kit Premium incluye las propuestas en formato vectorial (SVG/AI)? ¡Me interesa mucho!</p>
-        </div>
-
-        <!-- Comentario inicial 2 -->
-        <div class="comment-item">
-            <div class="comment-header">
-                <span class="comment-user">Luis Fernando</span>
-                <span class="comment-date">Ayer</span>
-            </div>
-            <p class="comment-body">Excelente servicio y atención. Recomiendo totalmente trabajar con ellos para el diseño de tu web.</p>
-        </div>
-     </div>
-    </section>
+        
 
     <section class="sobre" id="sobre-mi">
       <div class="sobre-inner">
