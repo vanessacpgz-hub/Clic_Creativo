@@ -12,12 +12,11 @@
   <header class="header">
     <div class="header-inner">
       
-      <div class="left-header-zone">
-        <button class="hamburger-admin" id="adminHam" aria-label="Menú Administración" onclick="toggleAdminMenu()">
-          <span></span><span></span><span></span>
-        </button>
-        <img src="Imagenes/Logo.png" alt="Clic Creativo" class="logo" />
-      </div>
+      <button class="hamburger-admin" id="adminHam" aria-label="Menú" onclick="toggleAdminMenu()">
+        <span></span><span></span><span></span>
+      </button>
+
+      <img src="Imagenes/Logo.png" alt="Clic Creativo" class="logo" />
 
       <nav class="nav">
         <a href="#inicio" onclick="regresarAlInicio()">Inicio</a>
@@ -59,16 +58,26 @@
   </header>
   <div class="admin-sidebar" id="adminSidebar">
     <div class="sidebar-header">
-      <h3>Panel de Control</h3>
+      <div style="display:flex;align-items:center;gap:0.8rem;">
+        <img src="Imagenes/Logo.png" alt="Clic Creativo" style="height:44px;object-fit:contain;mix-blend-mode:multiply;" />
+      </div>
       <button class="close-sidebar" onclick="toggleAdminMenu()">&times;</button>
     </div>
     <nav class="sidebar-links">
-      <a href="#dashboard" onclick="mostrarSeccionAdmin('dashboard')">📊 Dashboard</a>
-      <a href="#productos" onclick="mostrarSeccionAdmin('productos')">📦 Productos</a>
-      <a href="#pedidos" onclick="mostrarSeccionAdmin('pedidos')">🛒 Pedidos</a>
-      <a href="#promociones" onclick="mostrarSeccionAdmin('promociones')">🏷️ Promociones</a>
-      <a href="#clientes" onclick="mostrarSeccionAdmin('clientes')">👥 Clientes</a>
-      <a href="#reportes" onclick="mostrarSeccionAdmin('reportes')">📈 Reportes</a>
+      <div class="sidebar-section-label">Panel de Control</div>
+      <a href="#dashboard" onclick="mostrarSeccionAdmin('dashboard')">Dashboard</a>
+      <a href="#productos" onclick="mostrarSeccionAdmin('productos')">Productos</a>
+      <a href="#pedidos" onclick="mostrarSeccionAdmin('pedidos')">Pedidos</a>
+      <a href="#promociones" onclick="mostrarSeccionAdmin('promociones')">Promociones</a>
+      <a href="#clientes" onclick="mostrarSeccionAdmin('clientes')">Clientes</a>
+      <a href="#reportes" onclick="mostrarSeccionAdmin('reportes')">Reportes</a>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section-label">Comunidad</div>
+      <a href="javascript:void(0)" onclick="mostrarSeccion('publicar');toggleAdminMenu()">Publicar producto</a>
+      <a href="javascript:void(0)" onclick="mostrarSeccion('mis-publicaciones');toggleAdminMenu()">Mis publicaciones</a>
+      <a href="javascript:void(0)" onclick="mostrarSeccion('subasta');toggleAdminMenu()">Subasta activa</a>
+      <div class="sidebar-divider"></div>
+      <a href="javascript:void(0)" onclick="regresarAlInicio();toggleAdminMenu()" style="color:var(--magenta);font-weight:700;">Ir a la tienda</a>
     </nav>
   </div>
   <!-- ==========================================
@@ -520,6 +529,149 @@
           </tfoot>
         </table>
       </div>
+    </div>
+  </div>
+
+  <!-- ===== PANEL PUBLICAR PRODUCTO ===== -->
+  <div id="panel-publicar" style="display:none; padding:2rem; max-width:700px; margin:90px auto 2rem auto; font-family:'Quicksand',sans-serif;">
+    <div style="margin-bottom:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <h2 style="font-family:'Playfair Display',serif; color:#1f2937; font-size:2rem; margin:0;">📢 Publica tu producto</h2>
+        <p style="color:#6b7280; margin:0.3rem 0 0 0;">Comparte lo que ofreces con la comunidad.</p>
+      </div>
+      <button class="btn-outline" onclick="regresarAlInicio()" style="margin:0;">← Regresar</button>
+    </div>
+    <div style="background:#fff; border:2px solid #fbcfe8; border-radius:20px; padding:2rem; box-shadow:0 4px 20px rgba(230,0,115,0.07);">
+      <form onsubmit="publicarProductoC2C(event)" style="display:flex; flex-direction:column; gap:1.2rem;">
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <label style="font-weight:700; color:#4b5563; font-size:0.88rem;">Nombre del producto *</label>
+          <input type="text" id="c2c-nombre" required placeholder="Ej. Diseño de logo personalizado" style="padding:10px; border:1.5px solid #fbcfe8; border-radius:10px; outline:none; font-family:'Quicksand',sans-serif; font-size:0.93rem;" />
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <label style="font-weight:700; color:#4b5563; font-size:0.88rem;">Precio (MXN) *</label>
+            <input type="number" id="c2c-precio" required min="0" placeholder="500" style="padding:10px; border:1.5px solid #fbcfe8; border-radius:10px; outline:none; font-family:'Quicksand',sans-serif;" />
+          </div>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <label style="font-weight:700; color:#4b5563; font-size:0.88rem;">Categoría</label>
+            <select id="c2c-categoria" style="padding:10px; border:1.5px solid #fbcfe8; border-radius:10px; background:white; font-family:'Quicksand',sans-serif;">
+              <option value="Diseño">Diseño</option>
+              <option value="Invitación">Invitación</option>
+              <option value="Web">Página Web</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <label style="font-weight:700; color:#4b5563; font-size:0.88rem;">Descripción *</label>
+          <textarea id="c2c-desc" required rows="3" placeholder="Describe qué incluye tu producto o servicio..." style="padding:10px; border:1.5px solid #fbcfe8; border-radius:10px; outline:none; font-family:'Quicksand',sans-serif; font-size:0.93rem; resize:vertical;"></textarea>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <label style="font-weight:700; color:#4b5563; font-size:0.88rem;">Foto (URL o nombre)</label>
+          <input type="text" id="c2c-foto" placeholder="https://... o deja vacío para usar imagen por defecto" style="padding:10px; border:1.5px solid #fbcfe8; border-radius:10px; outline:none; font-family:'Quicksand',sans-serif; font-size:0.93rem;" />
+        </div>
+        <button type="submit" class="btn-primary" style="margin:0; padding:0.9rem; font-size:1rem;">📢 Publicar producto</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== PANEL MIS PUBLICACIONES ===== -->
+  <div id="panel-mis-publicaciones" style="display:none; padding:2rem; max-width:900px; margin:90px auto 2rem auto; font-family:'Quicksand',sans-serif;">
+    <div style="margin-bottom:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <h2 style="font-family:'Playfair Display',serif; color:#1f2937; font-size:2rem; margin:0;">📋 Mis publicaciones</h2>
+        <p style="color:#6b7280; margin:0.3rem 0 0 0;">Productos que has publicado en la comunidad.</p>
+      </div>
+      <div style="display:flex; gap:0.8rem;">
+        <button class="btn-outline" onclick="regresarAlInicio()" style="margin:0;">← Regresar</button>
+        <button class="btn-primary" onclick="mostrarSeccion('publicar')" style="margin:0;">+ Publicar nuevo</button>
+      </div>
+    </div>
+    <div id="lista-mis-publicaciones" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:1.5rem;"></div>
+    <div id="mis-pub-vacio" style="text-align:center; padding:3rem; color:#9ca3af; display:none;">
+      <div style="font-size:3rem; margin-bottom:1rem;">📭</div>
+      <p style="font-size:1rem;">Aún no tienes publicaciones.<br/>¡Publica tu primer producto!</p>
+      <button class="btn-primary" onclick="mostrarSeccion('publicar')" style="margin-top:1rem;">Publicar ahora</button>
+    </div>
+  </div>
+
+  <!-- Modal editar publicación -->
+  <div id="modal-editar-pub" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:3000; justify-content:center; align-items:center; padding:1rem;">
+    <div style="background:#fff; max-width:480px; width:100%; border-radius:20px; padding:2rem; box-shadow:0 20px 60px rgba(0,0,0,0.15); border:2px solid #fbcfe8; max-height:90vh; overflow-y:auto;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; border-bottom:2px dashed #fbcfe8; padding-bottom:1rem;">
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.4rem; color:#1f2937; margin:0;">✏️ Editar publicación</h3>
+        <button onclick="cerrarEditarPub()" style="background:none;border:none;font-size:1.5rem;color:#9ca3af;cursor:pointer;">&times;</button>
+      </div>
+      <form onsubmit="guardarEdicionPub(event)" style="display:flex; flex-direction:column; gap:1rem;">
+        <input type="hidden" id="edit-pub-idx" />
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <label style="font-weight:700; color:#4b5563; font-size:0.85rem;">Nombre</label>
+          <input type="text" id="edit-pub-nombre" style="padding:10px; border:1.5px solid #fbcfe8; border-radius:8px; outline:none; font-family:'Quicksand',sans-serif;" />
+        </div>
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <label style="font-weight:700; color:#4b5563; font-size:0.85rem;">Precio (MXN)</label>
+          <input type="number" id="edit-pub-precio" min="0" style="padding:10px; border:1.5px solid #fbcfe8; border-radius:8px; outline:none; font-family:'Quicksand',sans-serif;" />
+        </div>
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <label style="font-weight:700; color:#4b5563; font-size:0.85rem;">Descripción</label>
+          <textarea id="edit-pub-desc" rows="3" style="padding:10px; border:1.5px solid #fbcfe8; border-radius:8px; outline:none; font-family:'Quicksand',sans-serif; resize:vertical;"></textarea>
+        </div>
+        <div style="display:flex; gap:1rem; margin-top:0.5rem;">
+          <button type="button" class="btn-outline" onclick="cerrarEditarPub()" style="flex:1;margin:0;padding:0.8rem;">Cancelar</button>
+          <button type="submit" class="btn-primary" style="flex:1;margin:0;padding:0.8rem;">Guardar cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== PANEL SUBASTA ===== -->
+  <div id="panel-subasta" style="display:none; padding:2rem; max-width:800px; margin:90px auto 2rem auto; font-family:'Quicksand',sans-serif;">
+    <div style="margin-bottom:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <h2 style="font-family:'Playfair Display',serif; color:#1f2937; font-size:2rem; margin:0;">🔨 Subasta activa</h2>
+        <p style="color:#6b7280; margin:0.3rem 0 0 0;">Haz tu mejor oferta antes de que termine el tiempo.</p>
+      </div>
+      <button class="btn-outline" onclick="regresarAlInicio()" style="margin:0;">← Regresar</button>
+    </div>
+
+    <!-- Producto en subasta -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:2rem; flex-wrap:wrap;">
+      <div style="background:linear-gradient(135deg,#fdf2f8,#fce7f3); border-radius:20px; padding:2rem; border:2px solid #fbcfe8; display:flex; flex-direction:column; align-items:center; text-align:center; gap:1rem;">
+        <img src="Imagenes/CotizaInvitacion.png" alt="Producto subasta" style="width:100px; height:100px; object-fit:contain;" />
+        <h3 style="font-family:'Playfair Display',serif; color:#1f2937; font-size:1.3rem; margin:0;">Invitación Premium Especial</h3>
+        <p style="color:#6b7280; font-size:0.88rem; margin:0;">Diseño exclusivo con animaciones personalizadas, mesa de regalos y RSVP interactivo.</p>
+        <div style="background:#db2777; color:white; padding:0.5rem 1.5rem; border-radius:50px; font-weight:800; font-size:1.1rem;">Precio base: $800 MXN</div>
+      </div>
+
+      <!-- Temporizador y ofertar -->
+      <div style="display:flex; flex-direction:column; gap:1.5rem;">
+        <!-- Temporizador -->
+        <div style="background:#1f2937; border-radius:16px; padding:1.5rem; text-align:center;">
+          <div style="font-size:0.8rem; color:#9ca3af; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.5rem;">Tiempo restante</div>
+          <div id="subasta-timer" style="font-size:2.5rem; font-weight:800; color:#f9c8e0; letter-spacing:0.05em; font-family:'Quicksand',sans-serif;">02:45:30</div>
+          <div style="font-size:0.75rem; color:#6b7280; margin-top:0.3rem;">HH : MM : SS</div>
+        </div>
+        <!-- Oferta actual -->
+        <div style="background:#fff; border:2px solid #fbcfe8; border-radius:16px; padding:1.5rem; text-align:center;">
+          <div style="font-size:0.85rem; color:#6b7280; margin-bottom:0.3rem;">Oferta más alta</div>
+          <div id="oferta-actual" style="font-size:2rem; font-weight:800; color:#db2777;">$950 MXN</div>
+          <div style="font-size:0.8rem; color:#9ca3af; margin-top:0.2rem;" id="ofertante-actual">por Laura M.</div>
+        </div>
+        <!-- Hacer oferta -->
+        <div style="background:#fff; border:2px solid #fbcfe8; border-radius:16px; padding:1.5rem;">
+          <form onsubmit="hacerOferta(event)" style="display:flex; flex-direction:column; gap:0.8rem;">
+            <label style="font-weight:700; color:#4b5563; font-size:0.88rem;">Tu oferta (MXN) *</label>
+            <input type="number" id="input-oferta" required min="1" placeholder="Ej. 1000" style="padding:10px; border:1.5px solid #fbcfe8; border-radius:10px; outline:none; font-family:'Quicksand',sans-serif; font-size:1rem;" />
+            <button type="submit" class="btn-primary" style="margin:0; padding:0.8rem;">🔨 Ofertar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lista de ofertas -->
+    <div style="background:#fff; border:1px solid #e5e7eb; border-radius:16px; overflow:hidden;">
+      <div style="padding:1.2rem 1.5rem; border-bottom:1px solid #e5e7eb; font-weight:700; color:#1f2937;">Historial de ofertas</div>
+      <div id="lista-ofertas" style="display:flex; flex-direction:column;"></div>
     </div>
   </div>
 
@@ -987,7 +1139,8 @@
       ['landing-sections','catalogo-productos','detalle-producto',
        'admin-dashboard-panel','admin-productos-panel',
        'admin-pedidos-panel','admin-promociones-panel',
-       'admin-clientes-panel','admin-reportes-panel'].forEach(id => {
+       'admin-clientes-panel','admin-reportes-panel',
+       'panel-publicar','panel-mis-publicaciones','panel-subasta'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = 'none';
       });
@@ -1139,6 +1292,158 @@
       document.getElementById('toast-msg').textContent = msg;
       t.style.display = 'block';
       setTimeout(() => { t.style.display = 'none'; }, 3000);
+    }
+
+    // ── Navegación secciones C2C ──
+    function mostrarSeccion(seccion) {
+      ocultarTodosLosPaneles();
+      document.getElementById('landing-sections').style.display = 'none';
+      const map = {
+        'publicar':          'panel-publicar',
+        'mis-publicaciones': 'panel-mis-publicaciones',
+        'subasta':           'panel-subasta'
+      };
+      const el = document.getElementById(map[seccion]);
+      if (el) { el.style.display = 'block'; }
+      if (seccion === 'mis-publicaciones') renderMisPublicaciones();
+      if (seccion === 'subasta') iniciarTimerSubasta();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ── C2C Publicaciones ──
+    let misPublicaciones = [
+      {
+        nombre:    'Invitación Digital XV Años',
+        precio:    450,
+        categoria: 'Invitación',
+        desc:      'Diseño elegante con animaciones, contador regresivo, ubicación Maps y RSVP por WhatsApp. Entrega en 3 días hábiles.',
+        foto:      'Imagenes/CotizaInvitacion.png'
+      }
+    ];
+
+    function publicarProductoC2C(e) {
+      e.preventDefault();
+      const pub = {
+        nombre:    document.getElementById('c2c-nombre').value.trim(),
+        precio:    parseFloat(document.getElementById('c2c-precio').value),
+        categoria: document.getElementById('c2c-categoria').value,
+        desc:      document.getElementById('c2c-desc').value.trim(),
+        foto:      document.getElementById('c2c-foto').value.trim() || 'Imagenes/CotizaInvitacion.png',
+      };
+      misPublicaciones.push(pub);
+      e.target.reset();
+      showToast('✅ Publicado (simulado) — aparece en Mis publicaciones');
+      setTimeout(() => mostrarSeccion('mis-publicaciones'), 1200);
+    }
+
+    function renderMisPublicaciones() {
+      const lista = document.getElementById('lista-mis-publicaciones');
+      const vacio = document.getElementById('mis-pub-vacio');
+      if (!lista) return;
+      if (misPublicaciones.length === 0) {
+        lista.innerHTML = '';
+        if (vacio) vacio.style.display = 'block';
+        return;
+      }
+      if (vacio) vacio.style.display = 'none';
+      lista.innerHTML = misPublicaciones.map((p, i) => `
+        <div style="background:#fff; border:2px solid #fbcfe8; border-radius:20px; padding:1.5rem; display:flex; flex-direction:column; gap:0.8rem; box-shadow:0 4px 16px rgba(230,0,115,0.07);">
+          <img src="${p.foto}" alt="${p.nombre}" style="width:100%; height:140px; object-fit:contain; border-radius:12px; background:#fdf2f8;" onerror="this.src='Imagenes/CotizaInvitacion.png'" />
+          <span style="background:#fce7f3; color:#db2777; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:50px; width:fit-content;">${p.categoria}</span>
+          <h3 style="font-family:'Playfair Display',serif; font-size:1.1rem; color:#1f2937; margin:0;">${p.nombre}</h3>
+          <p style="font-size:0.85rem; color:#6b7280; margin:0; line-height:1.5;">${p.desc}</p>
+          <div style="font-size:1.2rem; font-weight:800; color:#db2777;">$${p.precio.toLocaleString()} MXN</div>
+          <div style="display:flex; gap:0.7rem;">
+            <button onclick="abrirEditarPub(${i})" class="btn-outline" style="flex:1; margin:0; padding:0.6rem; font-size:0.85rem;">✏️ Editar</button>
+            <button onclick="eliminarPub(${i})" style="flex:1; background:#fef2f2; border:none; color:#dc2626; border-radius:50px; padding:0.6rem; font-size:0.85rem; font-weight:700; cursor:pointer;">🗑️ Eliminar</button>
+          </div>
+        </div>`).join('');
+    }
+
+    function abrirEditarPub(i) {
+      const p = misPublicaciones[i];
+      document.getElementById('edit-pub-idx').value = i;
+      document.getElementById('edit-pub-nombre').value = p.nombre;
+      document.getElementById('edit-pub-precio').value = p.precio;
+      document.getElementById('edit-pub-desc').value = p.desc;
+      document.getElementById('modal-editar-pub').style.display = 'flex';
+    }
+    function cerrarEditarPub() {
+      document.getElementById('modal-editar-pub').style.display = 'none';
+    }
+    function guardarEdicionPub(e) {
+      e.preventDefault();
+      const i = parseInt(document.getElementById('edit-pub-idx').value);
+      misPublicaciones[i].nombre = document.getElementById('edit-pub-nombre').value.trim();
+      misPublicaciones[i].precio = parseFloat(document.getElementById('edit-pub-precio').value);
+      misPublicaciones[i].desc   = document.getElementById('edit-pub-desc').value.trim();
+      cerrarEditarPub();
+      renderMisPublicaciones();
+      showToast('✅ Publicación actualizada');
+    }
+    function eliminarPub(i) {
+      mostrarConfirm('🗑️ Eliminar publicación', '¿Segura que deseas eliminar "' + misPublicaciones[i].nombre + '"?', function() {
+        misPublicaciones.splice(i, 1);
+        renderMisPublicaciones();
+        showToast('✅ Publicación eliminada');
+      });
+    }
+
+    // ── Subasta simulada ──
+    let ofertasSubasta = [
+      { usuario: 'Ana G.',   monto: 850, tiempo: 'hace 10 min' },
+      { usuario: 'Sofía R.', monto: 900, tiempo: 'hace 5 min'  },
+      { usuario: 'Laura M.', monto: 950, tiempo: 'hace 2 min'  },
+    ];
+    let subastaInterval = null;
+    let subastaSegundos = 9930; // 2h 45m 30s
+
+    function iniciarTimerSubasta() {
+      if (subastaInterval) return;
+      renderOfertasSubasta();
+      subastaInterval = setInterval(() => {
+        if (subastaSegundos <= 0) { clearInterval(subastaInterval); return; }
+        subastaSegundos--;
+        const h = String(Math.floor(subastaSegundos / 3600)).padStart(2,'0');
+        const m = String(Math.floor((subastaSegundos % 3600) / 60)).padStart(2,'0');
+        const s = String(subastaSegundos % 60).padStart(2,'0');
+        const el = document.getElementById('subasta-timer');
+        if (el) el.textContent = h + ':' + m + ':' + s;
+      }, 1000);
+    }
+
+    function hacerOferta(e) {
+      e.preventDefault();
+      const monto = parseFloat(document.getElementById('input-oferta').value);
+      const maxOferta = ofertasSubasta.length ? Math.max(...ofertasSubasta.map(o => o.monto)) : 800;
+      if (monto <= maxOferta) {
+        showToast('⚠️ Tu oferta debe ser mayor a $' + maxOferta.toLocaleString() + ' MXN');
+        return;
+      }
+      const nombre = localStorage.getItem('sim_user_name') || 'Tú';
+      ofertasSubasta.push({ usuario: nombre, monto: monto, tiempo: 'ahora' });
+      document.getElementById('oferta-actual').textContent = '$' + monto.toLocaleString() + ' MXN';
+      document.getElementById('ofertante-actual').textContent = 'por ' + nombre;
+      renderOfertasSubasta();
+      document.getElementById('input-oferta').value = '';
+      showToast('✅ Oferta registrada (simulado)');
+    }
+
+    function renderOfertasSubasta() {
+      const lista = document.getElementById('lista-ofertas');
+      if (!lista) return;
+      const ordenadas = [...ofertasSubasta].reverse();
+      lista.innerHTML = ordenadas.map((o, i) => `
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:0.9rem 1.5rem; border-bottom:1px solid #f3f4f6; ${i===0?'background:#fdf2f8;':''}">
+          <div style="display:flex; align-items:center; gap:0.8rem;">
+            <span style="background:${i===0?'#db2777':'#e5e7eb'}; color:${i===0?'white':'#4b5563'}; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:800;">${i===0?'🥇':ordenadas.length-i}</span>
+            <span style="font-weight:${i===0?'700':'500'}; color:#1f2937;">${o.usuario}</span>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-weight:800; color:${i===0?'#db2777':'#1f2937'};">$${o.monto.toLocaleString()} MXN</div>
+            <div style="font-size:0.75rem; color:#9ca3af;">${o.tiempo}</div>
+          </div>
+        </div>`).join('');
     }
 
     // ── Clientes (simulado en memoria) ──
