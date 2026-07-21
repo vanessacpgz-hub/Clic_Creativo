@@ -332,8 +332,6 @@ function agregarComentario() {
     const lista = document.getElementById('comments-list');
     if (!nombreInput || !textoInput || !lista) return;
     const nombre = nombreInput.value.trim();
-    const texto = textoInput.value.trim();
-    if (!nombre || !texto) { showToast('⚠️ Completa tu nombre y comentario'); return; }
     const div = document.createElement('div');
     div.classList.add('comment-item', 'new-comment-animation');
     div.innerHTML = `<div class="comment-header"><span class="comment-user">${nombre}</span><span class="comment-date">Justo ahora</span></div><p class="comment-body">${texto}</p>`;
