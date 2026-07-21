@@ -1493,32 +1493,6 @@
       );
     }
 
-    // ── Modal confirmación genérico ──
-    let _confirmCallback = null;
-    function mostrarConfirm(titulo, mensaje, callback) {
-      document.getElementById('confirm-title').textContent = titulo;
-      document.getElementById('confirm-msg').textContent = mensaje;
-      _confirmCallback = callback;
-      const m = document.getElementById('modal-confirm');
-      m.style.display = 'flex';
-    }
-    function confirmCancel() {
-      document.getElementById('modal-confirm').style.display = 'none';
-      _confirmCallback = null;
-    }
-    document.getElementById('confirm-ok-btn').addEventListener('click', function() {
-      document.getElementById('modal-confirm').style.display = 'none';
-      if (_confirmCallback) { _confirmCallback(); _confirmCallback = null; }
-    });
-
-    // ── Toast ──
-    function showToast(msg) {
-      const t = document.getElementById('toast-ok');
-      document.getElementById('toast-msg').textContent = msg;
-      t.style.display = 'block';
-      setTimeout(() => { t.style.display = 'none'; }, 3000);
-    }
-
     // ── Checkout ──
     let checkoutData = { nombre:'', tel:'', email:'', dir:'', metodo:'tarjeta' };
     let historialCompras = [
