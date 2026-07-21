@@ -969,8 +969,8 @@
       <div class="contacto-inner">
         <h2>¿Lista para empezar?</h2>
         <p>Escríbeme y platicamos de tu proyecto</p>
-        <button class="btn-dudas" onclick="openModal('contactoFlotante')" style="margin-top: 2rem;">
-          <span class="btn-dudas-icon">❓</span> ¿Tienes dudas? ¡Contáctame aquí!
+        <button class="btn-dudas" onclick="window.open('https://wa.me/524494556465?text=¡Hola%20Clic_Creativo!%20Tengo%20una%20duda%20y%20me%20gustaría%20que%20me%20ayudaras%20🌸','_blank')" style="margin-top: 2rem;">
+          <span class="btn-dudas-icon">💬</span> ¿Tienes dudas? ¡Escríbeme en WhatsApp!
         </button>
       </div>
     </section>
@@ -1386,6 +1386,7 @@
     }
 
     function regresarAlInicio() {
+      if (subastaInterval) { clearInterval(subastaInterval); subastaInterval = null; }
       ['admin-dashboard-panel','admin-productos-panel','admin-pedidos-panel',
        'admin-promociones-panel','admin-clientes-panel','admin-reportes-panel',
        'catalogo-productos'].forEach(id => {
@@ -1619,6 +1620,11 @@
 
     // ── Navegación secciones C2C ──
     function mostrarSeccion(seccion) {
+      // Detener timer de subasta si salimos de ella
+      if (seccion !== 'subasta' && subastaInterval) {
+        clearInterval(subastaInterval);
+        subastaInterval = null;
+      }
       ocultarTodosLosPaneles();
       document.getElementById('landing-sections').style.display = 'none';
       const map = {
@@ -1631,10 +1637,11 @@
         'ticket':            'panel-ticket'
       };
       const el = document.getElementById(map[seccion]);
-      if (el) { el.style.display = 'block'; }
+      if (el) el.style.display = 'block';
       if (seccion === 'mis-publicaciones') renderMisPublicaciones();
       if (seccion === 'subasta') iniciarTimerSubasta();
-      if (seccion === 'mis-compras') renderMisCompras();      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (seccion === 'mis-compras') renderMisCompras();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // ── C2C Publicaciones ──
@@ -1980,64 +1987,57 @@
   </div>
 
   <script>
-    // ── Switches visuales ──
+    // ── Cookies: usa showToast solo si ya está disponible ──
+    function _toast(msg) {
+      if (typeof showToast === 'function') showToast(msg);
+    }
+
     function toggleCookieSwitch(id) {
       const cb = document.getElementById(id);
       const sw = document.getElementById('switch-' + id.replace('cookie-',''));
+      if (!cb || !sw) return;
       cb.checked = !cb.checked;
       sw.style.background = cb.checked ? '#E60073' : '#fbcfe8';
-      if (cb.checked) {
-        sw.style.boxShadow = '0 0 0 2px #fce7f3';
-      } else {
-        sw.style.boxShadow = 'none';
-      }
     }
 
-    // Inicializar estado visual de switches
     document.addEventListener('DOMContentLoaded', function() {
-      // Inicializar switches
       ['analiticas','marketing'].forEach(function(name) {
         const cb = document.getElementById('cookie-' + name);
         const sw = document.getElementById('switch-' + name);
         if (cb && sw) sw.style.background = cb.checked ? '#E60073' : '#fbcfe8';
       });
-
-      // Mostrar banner si no hay preferencia guardada
       if (!localStorage.getItem('cookie_pref')) {
         setTimeout(function() {
-          document.getElementById('cookie-banner').style.display = 'block';
+          const b = document.getElementById('cookie-banner');
+          if (b) b.style.display = 'block';
         }, 800);
       }
     });
 
     function cookieAceptar() {
-      localStorage.setItem('cookie_pref', JSON.stringify({ necesarias: true, analiticas: true, marketing: true }));
+      localStorage.setItem('cookie_pref', JSON.stringify({ necesarias:true, analiticas:true, marketing:true }));
       document.getElementById('cookie-banner').style.display = 'none';
-      showToast('✅ Cookies aceptadas');
+      _toast('✅ Cookies aceptadas');
     }
-
     function cookieRechazar() {
-      localStorage.setItem('cookie_pref', JSON.stringify({ necesarias: true, analiticas: false, marketing: false }));
+      localStorage.setItem('cookie_pref', JSON.stringify({ necesarias:true, analiticas:false, marketing:false }));
       document.getElementById('cookie-banner').style.display = 'none';
-      showToast('🍪 Solo cookies necesarias activas');
+      _toast('🍪 Solo cookies necesarias activas');
     }
-
     function cookieModificar() {
       document.getElementById('cookie-banner').style.display = 'none';
       document.getElementById('cookie-modal').style.display = 'flex';
     }
-
     function cerrarCookieModal() {
       document.getElementById('cookie-modal').style.display = 'none';
       document.getElementById('cookie-banner').style.display = 'block';
     }
-
     function cookieGuardarPreferencias() {
       const analiticas = document.getElementById('cookie-analiticas').checked;
       const marketing  = document.getElementById('cookie-marketing').checked;
-      localStorage.setItem('cookie_pref', JSON.stringify({ necesarias: true, analiticas, marketing }));
+      localStorage.setItem('cookie_pref', JSON.stringify({ necesarias:true, analiticas, marketing }));
       document.getElementById('cookie-modal').style.display = 'none';
-      showToast('✅ Preferencias guardadas');
+      _toast('✅ Preferencias guardadas');
     }
   </script>
 
