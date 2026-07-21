@@ -603,3 +603,285 @@ function agregarComentario() {
     nombreInput.value = '';
     textoInput.value = '';
 }
+// ==========================================
+// ESTADO Y VARIABLES GLOBALES
+// ==========================================
+let carrito = JSON.parse(localStorage.getItem('carrito')) || [
+  // Ejemplo de estructura de carrito por si viene vacío
+  { id: 1, nombre: "Invitación Digital Interactiva", cantidad: 1, precio: 350.00 }
+];
+
+let metodoPagoSeleccionado = 'tarjeta';
+let datosCliente = {};
+let ultimoPedido = null;
+
+// ==========================================
+// NAVEGACIÓN Y STEPPER DEL CHECKOUT
+// ==========================================
+
+// Paso 1 -> Paso 2: Guardar dirección y avanzar
+function checkoutPaso2(event) {
+  event.preventDefault();
+
+  // Guardar datos del formulario
+  datosCliente = {
+    nombre: document.getElementById('ch-nombre').value,
+    telefono: document.getElementById('ch-tel').value,
+    email: document.getElementById('ch-email').value,
+    direccion: document.getElementById('ch-dir').value || 'No especificada (Entrega digital)'
+  };
+
+  // Ocultar paso 1, mostrar paso 2
+  document.getElementById('checkout-paso-1').style.display = 'none';
+  document.getElementById('checkout-paso-2').style.display = 'block';
+
+  // Actualizar visualmente el Stepper
+  actualizarStepper(2);
+}
+
+// Paso 2 -> Paso 3: Resumen y confirmación
+function checkoutPaso3() {
+  // Validación básica según el método de pago activo
+  if (metodoPagoSeleccionado === 'tarjeta') {
+    const numTarjeta = document.getElementById('card-num').value;
+    if (!numTarjeta || numTarjeta.length < 15) {
+      alert('Por favor ingresa un número de tarjeta válido.');
+      return;
+    }
+  }
+
+  // Ocultar paso 2, mostrar paso 3
+  document.getElementById('checkout-paso-2').style.display = 'none';
+  document.getElementById('checkout-paso-3').style.display = 'block';
+
+  actualizarStepper(3);
+  renderizarResumenCheckout();
+}
+
+// Botones para regresar entre pasos
+function volverPaso1() {
+  document.getElementById('checkout-paso-2').style.display = 'none';
+  document.getElementById('checkout-paso-1').style.display = 'block';
+  actualizarStepper(1);
+}
+
+function volverPaso2() {
+  document.getElementById('checkout-paso-3').style.display = 'none';
+  document.getElementById('checkout-paso-2').style.display = 'block';
+  actualizarStepper(2);
+}
+
+// Helper para cambiar la apariencia del indicador de pasos
+function actualizarStepper(paso) {
+  for (let i = 1; i <= 3; i++) {
+    const stepEl = document.getElementById(`step-ind-${i}`);
+    const lineEl = document.getElementById(`line-${i}`);
+
+    if (i <= paso) {
+      stepEl.classList.add('active');
+    } else {
+      stepEl.classList.remove('active');
+    }
+
+    if (lineEl && i < paso) {
+      lineEl.style.backgroundColor = '#db2777'; // Color rosa activo
+    } else if (lineEl) {
+      lineEl.style.backgroundColor = '#fbcfe8';
+    }
+  }
+}
+
+// ==========================================
+// SELECCIÓN DE MÉTODOS DE PAGO
+// ==========================================
+function seleccionarPago(metodo) {
+  metodoPagoSeleccionado = metodo;
+
+  // Tabs UI
+  document.querySelectorAll('.pago-tab').forEach(tab => tab.classList.remove('active'));
+  document.getElementById(`tab-${metodo}`).classList.add('active');
+
+  // Contenedores
+  document.getElementById('pago-tarjeta').style.display = metodo === 'tarjeta' ? 'flex' : 'none';
+  document.getElementById('pago-transferencia').style.display = metodo === 'transferencia' ? 'block' : 'none';
+  document.getElementById('pago-ewallet').style.display = metodo === 'ewallet' ? 'block' : 'none';
+}
+
+// ==========================================
+// RESUMEN Y CONFIRMACIÓN DE PAGO
+// ==========================================
+function calcularTotal() {
+  return carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
+}
+
+function renderizarResumenCheckout() {
+  const contenedorResumen = document.getElementById('resumen-checkout');
+  const total = calcularTotal();
+
+  let itemsHtml = carrito.map(item => 
+    `<div style="display:flex; justify-content:space-between;">
+      <span>${item.cantidad}x ${item.nombre}</span>
+      <strong>$${(item.precio * item.cantidad).toFixed(2)} MXN</strong>
+    </div>`
+  ).join('');
+
+  contenedorResumen.innerHTML = `
+    <div><strong>Cliente:</strong> ${datosCliente.nombre} (${datosCliente.email})</div>
+    <div><strong>Método de pago:</strong> ${metodoPagoSeleccionado.toUpperCase()}</div>
+    <hr style="border:none; border-top:1px dashed #fbcfe8; margin:0.5rem 0;" />
+    ${itemsHtml}
+    <hr style="border:none; border-top:1px solid #fbcfe8; margin:0.5rem 0;" />
+    <div style="display:flex; justify-content:space-between; font-size:1.05rem; font-weight:800; color:#db2777;">
+      <span>Total a pagar:</span>
+      <span>$${total.toFixed(2)} MXN</span>
+    </div>
+  `;
+}
+
+function confirmarPago() {
+  // Generar un folio único para la compra
+  const folio = '#CC-' + Math.floor(10000 + Math.random() * 90000);
+  const fechaActual = new Date().toLocaleDateString('es-MX', {
+    year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+  });
+
+  ultimoPedido = {
+    folio: folio,
+    fecha: fechaActual,
+    cliente: { ...datosCliente },
+    metodoPago: metodoPagoSeleccionado,
+    items: [...carrito],
+    total: calcularTotal()
+  };
+
+  // Guardar en el historial local de "Mis Compras"
+  let historial = JSON.parse(localStorage.getItem('mis_compras')) || [];
+  historial.unshift(ultimoPedido);
+  localStorage.setItem('mis_compras', JSON.stringify(historial));
+
+  // Ocultar Checkout y mostrar Confirmación
+  document.getElementById('panel-checkout').style.display = 'none';
+  document.getElementById('panel-confirmacion').style.display = 'block';
+
+  // Mostrar datos en el panel de confirmación
+  document.getElementById('conf-folio').innerText = folio;
+  document.getElementById('conf-resumen').innerHTML = `
+    <strong>Gracias, ${datosCliente.nombre}!</strong><br/>
+    Enviamos los detalles de tu compra a <u>${datosCliente.email}</u>.<br/>
+    Total pagado: <strong>$${ultimoPedido.total.toFixed(2)} MXN</strong>
+  `;
+
+  // Limpiar el carrito
+  localStorage.removeItem('carrito');
+  carrito = [];
+}
+
+// ==========================================
+// TICKET / FACTURA
+// ==========================================
+function verTicket() {
+  if (!ultimoPedido) return;
+
+  ocultarTodosLosPaneles();
+  document.getElementById('panel-ticket').style.display = 'block';
+
+  document.getElementById('ticket-folio').innerText = ultimoPedido.folio;
+  document.getElementById('ticket-fecha').innerText = ultimoPedido.fecha;
+
+  document.getElementById('ticket-cliente').innerHTML = `
+    <strong>${ultimoPedido.cliente.nombre}</strong><br/>
+    📱 ${ultimoPedido.cliente.telefono}<br/>
+    ✉️ ${ultimoPedido.cliente.email}<br/>
+    📍 ${ultimoPedido.cliente.direccion}
+  `;
+
+  const tbody = document.getElementById('ticket-items');
+  tbody.innerHTML = ultimoPedido.items.map(item => `
+    <tr style="border-bottom:1px solid #f8fafc;">
+      <td style="padding:8px 0; color:#1f2937;">${item.nombre}</td>
+      <td style="padding:8px 0; text-align:center; color:#6b7280;">${item.cantidad}</td>
+      <td style="padding:8px 0; text-align:right; font-weight:700; color:#1f2937;">$${(item.precio * item.cantidad).toFixed(2)}</td>
+    </tr>
+  `).join('');
+
+  document.getElementById('ticket-total').innerText = `$${ultimoPedido.total.toFixed(2)} MXN`;
+}
+
+function descargarTicketSimulado() {
+  alert("⬇️ Simulación: Descargando PDF del ticket...");
+}
+
+// ==========================================
+// PANEL: MIS COMPRAS
+// ==========================================
+function renderizarMisCompras() {
+  const contenedor = document.getElementById('lista-mis-compras');
+  const historial = JSON.parse(localStorage.getItem('mis_compras')) || [];
+
+  if (historial.length === 0) {
+    contenedor.innerHTML = `
+      <div style="text-align:center; padding:3rem; background:#fff; border-radius:16px; border:1px solid #fbcfe8; color:#9ca3af;">
+        <p style="font-size:1.2rem; margin:0;">Aún no has realizado ninguna compra 🛍️</p>
+      </div>
+    `;
+    return;
+  }
+
+  contenedor.innerHTML = historial.map(pedido => `
+    <div style="background:#fff; border:1.5px solid #fbcfe8; border-radius:16px; padding:1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <div style="display:flex; align-items:center; gap:0.8rem; margin-bottom:0.4rem;">
+          <span style="font-weight:800; color:#db2777; font-size:1.1rem;">${pedido.folio}</span>
+          <span style="background:#fdf2f8; color:#db2777; font-size:0.75rem; padding:2px 8px; border-radius:12px; font-weight:700;">Completado</span>
+        </div>
+        <p style="font-size:0.85rem; color:#9ca3af; margin:0 0 0.5rem;">${pedido.fecha}</p>
+        <p style="font-size:0.9rem; color:#4b5563; margin:0;">
+          ${pedido.items.map(i => `${i.cantidad}x ${i.nombre}`).join(', ')}
+        </p>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:1.2rem; font-weight:800; color:#1f2937; margin-bottom:0.5rem;">$${pedido.total.toFixed(2)} MXN</div>
+        <button class="btn-outline" onclick='reconstruirYVerTicket(${JSON.stringify(pedido)})' style="padding:0.4rem 0.8rem; font-size:0.82rem;">Ver ticket</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function reconstruirYVerTicket(pedido) {
+  ultimoPedido = pedido;
+  verTicket();
+}
+
+// ==========================================
+// NAVEGACIÓN GENERAL Y UTILIDADES
+// ==========================================
+function ocultarTodosLosPaneles() {
+  const paneles = ['panel-checkout', 'panel-confirmacion', 'panel-ticket', 'panel-mis-compras'];
+  paneles.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+}
+
+function mostrarSeccion(seccion) {
+  ocultarTodosLosPaneles();
+  if (seccion === 'mis-compras') {
+    renderizarMisCompras();
+    document.getElementById('panel-mis-compras').style.display = 'block';
+  } else if (seccion === 'checkout') {
+    document.getElementById('panel-checkout').style.display = 'block';
+  }
+}
+
+function regresarAlInicio() {
+  ocultarTodosLosPaneles();
+  // Si tienes una sección principal en la página, activa su visibilidad aquí.
+  // Por ejemplo: document.getElementById('panel-inicio').style.display = 'block';
+  alert("Regresando a la tienda...");
+}
+
+// Inicialización de la vista (para pruebas o al cargar el DOM)
+document.addEventListener('DOMContentLoaded', () => {
+  // Opcional: Descomentar si deseas abrir el checkout directamente al cargar la página
+  // mostrarSeccion('checkout');
+});

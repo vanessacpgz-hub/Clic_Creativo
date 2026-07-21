@@ -1298,3 +1298,35 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
         transform: translateY(0);
     }
 }
+
+/* ===== CHECKOUT ===== */
+.checkout-step {
+  display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0;
+}
+.checkout-step span {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: #e5e7eb; color: #9ca3af;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.9rem;
+  transition: background 0.3s, color 0.3s;
+}
+.checkout-step p { font-size: 0.75rem; color: #9ca3af; margin: 0; font-weight: 600; }
+.checkout-step.active span { background: #db2777; color: white; }
+.checkout-step.active p { color: #db2777; }
+.checkout-step.done span { background: #d1fae5; color: #065f46; }
+
+.step-line {
+  flex: 1; height: 2px; background: #e5e7eb;
+  transition: background 0.3s;
+}
+.step-line.done { background: #db2777; }
+
+.pago-tab {
+  padding: 0.55rem 1.2rem; border-radius: 50px;
+  border: 2px solid #fbcfe8; background: white;
+  color: #4b5563; font-family: 'Quicksand', sans-serif;
+  font-weight: 700; font-size: 0.85rem; cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.pago-tab.active { background: #db2777; color: white; border-color: #db2777; }
+.pago-tab:hover:not(.active) { border-color: #db2777; color: #db2777; }
