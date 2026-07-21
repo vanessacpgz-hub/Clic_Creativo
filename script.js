@@ -223,42 +223,33 @@ function regresarAlInicio() {
 }
 
 // ==========================================
-// 7. TOAST & CONFIRM
+// 7. TOAST & CONFIRM — defined in home.html inline script
+// These are stubs so script.js doesn't error if loaded standalone
 // ==========================================
-function showToast(msg) {
-    const t = document.getElementById('toast-ok');
-    const m = document.getElementById('toast-msg');
-    if (!t || !m) return;
-    m.textContent = msg;
-    t.style.display = 'block';
-    setTimeout(() => { t.style.display = 'none'; }, 3000);
+if (typeof showToast === 'undefined') {
+    window.showToast = function(msg) {
+        const t = document.getElementById('toast-ok');
+        const m = document.getElementById('toast-msg');
+        if (!t || !m) return;
+        m.textContent = msg; t.style.display = 'block';
+        setTimeout(() => { t.style.display = 'none'; }, 3000);
+    };
 }
-
-function mostrarConfirm(titulo, mensaje, callback) {
-    const modal = document.getElementById('modal-confirm');
-    if (!modal) { if (window.confirm(mensaje)) callback(); return; }
-    document.getElementById('confirm-title').textContent = titulo;
-    document.getElementById('confirm-msg').textContent = mensaje;
-    window._confirmCallback = callback;
-    modal.style.display = 'flex';
+if (typeof mostrarConfirm === 'undefined') {
+    window.mostrarConfirm = function(titulo, mensaje, callback) {
+        const modal = document.getElementById('modal-confirm');
+        if (!modal) { if (window.confirm(mensaje)) callback(); return; }
+        document.getElementById('confirm-title').textContent = titulo;
+        document.getElementById('confirm-msg').textContent = mensaje;
+        window._confirmCallback = callback;
+        modal.style.display = 'flex';
+    };
 }
-
 function confirmCancel() {
     const m = document.getElementById('modal-confirm');
     if (m) m.style.display = 'none';
     window._confirmCallback = null;
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-    const btn = document.getElementById('confirm-ok-btn');
-    if (btn) {
-        btn.addEventListener('click', function() {
-            const m = document.getElementById('modal-confirm');
-            if (m) m.style.display = 'none';
-            if (window._confirmCallback) { window._confirmCallback(); window._confirmCallback = null; }
-        });
-    }
-});
 
 // ==========================================
 // 8. FORMULARIOS ADMIN (COMPATIBILIDAD)
