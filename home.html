@@ -1911,6 +1911,136 @@
     <span id="toast-msg">✅ Listo</span>
   </div>
 
+  <!-- ===== BANNER DE COOKIES ===== -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:#fff; border-top:2px solid #fbcfe8; box-shadow:0 -4px 24px rgba(0,0,0,0.10); padding:1.2rem 2rem; font-family:'Quicksand',sans-serif;">
+    <div style="max-width:1000px; margin:0 auto; display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; justify-content:space-between;">
+      <div style="flex:1; min-width:260px;">
+        <p style="margin:0 0 0.3rem; font-weight:700; color:#1f2937; font-size:0.95rem;">🍪 Usamos cookies</p>
+        <p style="margin:0; font-size:0.82rem; color:#6b7280; line-height:1.5;">Utilizamos cookies propias y de terceros para mejorar tu experiencia, analizar el tráfico y personalizar el contenido. Puedes aceptar todas, rechazarlas o personalizar tu elección.</p>
+      </div>
+      <div style="display:flex; gap:0.7rem; flex-wrap:wrap; align-items:center;">
+        <button onclick="cookieModificar()" style="background:#f3f4f6; border:1.5px solid #e5e7eb; color:#374151; border-radius:50px; padding:0.55rem 1.2rem; font-family:'Quicksand',sans-serif; font-size:0.85rem; font-weight:700; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#e5e7eb'" onmouseout="this.style.background='#f3f4f6'">⚙️ Personalizar</button>
+        <button onclick="cookieRechazar()" style="background:#fff; border:1.5px solid #fbcfe8; color:#db2777; border-radius:50px; padding:0.55rem 1.2rem; font-family:'Quicksand',sans-serif; font-size:0.85rem; font-weight:700; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#fdf2f8'" onmouseout="this.style.background='#fff'">Rechazar</button>
+        <button onclick="cookieAceptar()" style="background:#E60073; border:none; color:#fff; border-radius:50px; padding:0.55rem 1.4rem; font-family:'Quicksand',sans-serif; font-size:0.85rem; font-weight:700; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#c4005f'" onmouseout="this.style.background='#E60073'">Aceptar todo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal personalizar cookies -->
+  <div id="cookie-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:10000; justify-content:center; align-items:center; padding:1rem;">
+    <div style="background:#fff; max-width:480px; width:100%; border-radius:20px; padding:2rem; box-shadow:0 20px 60px rgba(0,0,0,0.18); border:2px solid #fbcfe8; font-family:'Quicksand',sans-serif; max-height:90vh; overflow-y:auto;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; border-bottom:2px dashed #fbcfe8; padding-bottom:1rem;">
+        <h3 style="font-family:'Playfair Display',serif; color:#1f2937; font-size:1.4rem; margin:0;">⚙️ Preferencias de cookies</h3>
+        <button onclick="cerrarCookieModal()" style="background:none;border:none;font-size:1.4rem;color:#9ca3af;cursor:pointer;">&times;</button>
+      </div>
+
+      <!-- Necesarias — no modificables -->
+      <div style="background:#f8fafc; border-radius:12px; padding:1rem 1.2rem; margin-bottom:1rem; border:1px solid #e5e7eb;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <p style="font-weight:700; color:#1f2937; margin:0 0 0.2rem; font-size:0.9rem;">🔒 Cookies necesarias</p>
+            <p style="font-size:0.78rem; color:#6b7280; margin:0;">Esenciales para el funcionamiento del sitio. No se pueden desactivar.</p>
+          </div>
+          <div style="background:#d1fae5; color:#065f46; font-size:0.75rem; font-weight:700; padding:4px 10px; border-radius:50px; white-space:nowrap;">Siempre activas</div>
+        </div>
+      </div>
+
+      <!-- Analíticas -->
+      <div style="background:#fff; border-radius:12px; padding:1rem 1.2rem; margin-bottom:1rem; border:1.5px solid #fbcfe8;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="flex:1; padding-right:1rem;">
+            <p style="font-weight:700; color:#1f2937; margin:0 0 0.2rem; font-size:0.9rem;">📊 Cookies analíticas</p>
+            <p style="font-size:0.78rem; color:#6b7280; margin:0;">Nos permiten entender cómo usas el sitio para mejorar la experiencia.</p>
+          </div>
+          <label style="position:relative; display:inline-block; width:44px; height:24px; flex-shrink:0;">
+            <input type="checkbox" id="cookie-analiticas" checked style="opacity:0;width:0;height:0;" />
+            <span onclick="toggleCookieSwitch('cookie-analiticas')" style="position:absolute;cursor:pointer;inset:0;background:#fbcfe8;border-radius:24px;transition:0.3s;" id="switch-analiticas"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Marketing -->
+      <div style="background:#fff; border-radius:12px; padding:1rem 1.2rem; margin-bottom:1.5rem; border:1.5px solid #fbcfe8;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="flex:1; padding-right:1rem;">
+            <p style="font-weight:700; color:#1f2937; margin:0 0 0.2rem; font-size:0.9rem;">🎯 Cookies de marketing</p>
+            <p style="font-size:0.78rem; color:#6b7280; margin:0;">Usadas para mostrarte contenido y anuncios personalizados.</p>
+          </div>
+          <label style="position:relative; display:inline-block; width:44px; height:24px; flex-shrink:0;">
+            <input type="checkbox" id="cookie-marketing" style="opacity:0;width:0;height:0;" />
+            <span onclick="toggleCookieSwitch('cookie-marketing')" style="position:absolute;cursor:pointer;inset:0;background:#fbcfe8;border-radius:24px;transition:0.3s;" id="switch-marketing"></span>
+          </label>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:0.8rem;">
+        <button onclick="cookieGuardarPreferencias()" style="flex:1; background:#E60073; border:none; color:#fff; border-radius:50px; padding:0.8rem; font-family:'Quicksand',sans-serif; font-size:0.9rem; font-weight:700; cursor:pointer;">Guardar preferencias</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── Switches visuales ──
+    function toggleCookieSwitch(id) {
+      const cb = document.getElementById(id);
+      const sw = document.getElementById('switch-' + id.replace('cookie-',''));
+      cb.checked = !cb.checked;
+      sw.style.background = cb.checked ? '#E60073' : '#fbcfe8';
+      if (cb.checked) {
+        sw.style.boxShadow = '0 0 0 2px #fce7f3';
+      } else {
+        sw.style.boxShadow = 'none';
+      }
+    }
+
+    // Inicializar estado visual de switches
+    document.addEventListener('DOMContentLoaded', function() {
+      // Inicializar switches
+      ['analiticas','marketing'].forEach(function(name) {
+        const cb = document.getElementById('cookie-' + name);
+        const sw = document.getElementById('switch-' + name);
+        if (cb && sw) sw.style.background = cb.checked ? '#E60073' : '#fbcfe8';
+      });
+
+      // Mostrar banner si no hay preferencia guardada
+      if (!localStorage.getItem('cookie_pref')) {
+        setTimeout(function() {
+          document.getElementById('cookie-banner').style.display = 'block';
+        }, 800);
+      }
+    });
+
+    function cookieAceptar() {
+      localStorage.setItem('cookie_pref', JSON.stringify({ necesarias: true, analiticas: true, marketing: true }));
+      document.getElementById('cookie-banner').style.display = 'none';
+      showToast('✅ Cookies aceptadas');
+    }
+
+    function cookieRechazar() {
+      localStorage.setItem('cookie_pref', JSON.stringify({ necesarias: true, analiticas: false, marketing: false }));
+      document.getElementById('cookie-banner').style.display = 'none';
+      showToast('🍪 Solo cookies necesarias activas');
+    }
+
+    function cookieModificar() {
+      document.getElementById('cookie-banner').style.display = 'none';
+      document.getElementById('cookie-modal').style.display = 'flex';
+    }
+
+    function cerrarCookieModal() {
+      document.getElementById('cookie-modal').style.display = 'none';
+      document.getElementById('cookie-banner').style.display = 'block';
+    }
+
+    function cookieGuardarPreferencias() {
+      const analiticas = document.getElementById('cookie-analiticas').checked;
+      const marketing  = document.getElementById('cookie-marketing').checked;
+      localStorage.setItem('cookie_pref', JSON.stringify({ necesarias: true, analiticas, marketing }));
+      document.getElementById('cookie-modal').style.display = 'none';
+      showToast('✅ Preferencias guardadas');
+    }
+  </script>
+
   <script src="script.js"></script>
 </body>
 </html>
