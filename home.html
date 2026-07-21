@@ -1000,6 +1000,7 @@
         <div class="card-icon"><img src="Imagenes/CotizaInvitacion.png" alt="Invitación Esencial" /></div>
         <span class="hero-badge" style="background: var(--magenta); font-size: 0.65rem; padding: 0.2rem 0.6rem;">Económica</span>
         <h3>Invitación Esencial</h3>
+        <div style="color:#f59e0b;font-size:1rem;letter-spacing:2px;">★★★★☆</div>
         <p>$250 MXN</p>
         <button class="btn-primary" onclick="verDetalleProducto('inv-sencilla')">Ver detalle</button>
       </div>
@@ -1009,6 +1010,7 @@
         <div class="card-icon"><img src="Imagenes/CotizaInvitacion.png" alt="Invitación Interactiva" /></div>
         <span class="hero-badge" style="background: #25D366; font-size: 0.65rem; padding: 0.2rem 0.6rem;">Más Vendida</span>
         <h3>Invitación Interactiva</h3>
+        <div style="color:#f59e0b;font-size:1rem;letter-spacing:2px;">★★★★★</div>
         <p>$450 MXN</p>
         <button class="btn-primary" onclick="verDetalleProducto('inv-ubicacion')">Ver detalle</button>
       </div>
@@ -1018,6 +1020,7 @@
         <div class="card-icon"><img src="Imagenes/CotizaInvitacion.png" alt="Invitación Premium" /></div>
         <span class="hero-badge" style="background: #1877F2; font-size: 0.65rem; padding: 0.2rem 0.6rem;">VIP</span>
         <h3>Invitación Premium</h3>
+        <div style="color:#f59e0b;font-size:1rem;letter-spacing:2px;">★★★★★</div>
         <p>$650 MXN</p>
         <button class="btn-primary" onclick="verDetalleProducto('inv-premium')">Ver detalle</button>
       </div>
@@ -1030,6 +1033,7 @@
         <div class="card-icon"><img src="Imagenes/Cotizapaginaweb.png" alt="Landing Page Express" /></div>
         <span class="hero-badge" style="background: var(--magenta); font-size: 0.65rem; padding: 0.2rem 0.6rem;">Sencilla</span>
         <h3>Landing Page Express</h3>
+        <div style="color:#f59e0b;font-size:1rem;letter-spacing:2px;">★★★★☆</div>
         <p>$1,200 MXN</p>
         <button class="btn-primary" onclick="verDetalleProducto('web-sencilla')">Ver detalle</button>
       </div>
@@ -1039,6 +1043,7 @@
         <div class="card-icon"><img src="Imagenes/Cotizapaginaweb.png" alt="Web Comercial" /></div>
         <span class="hero-badge" style="background: #25D366; font-size: 0.65rem; padding: 0.2rem 0.6rem;">Ideal Negocios</span>
         <h3>Web Comercial</h3>
+        <div style="color:#f59e0b;font-size:1rem;letter-spacing:2px;">★★★★★</div>
         <p>$2,400 MXN</p>
         <button class="btn-primary" onclick="verDetalleProducto('web-intermedia')">Ver detalle</button>
       </div>
@@ -1048,6 +1053,7 @@
         <div class="card-icon"><img src="Imagenes/Cotizapaginaweb.png" alt="Web Premium Pro" /></div>
         <span class="hero-badge" style="background: #1877F2; font-size: 0.65rem; padding: 0.2rem 0.6rem;">Completa</span>
         <h3>Web Premium Pro</h3>
+        <div style="color:#f59e0b;font-size:1rem;letter-spacing:2px;">★★★★★</div>
         <p>$4,500 MXN</p>
         <button class="btn-primary" onclick="verDetalleProducto('web-premium')">Ver detalle</button>
       </div>
@@ -1426,7 +1432,9 @@
       else productos[idx] = obj;
       renderTablaProductos();
       cerrarFormProducto();
-      showToast(idx === -1 ? '✅ Producto agregado' : '✅ Producto actualizado');
+      showToast(idx === -1 ? '✅ Producto agregado correctamente' : '✅ Producto actualizado');
+      // Flujo continuo: regresa a ver la tabla
+      mostrarSeccionAdmin('productos');
     }
 
     function editarProducto(i)  { abrirFormProducto(i); }
@@ -1627,7 +1635,8 @@
     // ── C2C Publicaciones ──
     let misPublicaciones = [
       { nombre:'Invitación Digital XV Años', precio:450, categoria:'Invitación', desc:'Diseño elegante con animaciones, contador regresivo, ubicación Maps y RSVP por WhatsApp. Entrega en 3 días hábiles.', foto:'Imagenes/CotizaInvitacion.png' },
-      { nombre:'Landing Page Boutique', precio:1200, categoria:'Web', desc:'Página de una sola sección con galería, servicios, contacto y botón de WhatsApp. Diseño minimalista y responsivo.', foto:'Imagenes/Cotizapaginaweb.png' }
+      { nombre:'Landing Page Boutique', precio:1200, categoria:'Web', desc:'Página de una sola sección con galería, servicios, contacto y botón de WhatsApp. Diseño minimalista y responsivo.', foto:'Imagenes/Cotizapaginaweb.png' },
+      { nombre:'Invitación Boda Premium', precio:650, categoria:'Invitación', desc:'Invitación interactiva para bodas con galería de novios, contador regresivo, mesa de regalos y confirmación RSVP.', foto:'Imagenes/CotizaInvitacion.png' }
     ];
 
     function publicarProductoC2C(e) {
@@ -1821,8 +1830,9 @@
 
     // ── Promociones (simulado en memoria) ──
     let promociones = [
-      { codigo: 'BIENVENIDA10', descuento: 10, vence: '2025-12-31' },
-      { codigo: 'CLIC20',       descuento: 20, vence: '2025-09-15' },
+      { codigo: 'BIENVENIDA10', descuento: 10, vence: '2025-12-31', desc: '10% de descuento para clientes nuevos en cualquier servicio.' },
+      { codigo: 'CLIC20',       descuento: 20, vence: '2025-09-15', desc: '20% OFF en invitaciones interactivas por tiempo limitado.' },
+      { codigo: 'WEB15',        descuento: 15, vence: '2025-10-31', desc: '15% de descuento en cualquier paquete de página web.' },
     ];
 
     function renderPromociones() {
@@ -1837,6 +1847,7 @@
           <div>
             <span style="font-size:1.1rem;font-weight:700;color:#db2777;letter-spacing:0.05em;">${p.codigo}</span>
             <span style="margin-left:0.8rem;background:#fce7f3;color:#db2777;padding:3px 10px;border-radius:50px;font-size:0.8rem;font-weight:700;">${p.descuento}% OFF</span>
+            <p style="font-size:0.82rem;color:#6b7280;margin:0.3rem 0 0;">${p.desc || ''}</p>
           </div>
           <div style="display:flex;align-items:center;gap:1rem;">
             <span style="font-size:0.85rem;color:#6b7280;">Vence: ${p.vence || 'Sin límite'}</span>
@@ -1866,7 +1877,7 @@
         document.addEventListener("DOMContentLoaded", function() {
       const usuarioGuardado = localStorage.getItem('sim_user_name');
       if (usuarioGuardado) {
-        const saludoHTML = `<span class="user-welcome-text">¡Hola, ${usuarioGuardado}!</span><a href="perfil.html" class="user-profile-link">Ver Perfil</a>`;
+        const saludoHTML = `<span class="user-welcome-text">¡Hola, ${usuarioGuardado}! 🌸</span><a href="perfil.html" class="user-profile-link">Ver Perfil</a>`;
         const z1 = document.getElementById('auth-zone');
         const z2 = document.getElementById('auth-zone-mobile');
         if (z1) z1.innerHTML = saludoHTML;
