@@ -330,12 +330,30 @@ function agregarComentario() {
     const nombreInput = document.getElementById('comment-name');
     const textoInput = document.getElementById('comment-text');
     const lista = document.getElementById('comments-list');
+    
     if (!nombreInput || !textoInput || !lista) return;
-    const nombre = nombreInput.value.trim();
+
+    // Si el nombre viene vacío, asigna "Anónimo"
+    const nombre = nombreInput.value.trim() || 'Anónimo';
+    
+    // Obtenemos el texto e indicamos un mensaje por defecto si está vacío
+    const texto = textoInput.value.trim() || 'Sin contenido en el comentario.';
+
     const div = document.createElement('div');
     div.classList.add('comment-item', 'new-comment-animation');
-    div.innerHTML = `<div class="comment-header"><span class="comment-user">${nombre}</span><span class="comment-date">Justo ahora</span></div><p class="comment-body">${texto}</p>`;
+    
+    div.innerHTML = `
+      <div class="comment-header">
+        <span class="comment-user">${nombre}</span>
+        <span class="comment-date">Justo ahora</span>
+      </div>
+      <p class="comment-body">${texto}</p>
+    `;
+
+    // Insertar al inicio de la lista
     lista.insertBefore(div, lista.firstChild);
+
+    // Limpiar los inputs
     nombreInput.value = '';
     textoInput.value = '';
 }
