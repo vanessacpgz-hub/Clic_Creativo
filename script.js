@@ -3,7 +3,6 @@
 // ==========================================
 const ham = document.getElementById('ham');
 const mobileNav = document.getElementById('mobileNav');
-
 if (ham && mobileNav) {
     ham.addEventListener('click', () => mobileNav.classList.toggle('open'));
     mobileNav.querySelectorAll('a').forEach(a => {
@@ -12,14 +11,12 @@ if (ham && mobileNav) {
 }
 
 // ==========================================
-// 2. MODALES (ABRIR / CERRAR)
+// 2. MODALES
 // ==========================================
 function openModal(type) {
-    if (type === 'web') {
-        document.getElementById('modalWeb')?.classList.add('active');
-    } else if (type === 'invitacion') {
-        document.getElementById('modalInvitacion')?.classList.add('active');
-    } else if (type === 'contactoFlotante') {
+    if (type === 'web') document.getElementById('modalWeb')?.classList.add('active');
+    else if (type === 'invitacion') document.getElementById('modalInvitacion')?.classList.add('active');
+    else if (type === 'contactoFlotante') {
         const form = document.getElementById('formContactoFlotante');
         const exito = document.getElementById('mensajeExito');
         if (form) form.style.display = 'flex';
@@ -30,41 +27,31 @@ function openModal(type) {
 }
 
 function closeModal(type) {
-    if (type === 'web') {
-        document.getElementById('modalWeb')?.classList.remove('active');
-    } else if (type === 'invitacion') {
-        document.getElementById('modalInvitacion')?.classList.remove('active');
-    } else if (type === 'contactoFlotante') {
-        document.getElementById('modalContactoFlotante')?.classList.remove('active');
-    }
+    if (type === 'web') document.getElementById('modalWeb')?.classList.remove('active');
+    else if (type === 'invitacion') document.getElementById('modalInvitacion')?.classList.remove('active');
+    else if (type === 'contactoFlotante') document.getElementById('modalContactoFlotante')?.classList.remove('active');
     document.body.style.overflow = '';
 }
 
-// Cerrar modales haciendo clic en el fondo (overlay)
 document.querySelectorAll('.modal-overlay').forEach(o => {
-    o.addEventListener('click', e => { 
-        if (e.target === o) { 
-            o.classList.remove('active'); 
-            document.body.style.overflow = ''; 
-        } 
+    o.addEventListener('click', e => {
+        if (e.target === o) { o.classList.remove('active'); document.body.style.overflow = ''; }
     });
 });
 
 // ==========================================
-// 3. WHATSAPP & COTIZACIONES GENERALES
+// 3. WHATSAPP & COTIZACIONES
 // ==========================================
 function sendWhatsApp(type, e) {
     e.preventDefault();
-    const phone = '524494556465'; // Clic_Creativo Aguascalientes
+    const phone = '524494556465';
     let msg = '';
-
     if (type === 'web') {
         const nombre   = document.getElementById('wb-nombre')?.value.trim() || 'Sin especificar';
         const objetivo = document.getElementById('wb-objetivo')?.value || 'Sin especificar';
         const presup   = document.getElementById('wb-presupuesto')?.value || 'Sin especificar';
         const logo     = document.querySelector('input[name="wb-logo"]:checked')?.value || 'Sin especificar';
         const secs     = [...document.querySelectorAll('input[name="wb-sec"]:checked')].map(c => c.value).join(', ') || 'Sin especificar';
-        
         msg = `¡Hola Clic_Creativo! 🌟 Quiero cotizar una *Página WEB*.\n\n📋 *Detalles:*\n• Negocio: ${nombre}\n• Objetivo: ${objetivo}\n• Presupuesto: ${presup}\n• Logo y fotos: ${logo}\n• Secciones: ${secs}\n\n¿Me podrías ayudar con el presupuesto? 🌸`;
     } else {
         const tipo     = document.getElementById('inv-tipo')?.value || 'Sin especificar';
@@ -72,83 +59,33 @@ function sendWhatsApp(type, e) {
         const fecha    = document.getElementById('inv-fecha')?.value || 'Sin especificar';
         const funcs    = [...document.querySelectorAll('input[name="inv-func"]:checked')].map(c => c.value).join(', ') || 'Sin especificar';
         const confirma = document.querySelector('input[name="inv-confirma"]:checked')?.value || 'Sin especificar';
-        
         msg = `¡Hola Clic_Creativo! 🌟 Quiero cotizar una *Invitación Interactiva*.\n\n📋 *Detalles:*\n• Tipo: ${tipo}\n• Nombre: ${nombre}\n• Fecha: ${fecha}\n• Funciones: ${funcs}\n• Confirmar con anfitriona: ${confirma}\n\n¿Me podrías ayudar con el presupuesto? 🌸`;
     }
-    
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
-// Formulario de contacto rápido
 function handleContactoSubmit(event) {
     event.preventDefault();
     const form = document.getElementById('formContactoFlotante');
     const exito = document.getElementById('mensajeExito');
-    
     if (form) form.style.display = 'none';
     if (exito) exito.style.display = 'block';
     if (form) form.reset();
-
-    setTimeout(() => {
-        closeModal('contactoFlotante');
-    }, 3500);
+    setTimeout(() => closeModal('contactoFlotante'), 3500);
 }
 
 // ==========================================
-// 4. BASE DE DATOS UNIFICADA DE PRODUCTOS
+// 4. PRODUCTOS DB
 // ==========================================
 const productosDB = {
-    'inv-sencilla': {
-        nombre: 'Invitación Esencial (Sencilla)',
-        precio: 250, // Guardado numérico para operaciones aritméticas en el carrito
-        precioTexto: '$250 MXN',
-        categoria: 'Invitaciones',
-        foto: 'Imagenes/CotizaInvitacion.png',
-        descripcion: 'Diseño digital elegante y minimalista en formato estático de una sola página. Ideal para eventos íntimos o notificaciones rápidas. Incluye tipografía estilizada, paleta de colores personalizada y entrega en alta resolución listo para enviarse por WhatsApp.'
-    },
-    'inv-ubicacion': {
-        nombre: 'Invitación Interactiva (Con Ubicación)',
-        precio: 450,
-        precioTexto: '$450 MXN',
-        categoria: 'Invitaciones',
-        foto: 'Imagenes/CotizaInvitacion.png',
-        descripcion: 'Nuestra opción más popular. Una invitación interactiva que incluye botones dinámicos con enlace directo a Google Maps o Waze para la ubicación del evento, botón de confirmación de asistencia RSVP directo a tu WhatsApp y un contador de cuenta regresiva estilizado.'
-    },
-    'inv-premium': {
-        nombre: 'Invitación Premium (Completa/Compleja)',
-        precio: 650,
-        precioTexto: '$650 MXN',
-        categoria: 'Invitaciones',
-        foto: 'Imagenes/CotizaInvitacion.png',
-        descripcion: 'Experiencia digital de lujo para tus invitados. Incluye todas las funciones interactives (Ubicación, RSVP vía WhatsApp), además de pase digital con código de accesos, sección para sugerencia de música, mesa de regalos con enlaces directos y galería de fotos de los festejados con animaciones delicadas.'
-    },
-    'web-sencilla': {
-        nombre: 'Landing Page Express (Sencilla)',
-        precio: 1200,
-        precioTexto: '$1,200 MXN',
-        categoria: 'Páginas WEB',
-        foto: 'Imagenes/Cotizapaginaweb.png',
-        descripcion: 'Una página de aterrizaje (One Page) directa y optimizada. Cuenta con sección de bienvenida, descripción clara de tu producto o servicio principal, galería básica de imágenes y un formulario de contacto directo o enlace a tus redes. Ideal para arrancar tu presencia digital con estilo.'
-    },
-    'web-intermedia': {
-        nombre: 'Web Comercial (Con Ubicación e Integraciones)',
-        precio: 2400,
-        precioTexto: '$2,400 MXN',
-        categoria: 'Páginas WEB',
-        foto: 'Imagenes/Cotizapaginaweb.png',
-        descripcion: 'Sitio web multipágina o sección extendida perfecta para negocios establecidos, locales o profesionistas. Incluye mapa interactivo de Google Maps incrustado, catálogo o listado de servicios detallado, integración con botones de cotización por WhatsApp y optimización SEO local básica.'
-    },
-    'web-premium': {
-        nombre: 'Web Premium Pro (Compleja / Administrable)',
-        precio: 4500,
-        precioTexto: '$4,500 MXN',
-        categoria: 'Páginas WEB',
-        foto: 'Imagenes/Cotizapaginaweb.png',
-        descripcion: 'La solución definitiva para marcas exigentes. Estructura robusta y completamente personalizada basada en componentes dinámicos. Incluye secciones para blog o portafolio avanzado, integración de sistemas de reserva, animaciones interactivas premium y una arquitectura limpia lista para escalar a e-commerce.'
-    }
+    'inv-sencilla': { nombre: 'Invitación Esencial (Sencilla)', precio: 250, precioTexto: '$250 MXN', categoria: 'Invitaciones', foto: 'Imagenes/CotizaInvitacion.png', descripcion: 'Diseño digital elegante y minimalista. Ideal para eventos íntimos. Incluye tipografía estilizada y paleta personalizada.' },
+    'inv-ubicacion': { nombre: 'Invitación Interactiva (Con Ubicación)', precio: 450, precioTexto: '$450 MXN', categoria: 'Invitaciones', foto: 'Imagenes/CotizaInvitacion.png', descripcion: 'Nuestra opción más popular. Incluye Google Maps, RSVP por WhatsApp y contador regresivo.' },
+    'inv-premium': { nombre: 'Invitación Premium (Completa)', precio: 650, precioTexto: '$650 MXN', categoria: 'Invitaciones', foto: 'Imagenes/CotizaInvitacion.png', descripcion: 'Experiencia digital de lujo. Incluye pase digital, música, mesa de regalos y galería animada.' },
+    'web-sencilla': { nombre: 'Landing Page Express', precio: 1200, precioTexto: '$1,200 MXN', categoria: 'Páginas WEB', foto: 'Imagenes/Cotizapaginaweb.png', descripcion: 'Una página de aterrizaje directa y optimizada con galería, servicios y contacto.' },
+    'web-intermedia': { nombre: 'Web Comercial', precio: 2400, precioTexto: '$2,400 MXN', categoria: 'Páginas WEB', foto: 'Imagenes/Cotizapaginaweb.png', descripcion: 'Sitio multipágina con Google Maps, catálogo de servicios y botones de WhatsApp.' },
+    'web-premium': { nombre: 'Web Premium Pro', precio: 4500, precioTexto: '$4,500 MXN', categoria: 'Páginas WEB', foto: 'Imagenes/Cotizapaginaweb.png', descripcion: 'Solución completa con blog, reservas, animaciones premium y arquitectura escalable.' }
 };
 
-// NAVEGACIÓN DEL CATÁLOGO
 function mostrarCatalogo() {
     document.getElementById('landing-sections').style.display = 'none';
     document.getElementById('detalle-producto').style.display = 'none';
@@ -159,300 +96,135 @@ function mostrarCatalogo() {
 function verDetalleProducto(idProducto) {
     const info = productosDB[idProducto];
     if (!info) return;
-
-    // 1. Llenar los datos principales del producto actual
     document.getElementById('det-foto').src = info.foto;
     document.getElementById('det-foto').alt = info.nombre;
     document.getElementById('det-categoria').innerText = info.categoria;
     document.getElementById('det-nombre').innerText = info.nombre;
     document.getElementById('det-precio').innerText = info.precioTexto;
     document.getElementById('det-descripcion').innerText = info.descripcion;
-
-    // NUEVO: Reiniciar el input de cantidad a 1 cada vez que se abre un producto nuevo
     const inputCant = document.getElementById('det-cantidad');
     if (inputCant) inputCant.value = 1;
-
-    // Conecta dinámicamente la ID del producto actual al botón del carrito
     prepararBotonCarrito(idProducto);
-
-    // ==========================================================
-    // LÓGICA DE PRODUCTOS RELACIONADOS
-    // ==========================================================
     const contenedorRelacionados = document.getElementById('relacionados-lista');
     if (contenedorRelacionados) {
-        contenedorRelacionados.innerHTML = ''; 
-
-        const relacionados = Object.keys(productosDB).filter(key => {
-            return productosDB[key].categoria === info.categoria && key !== idProducto;
-        });
-
+        contenedorRelacionados.innerHTML = '';
+        const relacionados = Object.keys(productosDB).filter(k => productosDB[k].categoria === info.categoria && k !== idProducto);
         relacionados.forEach(key => {
             const prod = productosDB[key];
-            contenedorRelacionados.innerHTML += `
-                <div class="card" style="flex: 1; min-width: 250px; max-width: 320px; border: 1px solid #eee; padding: 15px; border-radius: 8px; text-align: center;">
-                    <img src="${prod.foto}" alt="${prod.nombre}" style="width: 100%; height: auto; border-radius: 6px; margin-bottom: 10px;">
-                    <span style="font-size: 0.8rem; color: gray; text-transform: uppercase;">${prod.categoria}</span>
-                    <h4 style="font-size: 1.1rem; margin: 5px 0;">${prod.nombre}</h4>
-                    <p style="font-weight: bold; color: #333; margin-bottom: 10px;">${prod.precioTexto}</p>
-                    <button onclick="verDetalleProducto('${key}')" style="background-color: #000; color: #fff; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; width: 100%;">
-                        Ver detalle
-                    </button>
-                </div>
-            `;
+            contenedorRelacionados.innerHTML += `<div class="card" style="flex:1;min-width:250px;max-width:320px;border:1px solid #eee;padding:15px;border-radius:8px;text-align:center;"><img src="${prod.foto}" alt="${prod.nombre}" style="width:100%;height:auto;border-radius:6px;margin-bottom:10px;"><span style="font-size:0.8rem;color:gray;text-transform:uppercase;">${prod.categoria}</span><h4 style="font-size:1.1rem;margin:5px 0;">${prod.nombre}</h4><p style="font-weight:bold;color:#333;margin-bottom:10px;">${prod.precioTexto}</p><button onclick="verDetalleProducto('${key}')" style="background:#db2777;color:#fff;border:none;padding:8px 15px;border-radius:4px;cursor:pointer;width:100%;">Ver detalle</button></div>`;
         });
-
-        const seccionRelacionados = document.getElementById('productos-relacionados');
-        if (seccionRelacionados) {
-            seccionRelacionados.style.display = relacionados.length > 0 ? 'block' : 'none';
-        }
+        const secRel = document.getElementById('productos-relacionados');
+        if (secRel) secRel.style.display = relacionados.length > 0 ? 'block' : 'none';
     }
-    // ==========================================================
-
-    // Cambiar de vistas
     document.getElementById('catalogo-productos').style.display = 'none';
     document.getElementById('detalle-producto').style.display = 'block';
     window.scrollTo(0, 0);
 }
 
-// Agregar producto al array considerando la cantidad seleccionada
-function agregarAlCarrito(id) {
-    const producto = productosDB[id];
-    if (!producto) return;
-
-    // NUEVO: Obtener la cantidad seleccionada en el input (asegurando un número entero válido mayor a 0)
-    const inputCant = document.getElementById('det-cantidad');
-    const cantidadSeleccionada = inputCant ? parseInt(inputCant.value, 10) : 1;
-    const cantidadAAgregar = isNaN(cantidadSeleccionada) || cantidadSeleccionada < 1 ? 1 : cantidadSeleccionada;
-
-    const itemExistente = carrito.find(item => item.id === id);
-
-    if (itemExistente) {
-        // En lugar de hacer += 1, ahora sumamos la cantidad elegida
-        itemExistente.cantidad += cantidadAAgregar;
-    } else {
-        carrito.push({
-            id: id,
-            nombre: producto.nombre,
-            precio: producto.precio,
-            cantidad: cantidadAAgregar // Guardamos la cantidad elegida
-        });
-    }
-
-    localStorage.setItem('carrito_clic', JSON.stringify(carrito));
-    actualizarInterfazCarrito();
-    toggleModalCarrito(); 
-}
-
-// BARRA DE REDES SOCIALES FLOTANTE
-document.addEventListener("DOMContentLoaded", () => {
-    const floatingSocials = document.getElementById('floatingSocials');
-    let lastScrollTop = 0;
-
-    if (floatingSocials) {
-        window.addEventListener("scroll", () => {
-            let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-            if (currentScroll > lastScrollTop && currentScroll > 200) {
-                floatingSocials.style.opacity = "0.4";
-            } else {
-                floatingSocials.style.opacity = "1";
-            }
-            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-        }, { passive: true });
-    }
-});
-
-// MOTOR DE BÚSQUEDA EN TIEMPO REAL
-document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.getElementById('search-catalog');
-    
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u030f]/g, "").trim();
-            const productCards = document.querySelectorAll('.cards .card');
-
-            productCards.forEach(card => {
-                const cardText = card.textContent.toLowerCase().normalize("NFD").replace(/[\u0300-\u030f]/g, "");
-                if (cardText.includes(searchTerm)) {
-                    card.style.display = ""; 
-                } else {
-                    card.style.display = "none"; 
-                }
-            });
-        });
-
-        searchInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault(); 
-                searchInput.blur(); 
-            }
-        });
-    }
-});
-
 // ==========================================
-// 5. LÓGICA DEL CARRITO DE COMPRAS
+// 5. CARRITO
 // ==========================================
-
-// Cargar el carrito desde LocalStorage o iniciar vacío
 let carrito = JSON.parse(localStorage.getItem('carrito_clic')) || [];
 
-document.addEventListener('DOMContentLoaded', () => {
-    actualizarInterfazCarrito();
-});
+document.addEventListener('DOMContentLoaded', () => actualizarInterfazCarrito());
 
-// Abrir/cerrar la interfaz del carrito
 function toggleModalCarrito() {
     const modal = document.getElementById('modal-carrito');
-    if (modal) {
-        modal.style.display = (modal.style.display === 'none' || modal.style.display === '') ? 'block' : 'none';
-    }
+    if (modal) modal.style.display = (modal.style.display === 'none' || modal.style.display === '') ? 'block' : 'none';
 }
 
-// Configurar el botón de agregar cuando se visualiza un producto en el detalle
 function prepararBotonCarrito(idProducto) {
     const btnAgregar = document.getElementById('btn-agregar-al-carrito');
     if (!btnAgregar) return;
-
-    // Clonar para limpiar event listeners previos
     const nuevoBtn = btnAgregar.cloneNode(true);
     btnAgregar.parentNode.replaceChild(nuevoBtn, btnAgregar);
-
-    nuevoBtn.addEventListener('click', () => {
-        agregarAlCarrito(idProducto);
-    });
+    nuevoBtn.addEventListener('click', () => agregarAlCarrito(idProducto));
 }
 
-// Agregar producto al array
 function agregarAlCarrito(id) {
     const producto = productosDB[id];
     if (!producto) return;
-
-    const itemExistente = carrito.find(item => item.id === id);
-
-    if (itemExistente) {
-        itemExistente.cantidad += 1;
-    } else {
-        carrito.push({
-            id: id,
-            nombre: producto.nombre,
-            precio: producto.precio,
-            cantidad: 1
-        });
-    }
-
+    const inputCant = document.getElementById('det-cantidad');
+    const cantidad = inputCant ? Math.max(1, parseInt(inputCant.value, 10) || 1) : 1;
+    const existente = carrito.find(item => item.id === id);
+    if (existente) existente.cantidad += cantidad;
+    else carrito.push({ id, nombre: producto.nombre, precio: producto.precio, cantidad });
     localStorage.setItem('carrito_clic', JSON.stringify(carrito));
     actualizarInterfazCarrito();
-    toggleModalCarrito(); // Muestra el carrito de inmediato
+    toggleModalCarrito();
 }
 
-// Eliminar un producto del carrito
 function eliminarDelCarrito(id) {
     const item = carrito.find(i => i.id === id);
-    const nombre = item ? item.nombre : 'este producto';
-    mostrarConfirm(
-        '🛒 ¿Eliminar del carrito?',
-        '¿Deseas eliminar "' + nombre + '" de tu carrito?',
-        function() {
-            carrito = carrito.filter(i => i.id !== id);
-            localStorage.setItem('carrito_clic', JSON.stringify(carrito));
-            actualizarInterfazCarrito();
-            showToast('✅ Producto eliminado del carrito');
-        }
-    );
+    mostrarConfirm('🛒 ¿Eliminar del carrito?', '¿Deseas eliminar "' + (item ? item.nombre : 'este producto') + '" de tu carrito?', function() {
+        carrito = carrito.filter(i => i.id !== id);
+        localStorage.setItem('carrito_clic', JSON.stringify(carrito));
+        actualizarInterfazCarrito();
+        showToast('✅ Producto eliminado del carrito');
+    });
 }
 
-// Actualizar contadores y renderizar elementos en HTML
 function actualizarInterfazCarrito() {
     const contador = document.getElementById('carrito-contador');
     const contenedorItems = document.getElementById('carrito-items');
     const contenedorTotal = document.getElementById('carrito-total-precio');
-
-    // 1. Número flotante sobre el icono de carrito
-    if (contador) {
-        const totalProductos = carrito.reduce((suma, item) => suma + item.cantidad, 0);
-        contador.textContent = totalProductos;
-    }
-
-    // 2. Render de elementos en el modal
+    if (contador) contador.textContent = carrito.reduce((s, i) => s + i.cantidad, 0);
     if (contenedorItems) {
-        contenedorItems.innerHTML = '';
-        let precioTotal = 0;
-
-        carrito.forEach(item => {
-            precioTotal += item.precio * item.cantidad;
-            contenedorItems.innerHTML += `
-                <div class="item-carrito" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">
-                    <div>
-                        <strong>${item.nombre}</strong> x${item.cantidad}
-                        <br><span style="font-size:0.85rem; color:gray;">$${item.precio * item.cantidad} MXN</span>
-                    </div>
-                    <button onclick="eliminarDelCarrito('${item.id}')" style="background:none; border:none; color:red; cursor:pointer; font-size: 1.1rem;">❌</button>
-                </div>
-            `;
-        });
-
-        // 3. Imprimir el precio total formateado
-        if (contenedorTotal) {
-            contenedorTotal.textContent = `$${precioTotal.toLocaleString('es-MX')} MXN`;
-        }
+        let total = 0;
+        contenedorItems.innerHTML = carrito.map(item => {
+            total += item.precio * item.cantidad;
+            return `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;border-bottom:1px solid #eee;padding-bottom:5px;"><div><strong>${item.nombre}</strong> x${item.cantidad}<br/><span style="font-size:0.85rem;color:gray;">$${(item.precio*item.cantidad).toLocaleString()} MXN</span></div><button onclick="eliminarDelCarrito('${item.id}')" style="background:none;border:none;color:red;cursor:pointer;font-size:1.1rem;">❌</button></div>`;
+        }).join('');
+        if (contenedorTotal) contenedorTotal.textContent = `$${total.toLocaleString('es-MX')} MXN`;
     }
 }
 
-function enviarPedidoWhatsApp() {
-    if (carrito.length === 0) {
-        showToast('⚠️ Tu carrito está vacío');
-        return;
-    }
-    const checkboxTerminos = document.getElementById('acepta-terminos');
-    if (!checkboxTerminos || !checkboxTerminos.checked) {
-        showToast('⚠️ Acepta los términos y condiciones primero 🌸');
-        return;
-    }
-
-    const phone = '524494556465';
-    let mensaje = '¡Hola Clic_Creativo! 🌟 Me interesa contratar los siguientes servicios:\n\n';
-    let precioTotal = 0;
-    carrito.forEach(item => {
-        mensaje += `• ${item.nombre} (Cant: ${item.cantidad}) - $${(item.precio * item.cantidad).toLocaleString('es-MX')} MXN\n`;
-        precioTotal += item.precio * item.cantidad;
-    });
-    mensaje += `\n*Total estimado:* $${precioTotal.toLocaleString('es-MX')} MXN\n\nHe leído y acepto las políticas de diseño. ¿Cuáles son los pasos para comenzar? ✨`;
-
-    mostrarConfirm(
-        '💬 Enviar pedido',
-        `Se abrirá WhatsApp con tu pedido por $${precioTotal.toLocaleString('es-MX')} MXN. ¿Confirmas?`,
-        function() {
-            window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(mensaje), '_blank');
-        }
-    );
+function irAlCheckout() {
+    if (carrito.length === 0) { showToast('⚠️ Tu carrito está vacío'); return; }
+    const cb = document.getElementById('acepta-terminos');
+    if (!cb || !cb.checked) { showToast('⚠️ Acepta los términos y condiciones primero 🌸'); return; }
+    if (typeof ocultarTodosLosPaneles === 'function') ocultarTodosLosPaneles();
+    const p = document.getElementById('panel-checkout');
+    if (p) p.style.display = 'block';
+    ['checkout-paso-2','checkout-paso-3'].forEach(id => { const el=document.getElementById(id); if(el) el.style.display='none'; });
+    const p1 = document.getElementById('checkout-paso-1'); if(p1) p1.style.display='block';
+    if (typeof setStep === 'function') setStep(1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Función para abrir y cerrar la barra lateral de administración
+// ==========================================
+// 6. ADMINISTRACIÓN
+// ==========================================
 function toggleAdminMenu() {
     const sidebar = document.getElementById('adminSidebar');
-    if (sidebar) {
-        sidebar.classList.toggle('active');
-    }
+    if (sidebar) sidebar.classList.toggle('active');
 }
 
-// Funciones legacy — la navegación real está en home.html inline script
 function mostrarDashboardAdmin() {
     if (typeof mostrarSeccionAdmin === 'function') mostrarSeccionAdmin('dashboard');
 }
 
 function regresarAlInicio() {
-    ['admin-dashboard-panel','admin-productos-panel','admin-pedidos-panel',
-     'admin-promociones-panel','catalogo-productos'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.display = 'none';
-    });
+    if (typeof ocultarTodosLosPaneles === 'function') {
+        ocultarTodosLosPaneles();
+    } else {
+        ['admin-dashboard-panel','admin-productos-panel','admin-pedidos-panel',
+         'admin-promociones-panel','admin-clientes-panel','admin-reportes-panel',
+         'panel-publicar','panel-mis-publicaciones','panel-subasta',
+         'panel-checkout','panel-confirmacion','panel-ticket','panel-mis-compras',
+         'catalogo-productos','detalle-producto'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        });
+    }
     const ls = document.getElementById('landing-sections');
     if (ls) ls.style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Toast global (usado desde home.html y script.js)
+// ==========================================
+// 7. TOAST & CONFIRM
+// ==========================================
 function showToast(msg) {
     const t = document.getElementById('toast-ok');
     const m = document.getElementById('toast-msg');
@@ -462,426 +234,133 @@ function showToast(msg) {
     setTimeout(() => { t.style.display = 'none'; }, 3000);
 }
 
-// Confirm modal global
 function mostrarConfirm(titulo, mensaje, callback) {
-    const m = document.getElementById('modal-confirm');
-    if (!m) { if (confirm(mensaje)) callback(); return; }
+    const modal = document.getElementById('modal-confirm');
+    if (!modal) { if (window.confirm(mensaje)) callback(); return; }
     document.getElementById('confirm-title').textContent = titulo;
     document.getElementById('confirm-msg').textContent = mensaje;
     window._confirmCallback = callback;
-    m.style.display = 'flex';
+    modal.style.display = 'flex';
 }
+
 function confirmCancel() {
     const m = document.getElementById('modal-confirm');
     if (m) m.style.display = 'none';
     window._confirmCallback = null;
 }
+
 document.addEventListener('DOMContentLoaded', function() {
     const btn = document.getElementById('confirm-ok-btn');
     if (btn) {
         btn.addEventListener('click', function() {
-            document.getElementById('modal-confirm').style.display = 'none';
+            const m = document.getElementById('modal-confirm');
+            if (m) m.style.display = 'none';
             if (window._confirmCallback) { window._confirmCallback(); window._confirmCallback = null; }
         });
     }
 });
 
-// Funciones antiguas del formulario (no usadas, mantenidas para compatibilidad)
+// ==========================================
+// 8. FORMULARIOS ADMIN (COMPATIBILIDAD)
+// ==========================================
 function abrirFormularioProducto() {}
 function cerrarFormularioProducto() {}
 function actualizarPrevisualizacionImagen() {}
-function guardarProductoAdmin(e) { if(e) e.preventDefault(); }
-
-    function aplicarDescuento() {
-        // 1. Obtenemos lo que el usuario escribió, quitamos espacios y lo pasamos a mayúsculas
-        const input = document.getElementById('coupon-input').value.trim().toUpperCase();
-        
-        // 2. Traemos los elementos de la pantalla que vamos a modificar
-        const mensajeExito = document.getElementById('success-message');
-        const elementoTotal = document.getElementById('total-price');
-
-        // 3. Validamos si el código es el correcto
-        if (input === 'CREATIVO10') {
-            
-            // Muestra el mensaje de éxito quitando la clase que lo ocultaba
-            mensajeExito.classList.remove('hidden');
-            
-            // Cambia el texto del precio simulando el 10% de descuento ($1,000 -> $900)
-            elementoTotal.textContent = '$900.00';
-            
-            // Cambia el color del precio a verde para que se note el cambio visual
-            elementoTotal.style.color = '#10b981'; 
-
-        } else if (input === '') {
-            // Alerta si el usuario da clic con el campo vacío
-            alert('Por favor, ingresa un código de descuento.');
-        } else {
-            // Alerta si el código está mal escrito
-            alert('Código no válido. Intenta con: CREATIVO10');
-        }
-    }
-function agregarComentario() {
-    const nombreInput = document.getElementById('comment-name');
-    const textoInput = document.getElementById('comment-text');
-    const listaComentarios = document.getElementById('comments-list');
-
-    const nombre = nombreInput.value.trim();
-    const texto = textoInput.value.trim();
-
-    // Validación básica de campos vacíos
-    if (nombre === '' || texto === '') {
-        alert('Por favor, completa tu nombre y escribe un comentario antes de publicar.');
-        return;
-    }
-
-    // Crear el contenedor del nuevo comentario
-    const nuevoComentario = document.createElement('div');
-    nuevoComentario.classList.add('comment-item', 'new-comment-animation');
-
-    // Estructura interna del comentario
-    nuevoComentario.innerHTML = `
-        <div class="comment-header">
-            <span class="comment-user">${nombre}</span>
-            <span class="comment-date">Justo ahora</span>
-        </div>
-        <p class="comment-body">${texto}</p>
-    `;
-
-    // Insertar el nuevo comentario al inicio de la lista
-    listaComentarios.insertBefore(nuevoComentario, listaComentarios.firstChild);
-
-    // Limpiar los campos del formulario
-    nombreInput.value = '';
-    textoInput.value = '';
-}
-
-// Función para abrir la ventana emergente
-function abrirModalComunidad() {
-    document.getElementById('modal-comunidad').style.display = 'flex';
-}
-
-// Función para cerrar la ventana emergente
-function cerrarModalComunidad() {
-    document.getElementById('modal-comunidad').style.display = 'none';
-}
-
-// Cerrar la ventana si el usuario da clic fuera del cuadro blanco
-window.onclick = function(event) {
-    const modal = document.getElementById('modal-comunidad');
-    if (event.target === modal) {
-        modal.style.display = 'none';
-    }
-}
-
-// Función para publicar comentarios dentro del modal
-function agregarComentario() {
-    const nombreInput = document.getElementById('comment-name');
-    const textoInput = document.getElementById('comment-text');
-    const listaComentarios = document.getElementById('comments-list');
-
-    const nombre = nombreInput.value.trim();
-    const texto = textoInput.value.trim();
-
-    if (nombre === '' || texto === '') {
-        alert('Por favor, completa tu nombre y escribe un comentario.');
-        return;
-    }
-
-    const nuevoComentario = document.createElement('div');
-    nuevoComentario.classList.add('comment-item', 'new-comment-animation');
-
-    nuevoComentario.innerHTML = `
-        <div class="comment-header">
-            <span class="comment-user">${nombre}</span>
-            <span class="comment-date">Justo ahora</span>
-        </div>
-        <p class="comment-body">${texto}</p>
-    `;
-
-    listaComentarios.insertBefore(nuevoComentario, listaComentarios.firstChild);
-
-    nombreInput.value = '';
-    textoInput.value = '';
-}
-// ==========================================
-// ESTADO Y VARIABLES GLOBALES
-// ==========================================
-let carrito = JSON.parse(localStorage.getItem('carrito')) || [
-  // Ejemplo de estructura de carrito por si viene vacío
-  { id: 1, nombre: "Invitación Digital Interactiva", cantidad: 1, precio: 350.00 }
-];
-
-let metodoPagoSeleccionado = 'tarjeta';
-let datosCliente = {};
-let ultimoPedido = null;
+function guardarProductoAdmin(e) { if (e) e.preventDefault(); }
 
 // ==========================================
-// NAVEGACIÓN Y STEPPER DEL CHECKOUT
+// 9. SCROLL REDES SOCIALES
 // ==========================================
-
-// Paso 1 -> Paso 2: Guardar dirección y avanzar
-function checkoutPaso2(event) {
-  event.preventDefault();
-
-  // Guardar datos del formulario
-  datosCliente = {
-    nombre: document.getElementById('ch-nombre').value,
-    telefono: document.getElementById('ch-tel').value,
-    email: document.getElementById('ch-email').value,
-    direccion: document.getElementById('ch-dir').value || 'No especificada (Entrega digital)'
-  };
-
-  // Ocultar paso 1, mostrar paso 2
-  document.getElementById('checkout-paso-1').style.display = 'none';
-  document.getElementById('checkout-paso-2').style.display = 'block';
-
-  // Actualizar visualmente el Stepper
-  actualizarStepper(2);
-}
-
-// Paso 2 -> Paso 3: Resumen y confirmación
-function checkoutPaso3() {
-  // Validación básica según el método de pago activo
-  if (metodoPagoSeleccionado === 'tarjeta') {
-    const numTarjeta = document.getElementById('card-num').value;
-    if (!numTarjeta || numTarjeta.length < 15) {
-      alert('Por favor ingresa un número de tarjeta válido.');
-      return;
-    }
-  }
-
-  // Ocultar paso 2, mostrar paso 3
-  document.getElementById('checkout-paso-2').style.display = 'none';
-  document.getElementById('checkout-paso-3').style.display = 'block';
-
-  actualizarStepper(3);
-  renderizarResumenCheckout();
-}
-
-// Botones para regresar entre pasos
-function volverPaso1() {
-  document.getElementById('checkout-paso-2').style.display = 'none';
-  document.getElementById('checkout-paso-1').style.display = 'block';
-  actualizarStepper(1);
-}
-
-function volverPaso2() {
-  document.getElementById('checkout-paso-3').style.display = 'none';
-  document.getElementById('checkout-paso-2').style.display = 'block';
-  actualizarStepper(2);
-}
-
-// Helper para cambiar la apariencia del indicador de pasos
-function actualizarStepper(paso) {
-  for (let i = 1; i <= 3; i++) {
-    const stepEl = document.getElementById(`step-ind-${i}`);
-    const lineEl = document.getElementById(`line-${i}`);
-
-    if (i <= paso) {
-      stepEl.classList.add('active');
-    } else {
-      stepEl.classList.remove('active');
-    }
-
-    if (lineEl && i < paso) {
-      lineEl.style.backgroundColor = '#db2777'; // Color rosa activo
-    } else if (lineEl) {
-      lineEl.style.backgroundColor = '#fbcfe8';
-    }
-  }
-}
-
-// ==========================================
-// SELECCIÓN DE MÉTODOS DE PAGO
-// ==========================================
-function seleccionarPago(metodo) {
-  metodoPagoSeleccionado = metodo;
-
-  // Tabs UI
-  document.querySelectorAll('.pago-tab').forEach(tab => tab.classList.remove('active'));
-  document.getElementById(`tab-${metodo}`).classList.add('active');
-
-  // Contenedores
-  document.getElementById('pago-tarjeta').style.display = metodo === 'tarjeta' ? 'flex' : 'none';
-  document.getElementById('pago-transferencia').style.display = metodo === 'transferencia' ? 'block' : 'none';
-  document.getElementById('pago-ewallet').style.display = metodo === 'ewallet' ? 'block' : 'none';
-}
-
-// ==========================================
-// RESUMEN Y CONFIRMACIÓN DE PAGO
-// ==========================================
-function calcularTotal() {
-  return carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
-}
-
-function renderizarResumenCheckout() {
-  const contenedorResumen = document.getElementById('resumen-checkout');
-  const total = calcularTotal();
-
-  let itemsHtml = carrito.map(item => 
-    `<div style="display:flex; justify-content:space-between;">
-      <span>${item.cantidad}x ${item.nombre}</span>
-      <strong>$${(item.precio * item.cantidad).toFixed(2)} MXN</strong>
-    </div>`
-  ).join('');
-
-  contenedorResumen.innerHTML = `
-    <div><strong>Cliente:</strong> ${datosCliente.nombre} (${datosCliente.email})</div>
-    <div><strong>Método de pago:</strong> ${metodoPagoSeleccionado.toUpperCase()}</div>
-    <hr style="border:none; border-top:1px dashed #fbcfe8; margin:0.5rem 0;" />
-    ${itemsHtml}
-    <hr style="border:none; border-top:1px solid #fbcfe8; margin:0.5rem 0;" />
-    <div style="display:flex; justify-content:space-between; font-size:1.05rem; font-weight:800; color:#db2777;">
-      <span>Total a pagar:</span>
-      <span>$${total.toFixed(2)} MXN</span>
-    </div>
-  `;
-}
-
-function confirmarPago() {
-  // Generar un folio único para la compra
-  const folio = '#CC-' + Math.floor(10000 + Math.random() * 90000);
-  const fechaActual = new Date().toLocaleDateString('es-MX', {
-    year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
-  });
-
-  ultimoPedido = {
-    folio: folio,
-    fecha: fechaActual,
-    cliente: { ...datosCliente },
-    metodoPago: metodoPagoSeleccionado,
-    items: [...carrito],
-    total: calcularTotal()
-  };
-
-  // Guardar en el historial local de "Mis Compras"
-  let historial = JSON.parse(localStorage.getItem('mis_compras')) || [];
-  historial.unshift(ultimoPedido);
-  localStorage.setItem('mis_compras', JSON.stringify(historial));
-
-  // Ocultar Checkout y mostrar Confirmación
-  document.getElementById('panel-checkout').style.display = 'none';
-  document.getElementById('panel-confirmacion').style.display = 'block';
-
-  // Mostrar datos en el panel de confirmación
-  document.getElementById('conf-folio').innerText = folio;
-  document.getElementById('conf-resumen').innerHTML = `
-    <strong>Gracias, ${datosCliente.nombre}!</strong><br/>
-    Enviamos los detalles de tu compra a <u>${datosCliente.email}</u>.<br/>
-    Total pagado: <strong>$${ultimoPedido.total.toFixed(2)} MXN</strong>
-  `;
-
-  // Limpiar el carrito
-  localStorage.removeItem('carrito');
-  carrito = [];
-}
-
-// ==========================================
-// TICKET / FACTURA
-// ==========================================
-function verTicket() {
-  if (!ultimoPedido) return;
-
-  ocultarTodosLosPaneles();
-  document.getElementById('panel-ticket').style.display = 'block';
-
-  document.getElementById('ticket-folio').innerText = ultimoPedido.folio;
-  document.getElementById('ticket-fecha').innerText = ultimoPedido.fecha;
-
-  document.getElementById('ticket-cliente').innerHTML = `
-    <strong>${ultimoPedido.cliente.nombre}</strong><br/>
-    📱 ${ultimoPedido.cliente.telefono}<br/>
-    ✉️ ${ultimoPedido.cliente.email}<br/>
-    📍 ${ultimoPedido.cliente.direccion}
-  `;
-
-  const tbody = document.getElementById('ticket-items');
-  tbody.innerHTML = ultimoPedido.items.map(item => `
-    <tr style="border-bottom:1px solid #f8fafc;">
-      <td style="padding:8px 0; color:#1f2937;">${item.nombre}</td>
-      <td style="padding:8px 0; text-align:center; color:#6b7280;">${item.cantidad}</td>
-      <td style="padding:8px 0; text-align:right; font-weight:700; color:#1f2937;">$${(item.precio * item.cantidad).toFixed(2)}</td>
-    </tr>
-  `).join('');
-
-  document.getElementById('ticket-total').innerText = `$${ultimoPedido.total.toFixed(2)} MXN`;
-}
-
-function descargarTicketSimulado() {
-  alert("⬇️ Simulación: Descargando PDF del ticket...");
-}
-
-// ==========================================
-// PANEL: MIS COMPRAS
-// ==========================================
-function renderizarMisCompras() {
-  const contenedor = document.getElementById('lista-mis-compras');
-  const historial = JSON.parse(localStorage.getItem('mis_compras')) || [];
-
-  if (historial.length === 0) {
-    contenedor.innerHTML = `
-      <div style="text-align:center; padding:3rem; background:#fff; border-radius:16px; border:1px solid #fbcfe8; color:#9ca3af;">
-        <p style="font-size:1.2rem; margin:0;">Aún no has realizado ninguna compra 🛍️</p>
-      </div>
-    `;
-    return;
-  }
-
-  contenedor.innerHTML = historial.map(pedido => `
-    <div style="background:#fff; border:1.5px solid #fbcfe8; border-radius:16px; padding:1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
-      <div>
-        <div style="display:flex; align-items:center; gap:0.8rem; margin-bottom:0.4rem;">
-          <span style="font-weight:800; color:#db2777; font-size:1.1rem;">${pedido.folio}</span>
-          <span style="background:#fdf2f8; color:#db2777; font-size:0.75rem; padding:2px 8px; border-radius:12px; font-weight:700;">Completado</span>
-        </div>
-        <p style="font-size:0.85rem; color:#9ca3af; margin:0 0 0.5rem;">${pedido.fecha}</p>
-        <p style="font-size:0.9rem; color:#4b5563; margin:0;">
-          ${pedido.items.map(i => `${i.cantidad}x ${i.nombre}`).join(', ')}
-        </p>
-      </div>
-      <div style="text-align:right;">
-        <div style="font-size:1.2rem; font-weight:800; color:#1f2937; margin-bottom:0.5rem;">$${pedido.total.toFixed(2)} MXN</div>
-        <button class="btn-outline" onclick='reconstruirYVerTicket(${JSON.stringify(pedido)})' style="padding:0.4rem 0.8rem; font-size:0.82rem;">Ver ticket</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-function reconstruirYVerTicket(pedido) {
-  ultimoPedido = pedido;
-  verTicket();
-}
-
-// ==========================================
-// NAVEGACIÓN GENERAL Y UTILIDADES
-// ==========================================
-function ocultarTodosLosPaneles() {
-  const paneles = ['panel-checkout', 'panel-confirmacion', 'panel-ticket', 'panel-mis-compras'];
-  paneles.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'none';
-  });
-}
-
-function mostrarSeccion(seccion) {
-  ocultarTodosLosPaneles();
-  if (seccion === 'mis-compras') {
-    renderizarMisCompras();
-    document.getElementById('panel-mis-compras').style.display = 'block';
-  } else if (seccion === 'checkout') {
-    document.getElementById('panel-checkout').style.display = 'block';
-  }
-}
-
-function regresarAlInicio() {
-  ocultarTodosLosPaneles();
-  // Si tienes una sección principal en la página, activa su visibilidad aquí.
-  // Por ejemplo: document.getElementById('panel-inicio').style.display = 'block';
-  alert("Regresando a la tienda...");
-}
-
-// Inicialización de la vista (para pruebas o al cargar el DOM)
 document.addEventListener('DOMContentLoaded', () => {
-  // Opcional: Descomentar si deseas abrir el checkout directamente al cargar la página
-  // mostrarSeccion('checkout');
+    const floatingSocials = document.getElementById('floatingSocials');
+    if (!floatingSocials) return;
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', () => {
+        const current = window.pageYOffset || document.documentElement.scrollTop;
+        floatingSocials.style.opacity = current > lastScrollTop && current > 200 ? '0.4' : '1';
+        lastScrollTop = current <= 0 ? 0 : current;
+    }, { passive: true });
 });
+
+// ==========================================
+// 10. BÚSQUEDA EN CATÁLOGO
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search-catalog');
+    if (!searchInput) return;
+    searchInput.addEventListener('input', e => {
+        const term = e.target.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+        document.querySelectorAll('.cards .card').forEach(card => {
+            const text = card.textContent.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            card.style.display = text.includes(term) ? '' : 'none';
+        });
+    });
+    searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); searchInput.blur(); } });
+});
+
+// ==========================================
+// 11. DESCUENTO
+// ==========================================
+function aplicarDescuento() {
+    const input = document.getElementById('coupon-input');
+    if (!input) return;
+    const code = input.value.trim().toUpperCase();
+    const mensajeExito = document.getElementById('success-message');
+    const elementoTotal = document.getElementById('total-price');
+    if (code === 'CREATIVO10') {
+        if (mensajeExito) mensajeExito.classList.remove('hidden');
+        if (elementoTotal) { elementoTotal.textContent = '$900.00'; elementoTotal.style.color = '#10b981'; }
+    } else if (code === '') {
+        showToast('⚠️ Ingresa un código de descuento');
+    } else {
+        showToast('⚠️ Código no válido. Intenta con: CREATIVO10');
+    }
+}
+
+// ==========================================
+// 12. COMUNIDAD
+// ==========================================
+function abrirModalComunidad() {
+    const m = document.getElementById('modal-comunidad');
+    if (m) m.style.display = 'flex';
+}
+
+function cerrarModalComunidad() {
+    const m = document.getElementById('modal-comunidad');
+    if (m) m.style.display = 'none';
+}
+
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('modal-comunidad');
+    if (modal && event.target === modal) modal.style.display = 'none';
+});
+
+function agregarComentario() {
+    const nombreInput = document.getElementById('comment-name');
+    const textoInput = document.getElementById('comment-text');
+    const lista = document.getElementById('comments-list');
+    if (!nombreInput || !textoInput || !lista) return;
+    const nombre = nombreInput.value.trim();
+    const texto = textoInput.value.trim();
+    if (!nombre || !texto) { showToast('⚠️ Completa tu nombre y comentario'); return; }
+    const div = document.createElement('div');
+    div.classList.add('comment-item', 'new-comment-animation');
+    div.innerHTML = `<div class="comment-header"><span class="comment-user">${nombre}</span><span class="comment-date">Justo ahora</span></div><p class="comment-body">${texto}</p>`;
+    lista.insertBefore(div, lista.firstChild);
+    nombreInput.value = '';
+    textoInput.value = '';
+}
+
+// ==========================================
+// 13. POLÍTICAS MODAL
+// ==========================================
+function openModalPoliticas(e) {
+    if (e) e.preventDefault();
+    const m = document.getElementById('modal-politicas');
+    if (m) m.style.display = 'flex';
+}
+
+function closeModalPoliticas() {
+    const m = document.getElementById('modal-politicas');
+    if (m) m.style.display = 'none';
+}
