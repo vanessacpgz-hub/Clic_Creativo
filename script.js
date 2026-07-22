@@ -14,29 +14,40 @@ if (ham && mobileNav) {
 // 2. MODALES
 // ==========================================
 function openModal(type) {
-    if (type === 'web') document.getElementById('modalWeb')?.classList.add('active');
-    else if (type === 'invitacion') document.getElementById('modalInvitacion')?.classList.add('active');
-    else if (type === 'contactoFlotante') {
+    const ids = { web: 'modalWeb', invitacion: 'modalInvitacion', contactoFlotante: 'modalContactoFlotante' };
+    const id = ids[type];
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (type === 'contactoFlotante') {
         const form = document.getElementById('formContactoFlotante');
         const exito = document.getElementById('mensajeExito');
         if (form) form.style.display = 'flex';
         if (exito) exito.style.display = 'none';
-        document.getElementById('modalContactoFlotante')?.classList.add('active');
     }
+    el.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
 function closeModal(type) {
-    if (type === 'web') document.getElementById('modalWeb')?.classList.remove('active');
-    else if (type === 'invitacion') document.getElementById('modalInvitacion')?.classList.remove('active');
-    else if (type === 'contactoFlotante') document.getElementById('modalContactoFlotante')?.classList.remove('active');
-    document.body.style.overflow = '';
+    const ids = { web: 'modalWeb', invitacion: 'modalInvitacion', contactoFlotante: 'modalContactoFlotante' };
+    const id = ids[type];
+    if (id) {
+        const el = document.getElementById(id);
+        if (el) el.classList.remove('active');
+    }
+    // Restore scroll only if no other modal is open
+    const anyOpen = document.querySelector('.modal-overlay.active');
+    if (!anyOpen) document.body.style.overflow = '';
 }
 
-document.querySelectorAll('.modal-overlay').forEach(o => {
-    o.addEventListener('click', e => {
-        if (e.target === o) { o.classList.remove('active'); document.body.style.overflow = ''; }
-    });
+// Close modal on backdrop click — uses event delegation so it works always
+document.addEventListener('click', function(e) {
+    if (e.target && e.target.classList && e.target.classList.contains('modal-overlay') && e.target.classList.contains('active')) {
+        e.target.classList.remove('active');
+        const anyOpen = document.querySelector('.modal-overlay.active');
+        if (!anyOpen) document.body.style.overflow = '';
+    }
 });
 
 // ==========================================
@@ -353,10 +364,13 @@ function agregarComentario() {
 function openModalPoliticas(e) {
     if (e) e.preventDefault();
     const m = document.getElementById('modal-politicas');
-    if (m) m.style.display = 'flex';
+    if (m) m.classList.add('active');
+    document.body.style.overflow = 'hidden';
 }
 
 function closeModalPoliticas() {
     const m = document.getElementById('modal-politicas');
-    if (m) m.style.display = 'none';
+    if (m) m.classList.remove('active');
+    const anyOpen = document.querySelector('.modal-overlay.active');
+    if (!anyOpen) document.body.style.overflow = '';
 }

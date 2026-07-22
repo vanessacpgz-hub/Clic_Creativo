@@ -1140,21 +1140,8 @@ form { padding: 1rem 1.8rem 2rem; display: flex; flex-direction: column; gap: 1r
 }
 
 /* ==========================================
-   ESTILOS DEL MODAL (VENTANA EMERGENTE)
+   ESTILOS DEL MODAL COMUNIDAD
    ========================================== */
-.modal-overlay {
-    display: none; /* Oculto por defecto */
-    position: fixed;
-    z-index: 9999; /* Por encima de cualquier menú o contenido */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro translúcido */
-    justify-content: center;
-    align-items: center;
-    font-family: 'Segoe UI', Roboto, sans-serif;
-}
 
 .modal-content {
     background-color: #ffffff;
